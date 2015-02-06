@@ -1,0 +1,15 @@
+<li ui-sref-active="active" ng-class="{'has-sub': item.menuItems.length}">
+
+    <script type="text/ng-template" id="menu-item-link-tpl">
+        <i ng-if="item.icon" class="{{item.icon}}"></i>
+        <span class="title">{{item.title}}</span>
+        <span ng-if="item.label" class="label label-{{item.label.classname}} pull-right" ng-class="{'hidden-collapsed': item.label.collapsedHide}">{{item.label.text}}</span>
+    </script>
+
+    <a href ng-if="item.link" ui-sref="{{item.link}}" ng-include="'menu-item-link-tpl'"></a>
+    <a href ng-if="!item.link" sg-dropdown-toggle ng-include="'menu-item-link-tpl'"></a>
+    <ul ng-if="item.menuItems.length" sg-dropdown-toggled>
+        <sg-dropdown close-mode="false" expanded-class="expanded" item="subItem" ng-repeat="subItem in item.menuItems"></sg-dropdown>
+    </ul>
+
+</li>
