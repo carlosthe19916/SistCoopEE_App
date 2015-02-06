@@ -1,6 +1,7 @@
 /*jshint unused: vars */
 define([
-        'angular'
+        'angular',
+        './xenon/main'
     ]/*deps*/,
     function (angular){
 
@@ -9,7 +10,7 @@ define([
         var app = angular.module('sistcoop-app',
             [
                 /*xenon*/
-                //'xenon',
+                'xenon',
 
                 /*angular*/
                 'ngCookies',
@@ -449,7 +450,7 @@ define([
 
         /*****************MAIN CONTROLLER******************/
         app.controller('MainCtrl', function(){
-            
+
         });
 
         /**********************************ROUTES*******************************************/
