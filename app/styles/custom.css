@@ -22,3 +22,9 @@ form .form-group.validate-has-error .form-control + div {
     font-size: 12px;
     color: #cc3f44;
 }
+
+.ui-select-bootstrap button{
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}

@@ -482,7 +482,7 @@ define([
                 };
 
                 return $modal.open({
-                    templateUrl: appHelper.viewsPath("themplate/sg-modal"),
+                    templateUrl: appHelper.viewPath("tpls/sg-modal"),
                     controller: controller,
                     resolve: {
                         title: function() {
