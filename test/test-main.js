@@ -34,7 +34,9 @@ requirejs.config({
         oclazyload: '../../bower_components/oclazyload/dist/ocLazyLoad.min',
         restangular: '../../bower_components/restangular/dist/restangular',
         underscore: '../../bower_components/underscore/underscore',
-        'requirejs-domready': '../../bower_components/requirejs-domready/domReady'
+        'requirejs-domready': '../../bower_components/requirejs-domready/domReady',
+        ladda: '../../bower_components/ladda/dist/ladda.min',
+        select2: '../../bower_components/select2/select2'
     },
 
     shim: {
