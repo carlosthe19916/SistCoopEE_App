@@ -1,7 +1,11 @@
 /*jshint unused: vars */
 define([
         'angular',
-        './xenon/main'
+        './xenon/main',
+        './common/main',
+        './organizacion/main',
+        './persona/main',
+        './ubigeo/main'
     ]/*deps*/,
     function (angular){
 
@@ -30,10 +34,13 @@ define([
                 'restangular',
                 'blockUI',
                 'oc.lazyLoad',
-                'RecursionHelper'
+                'RecursionHelper',
 
                 /*sistcoop*/
-
+                'persona',
+                'ubigeo',
+                'organizacion',
+                'common'
             ]);
 
 

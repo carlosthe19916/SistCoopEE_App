@@ -1,0 +1,7 @@
+define([
+    'angular',
+    './DateCtrl'
+], function () {
+
+});
+
