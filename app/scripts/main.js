@@ -17,6 +17,7 @@ require.config({
         'angular-ui-grid': '../../bower_components/angular-ui-grid/ui-grid',
         'angular-block-ui': '../../bower_components/angular-block-ui/dist/angular-block-ui',
         'angular-ladda': '../../bower_components/angular-ladda/dist/angular-ladda.min',
+        'angular-recursion': '../../bower_components/angular-recursion/angular-recursion',
         oclazyload: '../../bower_components/oclazyload/dist/ocLazyLoad.min',
         restangular: '../../bower_components/restangular/dist/restangular',
         underscore: '../../bower_components/underscore/underscore',
@@ -97,6 +98,11 @@ require.config({
                 'angular'
             ]
         },
+        'angular-recursion': {
+            deps: [
+                'angular'
+            ]
+        },
         oclazyload: {
             deps: [
                 'angular'
@@ -136,6 +142,8 @@ require([
     'keycloak',
     'app',
 
+    'route_admin',
+
     'angular-sanitize',
     'angular-cookies',
     'angular-messages',
@@ -148,6 +156,7 @@ require([
     'angular-ui-grid',
     'angular-block-ui',
     'angular-ladda',
+    'angular-recursion',
     'oclazyload',
     'restangular',
     'underscore'

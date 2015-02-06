@@ -29,7 +29,8 @@ define([
                 'angular-ladda',
                 'restangular',
                 'blockUI',
-                'oc.lazyLoad'
+                'oc.lazyLoad',
+                'RecursionHelper'
 
                 /*sistcoop*/
 
@@ -168,6 +169,294 @@ define([
 
 
         /*******************************SERVICES***************************/
+        app.service('$menuItems', function(activeProfile)
+        {
+            this.menuItems = [];
+            var $menuItemsRef = this;
+
+            var menuItemObj = {
+                parent: null,
+
+                title: '',
+                link: '', // starting with "./" will refer to parent link concatenation
+                state: '', // will be generated from link automatically where "/" (forward slashes) are replaced with "."
+                icon: '',
+
+                isActive: false,
+                label: null,
+
+                menuItems: [],
+
+                setLabel: function(label, color, hideWhenCollapsed)
+                {
+                    if(typeof hideWhenCollapsed == 'undefined')
+                        hideWhenCollapsed = true;
+
+                    this.label = {
+                        text: label,
+                        classname: color,
+                        collapsedHide: hideWhenCollapsed
+                    };
+
+                    return this;
+                },
+
+                addItem: function(title, link, icon)
+                {
+                    var parent = this,
+                        item = angular.extend(angular.copy(menuItemObj), {
+                            parent: parent,
+
+                            title: title,
+                            link: link,
+                            icon: icon
+                        });
+
+                    if(item.link)
+                    {
+                        if(item.link.match(/^\./))
+                            item.link = parent.link + item.link.substring(1, link.length);
+
+                        if(item.link.match(/^-/))
+                            item.link = parent.link + '-' + item.link.substring(2, link.length);
+
+                        item.state = $menuItemsRef.toStatePath(item.link);
+                    }
+
+                    this.menuItems.push(item);
+
+                    return item;
+                }
+            };
+
+            this.addItem = function(title, link, icon)
+            {
+                var item = angular.extend(angular.copy(menuItemObj), {
+                    title: title,
+                    link: link,
+                    state: this.toStatePath(link),
+                    icon: icon
+                });
+
+                this.menuItems.push(item);
+
+                return item;
+            };
+
+            this.getAll = function()
+            {
+                return this.menuItems;
+            };
+
+            this.prepareSidebarMenu = function(stateName, roles)
+            {
+                if(roles.indexOf('ADMIN') != -1){
+                    if(stateName.indexOf('app.admin.organizacion') > -1){
+                        var estructura = this.addItem('Estructura', '', 'linecons-inbox');
+                        var rrhh = this.addItem('RRHH', '', 'linecons-t-shirt');
+
+                        estructura.addItem('Sucursales', 'app.admin.organizacion.estructura.buscarSucursal');
+                        estructura.addItem('Agencias', 'app.admin.organizacion.estructura.buscarAgencia');
+                        estructura.addItem('Bovedas', 'app.organizacion.estructura.buscarBoveda');
+                        estructura.addItem('Cajas', 'app.organizacion.estructura.buscarCaja');
+                        rrhh.addItem('Trabajadores', 'app.organizacion.rrhh.buscarTrabajador');
+                        rrhh.addItem('Usuarios', 'app.organizacion.rrhh.buscarUsuario');
+
+                    } else {
+                        return undefined;
+                    }
+                }
+
+                return this;
+            };
+
+            this.prepareHorizontalMenu = function()
+            {
+                var roles = activeProfile.realmAccess.roles;
+
+                if(roles.indexOf('ADMIN') != -1){
+                    var organizacion = this.addItem('Organizacion', 'app.admin.organizacion', 'linecons-desktop');
+                    var cliente = this.addItem('Clientes', 'app.cliente', 'linecons-database');
+                    var transaccion = this.addItem('Transacciones', 'app.transaccion', 'linecons-doc');
+                    var administracion = this.addItem('Administracion', 'app.administracion', 'linecons-params');
+                    var configuracion = this.addItem('Configuracion', 'app.configuracion', 'linecons-cog');
+
+
+                    var other  	 	 = this.addItem('Other', 			'', 				'linecons-beaker');
+
+                    // Subitems of Others
+                    var widgets     = other.addItem('Widgets', 			'/app/widgets', 			'linecons-star');
+                    var mailbox     = other.addItem('Mailbox', 			'', 			'linecons-mail').setLabel('5', 'secondary', false);
+                    var tables      = other.addItem('Tables', 			'/app/tables', 				'linecons-database');
+                    var extra       = other.addItem('Extra', 			'/app/extra', 				'linecons-beaker').setLabel('New Items', 'purple');
+                    var charts      = other.addItem('Charts', 			'/app/charts', 				'linecons-globe');
+                    var menu_lvls   = other.addItem('Menu Levels', 		'', 						'linecons-cloud');
+
+
+                    // Subitems of Mailbox
+                    mailbox.addItem('Inbox', 			'-/inbox');
+                    mailbox.addItem('Compose Message', 	'-/compose');
+                    mailbox.addItem('View Message', 	'-/message');
+
+
+                    // Subitems of Tables
+                    tables.addItem('Basic Tables',		'-/basic');
+                    tables.addItem('Responsive Tables',	'-/responsive');
+                    tables.addItem('Data Tables',		'-/datatables');
+
+
+                    // Subitems of Extra
+                    var extra_icons = extra.addItem('Icons', 	'-/icons').setLabel(4, 'warning');
+                    var extra_maps  = extra.addItem('Maps', 	'-/maps');
+                    extra.addItem('Gallery', 					'-/gallery');
+                    extra.addItem('Calendar', 					'-/calendar');
+                    extra.addItem('Profile', 					'-/profile');
+                    extra.addItem('Login', 						'/login');
+                    extra.addItem('Lockscreen', 				'/lockscreen');
+                    extra.addItem('Login Light', 				'/login-light');
+                    extra.addItem('Timeline', 					'-/timeline');
+                    extra.addItem('Timeline Centered', 			'-/timeline-centered');
+                    extra.addItem('Notes', 						'-/notes');
+                    extra.addItem('Image Crop', 				'-/image-crop');
+                    extra.addItem('Portlets', 					'-/portlets');
+                    extra.addItem('Blank Page', 				'-/blank-page');
+                    extra.addItem('Search', 					'-/search');
+                    extra.addItem('Invoice', 					'-/invoice');
+                    extra.addItem('404 Page', 					'-/page-404');
+                    extra.addItem('Tocify', 					'-/tocify');
+                    extra.addItem('Loading Progress', 			'-/loading-progress');
+                    //extra.addItem('Page Loading Overlay', 		'-/page-loading-overlay'); NOT SUPPORTED IN ANGULAR
+                    extra.addItem('Notifications', 				'-/notifications');
+                    extra.addItem('Nestable Lists', 			'-/nestable-lists');
+                    extra.addItem('Scrollable', 				'-/scrollable');
+
+                    // Submenu of Extra/Icons
+                    extra_icons.addItem('Font Awesome', 	'-/font-awesome');
+                    extra_icons.addItem('Linecons', 		'-/linecons');
+                    extra_icons.addItem('Elusive', 			'-/elusive');
+                    extra_icons.addItem('Meteocons', 		'-/meteocons');
+
+                    // Submenu of Extra/Maps
+                    extra_maps.addItem('Google Maps', 		'-/google');
+                    extra_maps.addItem('Advanced Map', 		'-/advanced');
+                    extra_maps.addItem('Vector Map', 		'-/vector');
+
+
+                    // Subitems of Charts
+                    charts.addItem('Chart Variants', 		'-/variants');
+                    charts.addItem('Range Selector', 		'-/range-selector');
+                    charts.addItem('Sparklines', 			'-/sparklines');
+                    charts.addItem('Map Charts', 			'-/map-charts');
+                    charts.addItem('Circular Gauges', 		'-/gauges');
+                    charts.addItem('Bar Gauges', 			'-/bar-gauges');
+
+
+
+                    // Subitems of Menu Levels
+                    var menu_lvl1 = menu_lvls.addItem('Menu Item 1.1');  // has to be referenced to add sub menu elements
+                    menu_lvls.addItem('Menu Item 1.2');
+                    menu_lvls.addItem('Menu Item 1.3');
+
+                    // Sub Level 2
+                    menu_lvl1.addItem('Menu Item 2.1');
+                    var menu_lvl2 = menu_lvl1.addItem('Menu Item 2.2'); // has to be referenced to add sub menu elements
+                    menu_lvl1.addItem('Menu Item 2.3');
+
+                    // Sub Level 3
+                    menu_lvl2.addItem('Menu Item 3.1');
+                    menu_lvl2.addItem('Menu Item 3.2');
+
+
+
+                } else if(roles.indexOf('GERENTE_GENERAL') != -1){
+                    var organizacion = this.addItem('Organizacion', 'app.gerentegeneral.organizacion', 'linecons-desktop');
+                    var cliente = this.addItem('Clientes', 'app.cliente', 'linecons-database');
+                    var transaccion = this.addItem('Transacciones', 'app.transaccion', 'linecons-doc');
+                    var administracion = this.addItem('Administracion', 'app.administracion', 'linecons-params');
+                    var configuracion = this.addItem('Configuracion', 'app.configuracion', 'linecons-cog');
+                } else if(roles.indexOf('ADMINISTRADOR_GENERAL') != -1){
+                    var organizacion = this.addItem('Organizacion', 'app.administradorgeneral.organizacion', 'linecons-desktop');
+                    var cliente = this.addItem('Clientes', 'app.cliente', 'linecons-database');
+                    var transaccion = this.addItem('Transacciones', 'app.transaccion', 'linecons-doc');
+                    var administracion = this.addItem('Administracion', 'app.administracion', 'linecons-params');
+                    var configuracion = this.addItem('Configuracion', 'app.configuracion', 'linecons-cog');
+                } else if(roles.indexOf('ADMINISTRADOR') != -1){
+                    var organizacion = this.addItem('Organizacion', 'app.organizacion', 'linecons-desktop');
+                    var cliente = this.addItem('Clientes', 'app.cliente', 'linecons-database');
+                    var transaccion = this.addItem('Transacciones', 'app.transaccion', 'linecons-doc');
+                    var administracion = this.addItem('Administracion', 'app.administracion', 'linecons-params');
+                    var configuracion = this.addItem('Configuracion', 'app.configuracion', 'linecons-cog');
+                } else if(roles.indexOf('PLATAFORMA') != -1){
+                    var cliente = this.addItem('Clientes', 'app.cliente', 'linecons-database');
+                    var administracion = this.addItem('Administracion', 'app.administracion', 'linecons-params');
+                    var configuracion = this.addItem('Configuracion', 'app.configuracion', 'linecons-cog');
+                } else if(roles.indexOf('JEFE_CAJA') != -1){
+                    var organizacion = this.addItem('Organizacion', 'app.organizacion', 'linecons-desktop');
+                    var cliente = this.addItem('Clientes', 'app.cliente', 'linecons-database');
+                    var transaccion = this.addItem('Transacciones', 'app.transaccion', 'linecons-doc');
+                    var administracion = this.addItem('Administracion', 'app.administracion', 'linecons-params');
+                    var configuracion = this.addItem('Configuracion', 'app.configuracion', 'linecons-cog');
+                } else if(roles.indexOf('CAJERO') != -1){
+                    var cliente = this.addItem('Clientes', 'app.cliente', 'linecons-database');
+                    var transaccion = this.addItem('Transacciones', 'app.transaccion', 'linecons-doc');
+                    var administracion = this.addItem('Administracion', 'app.administracion', 'linecons-params');
+                    var configuracion = this.addItem('Configuracion', 'app.configuracion', 'linecons-cog');
+                } else {
+                    return undefined;
+                }
+
+                return this;
+            };
+
+            this.instantiate = function()
+            {
+                return angular.copy( this );
+            };
+
+            this.toStatePath = function(path)
+            {
+                return path.replace(/\//g, '.').replace(/^\./, '');
+            };
+
+            this.setActive = function(path)
+            {
+                this.iterateCheck(this.menuItems, this.toStatePath(path));
+            };
+
+            this.setActiveParent = function(item)
+            {
+                item.isActive = true;
+                item.isOpen = true;
+
+                if(item.parent)
+                    this.setActiveParent(item.parent);
+            };
+
+            this.iterateCheck = function(menuItems, currentState)
+            {
+                angular.forEach(menuItems, function(item)
+                {
+                    if(item.state == currentState)
+                    {
+                        item.isActive = true;
+
+                        if(item.parent != null)
+                            $menuItemsRef.setActiveParent(item.parent);
+                    }
+                    else
+                    {
+                        item.isActive = false;
+                        item.isOpen = false;
+
+                        if(item.menuItems.length)
+                        {
+                            $menuItemsRef.iterateCheck(item.menuItems, currentState);
+                        }
+                    }
+                });
+            }
+        });
+
         app.service('Dialog', function($modal) {
             var dialog = {};
 
@@ -449,7 +738,58 @@ define([
 
 
         /*****************MAIN CONTROLLER******************/
-        app.controller('MainCtrl', function(){
+        app.controller('MainCtrl', function($rootScope, $scope){
+
+            $rootScope.layoutOptions = {
+                horizontalMenu: {
+                    isVisible		: true,
+                    isFixed			: true,
+                    minimal			: true,
+                    clickToExpand	: true,
+
+                    isMenuOpenMobile: false
+                },
+                sidebar: {
+                    isVisible		: true,
+                    isCollapsed		: false,
+                    toggleOthers	: true,
+                    isFixed			: true,
+                    isRight			: false,
+
+                    isMenuOpenMobile: false,
+
+                    // Added in v1.3
+                    userProfile		: true
+                },
+                chat: {
+                    isOpen			: false
+                },
+                settingsPane: {
+                    isOpen			: false,
+                    useAnimation	: true
+                },
+                container: {
+                    isBoxed			: false
+                },
+                skins: {
+                    sidebarMenu		: '',
+                    horizontalMenu	: '',
+                    userInfoNavbar	: ''
+                },
+                pageTitles: true,
+                userInfoNavVisible	: false
+            };
+
+            //Control functions
+            $scope.control = {
+                block: false
+            };
+            $scope.blockControl = function(){
+                $scope.control.block = true;
+            };
+            $scope.unblockControl = function(){
+                $scope.control.block = false;
+            };
 
         });
 

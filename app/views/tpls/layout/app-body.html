@@ -2,8 +2,7 @@
 
     <div class="sidebar-menu-inner">
 
-        <sidebar-logo ng-if="layoutOptions.horizontalMenu.isVisible == false"></sidebar-logo>
-        <sidebar-profile ng-if="layoutOptions.sidebar.userProfile"></sidebar-profile>
+        <sidebar-profile></sidebar-profile>
         <sidebar-menu></sidebar-menu>
 
     </div>
@@ -11,8 +10,6 @@
 </div>
 
 <div class="main-content">
-
-    <user-info-navbar ng-show="layoutOptions.horizontalMenu.isVisible == false"></user-info-navbar>
 
     <ui-view class="main-content-view"></ui-view>
 

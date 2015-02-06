@@ -7,9 +7,9 @@
     </script>
 
     <a href ng-if="item.link" ui-sref="{{item.link}}" ng-include="'menu-item-link-tpl'"></a>
-    <a href ng-if="!item.link" sg-dropdown-toggle ng-include="'menu-item-link-tpl'"></a>
-    <ul ng-if="item.menuItems.length" sg-dropdown-toggled>
-        <sg-dropdown close-mode="false" expanded-class="expanded" item="subItem" ng-repeat="subItem in item.menuItems"></sg-dropdown>
+    <a href ng-if="!item.link" navbar-dropdown-toggle ng-include="'menu-item-link-tpl'"></a>
+    <ul ng-if="item.menuItems.length">
+        <sidebar-dropdown open-class="expanded" item="subItem" ng-repeat="subItem in item.menuItems"></sidebar-dropdown>
     </ul>
 
 </li>
