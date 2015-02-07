@@ -1,7 +1,7 @@
 define(['../../module'], function (module) {
     'use strict';
 
-    module.controller('CrearAgenciaCtrl', function($scope, $state, Sucursal, activeProfile, Notifications){
+    var crearAgenciaCtrl = function($scope, $state, Notifications){
 
         $scope.view = {
             sucursal: undefined,
@@ -14,30 +14,35 @@ define(['../../module'], function (module) {
         $scope.combo.selected = {
             sucursal: undefined
         };
-        $scope.loadCombo = function(){
-            if(angular.isUndefined($scope.view.sucursal)){
-                $scope.combo.sucursal = Sucursal.$search().$object;
-            }
-        };
-        $scope.loadCombo();
 
         $scope.addAgencia = function(){
             if($scope.form.$valid){
                 $scope.combo.selected.sucursal.$addAgencia($scope.view.agencia).then(
                     function(response){
                         $scope.unblockControl();
-                        Notifications.success("Agencia creada");
-                        $state.go('app.organizacion.estructura.editarAgencia.resumen', {id: response.id});
+                        Notifications.success("Agencia creada.");
+                        $state.go('^.^.editarAgencia.resumen', {id: response.id});
                     },
                     function error(error){
                         $scope.unblockControl();
-                        Notifications.error(error.data+".");
+                        Notifications.error(error.data.message + ".");
                     }
                 );
             } else {
                 $scope.form.$setSubmitted();
             }
         };
+
+    };
+
+    module.controller('CrearAgenciaCtrl_Admin', function($injector, $scope, $state, Sucursal){
+
+        $injector.invoke(crearAgenciaCtrl, this, {$scope: $scope});
+
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = Sucursal.$search().$object;
+        };
+        $scope.loadCombo();
 
     }).controller('CrearAgenciaFromSucursalCtrl', function($scope, $state, Sucursal, activeProfile, Notifications){
 
@@ -56,7 +61,7 @@ define(['../../module'], function (module) {
                     },
                     function error(error){
                         $scope.unblockControl();
-                        Notifications.error(error.data+".");
+                        Notifications.error(error.data.message+".");
                     }
                 );
             }

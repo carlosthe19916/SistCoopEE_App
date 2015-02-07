@@ -10,7 +10,6 @@ define(['../../module'], function (module) {
             sucursal: undefined
         };
 
-
         $scope.filterOptions = {
             filterText: undefined,
             offset: 0,

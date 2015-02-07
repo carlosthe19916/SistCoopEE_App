@@ -9,8 +9,8 @@ define(['../../module'], function (module) {
         };
 
         $scope.loadParams = function(){
-            $scope.view.agenciaDB = $scope.params.object;
-            $scope.view.agencia = angular.copy($scope.view.agenciaDB);
+            $scope.view.agencia = $scope.params.object;
+            $scope.view.agenciaDB = angular.copy($scope.params.object);
         };
         $scope.loadParams();
 
@@ -25,7 +25,7 @@ define(['../../module'], function (module) {
                     },
                     function error(error){
                         $scope.unblockControl();
-                        Notifications.error(error.data+".");
+                        Notifications.error(error.data.message+".");
                     }
                 );
             }
@@ -38,11 +38,11 @@ define(['../../module'], function (module) {
                     function(response){
                         $scope.unblockControl();
                         Notifications.success("Agencia desactivada");
-                        $state.go('app.organizacion.estructura.buscarAgencia');
+                        $state.go('^.^.buscarAgencia');
                     },
                     function error(error){
                         $scope.unblockControl();
-                        Notifications.error(error.data+".");
+                        Notifications.error(error.data.message+".");
                     }
                 );
             });
