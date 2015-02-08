@@ -143,6 +143,53 @@ define(['./app'], function(app) {
                 controller: 'CajaDatosPrincipalesCtrl',
                 module: 'ORGANIZACION',
                 roles: ['ADMIN']
+            })
+
+            .state('app.admin.organizacion.estructura.buscarBoveda', {
+                url: '/boveda/buscar',
+                templateUrl: appHelper.viewPath('organizacion/sucursal/agencia/boveda/form-buscar-boveda'),
+                controller: 'BuscarBovedaCtrl_Admin',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.estructura.crearBoveda', {
+                url: '/boveda',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/boveda/form-crear-boveda"),
+                controller: 'CrearBovedaCtrl_Admin',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.estructura.crearBoveda.datosPrincipales', {
+                url: '/principal',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/boveda/form-datosPrincipales-crear"),
+                controller: 'BovedaDatosPrincipalesCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.estructura.editarBoveda', {
+                url: '/boveda/{id:[0-9]{1,8}}',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/boveda/form-editar-boveda"),
+                resolve: {
+                    boveda: function($state, $stateParams, Boveda) {
+                        return Boveda.$find($stateParams.id);
+                    }
+                },
+                controller: function($scope, $stateParams, boveda) {
+                    $scope.params = {};
+                    $scope.params.id = $stateParams.id;
+                    $scope.params.object = boveda;
+                },
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.estructura.editarBoveda.resumen', {
+                url: '/resumen',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/boveda/form-resumen"),
+                controller: 'BovedaResumenCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.estructura.editarBoveda.datosPrincipales', {
+                url: '/principal',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/boveda/form-datosPrincipales-editar"),
+                controller: 'BovedaDatosPrincipalesCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
             });
 
     });

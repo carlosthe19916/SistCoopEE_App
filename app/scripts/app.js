@@ -264,10 +264,10 @@ define([
 
                         estructura.addItem('Sucursales', 'app.admin.organizacion.estructura.buscarSucursal');
                         estructura.addItem('Agencias', 'app.admin.organizacion.estructura.buscarAgencia');
-                        estructura.addItem('Bovedas', 'app.organizacion.estructura.buscarBoveda');
-                        estructura.addItem('Cajas', 'app.organizacion.estructura.buscarCaja');
-                        rrhh.addItem('Trabajadores', 'app.organizacion.rrhh.buscarTrabajador');
-                        rrhh.addItem('Usuarios', 'app.organizacion.rrhh.buscarUsuario');
+                        estructura.addItem('Bovedas', 'app.admin.organizacion.estructura.buscarBoveda');
+                        estructura.addItem('Cajas', 'app.admin.organizacion.estructura.buscarCaja');
+                        rrhh.addItem('Trabajadores', 'app.admin.organizacion.rrhh.buscarTrabajador');
+                        rrhh.addItem('Usuarios', 'app.admin.organizacion.rrhh.buscarUsuario');
 
                     } else {
                         return undefined;

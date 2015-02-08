@@ -1,7 +1,7 @@
 define(['../../../module'], function (module) {
     'use strict';
 
-    module.controller('BuscarBovedaCtrl', function($scope, $state, activeProfile, Sucursal, Agencia){
+    var buscarBovedaCtrl = function($scope, $state, activeProfile, Sucursal, Agencia){
 
         $scope.combo = {
             sucursal: undefined,
@@ -11,29 +11,6 @@ define(['../../../module'], function (module) {
             sucursal: undefined,
             agencia: undefined
         };
-        var comboSucursalListener = $scope.$watch('combo.selected.sucursal', function(){
-            if(angular.isDefined($scope.combo.selected.sucursal)){
-                $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
-            }
-        }, true);
-        $scope.loadCombo = function(){
-            if(activeProfile.hasRole('ORGANIZACION', ['ADMIN', 'GERENTE_GENERAL'], 'OR')){
-                $scope.combo.sucursal = Sucursal.$search().$object;
-            } else if(activeProfile.hasRole('ORGANIZACION', ['ADMINISTRADOR_GENERAL'], 'OR')){
-                $scope.combo.sucursal = [];
-                $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
-                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
-            } else if(activeProfile.hasRole('ORGANIZACION', ['ADMINISTRADOR', 'JEFE_CAJA'], 'OR')){
-                comboSucursalListener();
-                $scope.combo.sucursal = [];
-                $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
-                $scope.combo.agencia = [];
-                $scope.combo.agencia[0] = $scope.auth.user.agencia;
-                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
-                $scope.combo.selected.agencia = $scope.combo.agencia[0];
-            }
-        };
-        $scope.loadCombo();
 
         $scope.filterOptions = {
             filterText: undefined,
@@ -61,11 +38,11 @@ define(['../../../module'], function (module) {
         };
         $scope.gridActions = {
             edit: function(row){
-                $state.go('app.organizacion.estructura.editarBoveda.resumen', {id: row.id});
+                $state.go('^.editarBoveda.resumen', {id: row.id});
             }
         };
         $scope.nuevo = function(){
-            $state.go('app.organizacion.estructura.crearBoveda.datosPrincipales');
+            $state.go('^.crearBoveda.datosPrincipales');
         };
         $scope.search = function(){
             if($scope.combo.selected.sucursal && $scope.combo.selected.agencia){
@@ -73,7 +50,70 @@ define(['../../../module'], function (module) {
             }
         };
 
-    }).controller('BuscarBovedaFromAgenciaCtrl', function($scope, $state){
+    };
+
+    module.controller('BuscarBovedaCtrl_Admin', function($injector, $scope, Sucursal){
+        $injector.invoke(buscarBovedaCtrl, this,{$scope: $scope});
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = Sucursal.$search().$object;
+        };
+        $scope.loadCombo();
+        $scope.$watch('combo.selected.sucursal', function(){
+            if(angular.isDefined($scope.combo.selected.sucursal))
+            {
+                $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
+            }
+        }, true);
+    }).controller('BuscarBovedaCtrl_Gerentegeneral', function($injector, $scope, Sucursal){
+        $injector.invoke(buscarBovedaCtrl, this,{$scope: $scope});
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = Sucursal.$search().$object;
+        };
+        $scope.loadCombo();
+        $scope.$watch('combo.selected.sucursal', function(){
+            if(angular.isDefined($scope.combo.selected.sucursal))
+            {
+                $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
+            }
+        }, true);
+    }).controller('BuscarBovedaCtrl_Administradorgeneral', function($injector, $scope){
+        $injector.invoke(buscarBovedaCtrl, this,{$scope: $scope});
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = [];
+            $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
+            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+        };
+        $scope.loadCombo();
+        $scope.$watch('combo.selected.sucursal', function(){
+            if(angular.isDefined($scope.combo.selected.sucursal)){
+                $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
+            }
+        }, true);
+    }).controller('BuscarBovedaCtrl_Administrador', function($injector, $scope){
+        $injector.invoke(buscarBovedaCtrl, this,{$scope: $scope});
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = [];
+            $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
+            $scope.combo.agencia = [];
+            $scope.combo.agencia[0] = $scope.auth.user.agencia;
+            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+            $scope.combo.selected.agencia = $scope.combo.agencia[0];
+        };
+        $scope.loadCombo();
+    }).controller('BuscarBovedaCtrl_Jefecaja', function($injector, $scope){
+        $injector.invoke(buscarBovedaCtrl, this,{$scope: $scope});
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = [];
+            $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
+            $scope.combo.agencia = [];
+            $scope.combo.agencia[0] = $scope.auth.user.agencia;
+            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+            $scope.combo.selected.agencia = $scope.combo.agencia[0];
+        };
+        $scope.loadCombo();
+    });
+
+    module.controller('BuscarBovedaFromAgenciaCtrl', function($scope, $state){
 
         $scope.filterOptions = {
             filterText: undefined,
@@ -102,11 +142,11 @@ define(['../../../module'], function (module) {
         };
         $scope.gridActions = {
             edit: function(row){
-                $state.go('app.organizacion.estructura.editarBoveda.resumen', {id: row.id});
+                $state.go('^.editarBoveda.resumen', {id: row.id});
             }
         };
         $scope.nuevo = function(){
-            $state.go('app.organizacion.estructura.editarAgencia.crearBoveda.datosPrincipales');
+            $state.go('^.crearBoveda.datosPrincipales');
         };
         $scope.search = function(){
             $scope.gridOptions.data = $scope.view.agenciaDB.$getBovedas().$object;
