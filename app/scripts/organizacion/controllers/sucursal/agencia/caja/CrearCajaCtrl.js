@@ -1,7 +1,7 @@
 define(['../../../module'], function (module) {
     'use strict';
 
-    module.controller('CrearCajaCtrl', function($scope, $state, Sucursal, Agencia, activeProfile, Notifications){
+    var crearCajaCtrl = function($scope, $state, Sucursal, Agencia, Notifications){
 
         $scope.view = {
             caja: undefined
@@ -17,7 +17,37 @@ define(['../../../module'], function (module) {
             agencia: undefined,
             boveda: []
         };
-        var comboSucursalListener = $scope.$watch('combo.selected.sucursal', function(){
+
+        $scope.addCaja = function(){
+            if($scope.form.$valid){
+                $scope.view.caja.bovedas = $scope.combo.selected.boveda;
+                Agencia.$new($scope.combo.selected.agencia.id).$addCaja($scope.view.caja).then(
+                    function(response){
+                        $scope.unblockControl();
+                        Notifications.success("Caja creada");
+                        $state.go('^.^.editarCaja.resumen', {id: response.id});
+                    },
+                    function error(error){
+                        $scope.unblockControl();
+                        Notifications.error(error.data.message+".");
+                    }
+                );
+            } else {
+                $scope.form.$setSubmitted();
+            }
+        };
+
+    };
+
+    module.controller('CrearCajaCtrl_Admin', function($injector, $scope, Sucursal, Agencia){
+        $injector.invoke(crearCajaCtrl, this, {$scope: $scope});
+
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = Sucursal.$search().$object;
+        };
+        $scope.loadCombo();
+
+        $scope.$watch('combo.selected.sucursal', function(){
             if(angular.isDefined($scope.combo.selected.sucursal)){
                 $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
             }
@@ -27,45 +57,83 @@ define(['../../../module'], function (module) {
                 $scope.combo.boveda = Agencia.$new($scope.combo.selected.agencia.id).$getBovedas().$object;
             }
         }, true);
+    }).controller('CrearCajaCtrl_Gerentegeneral', function($injector, $scope, Sucursal, Agencia){
+        $injector.invoke(crearCajaCtrl, this, {$scope: $scope});
+
         $scope.loadCombo = function(){
-            if(activeProfile.hasRole('ORGANIZACION', ['ADMIN', 'GERENTE_GENERAL'], 'OR')){
-                $scope.combo.sucursal = Sucursal.$search().$object;
-            } else if(activeProfile.hasRole('ORGANIZACION', ['ADMINISTRADOR_GENERAL'], 'OR')){
-                $scope.combo.sucursal = [];
-                $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
-                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
-            } else if(activeProfile.hasRole('ORGANIZACION', ['ADMINISTRADOR', 'JEFE_CAJA'], 'OR')){
-                comboSucursalListener();
-                $scope.combo.sucursal = [];
-                $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
-                $scope.combo.agencia = [];
-                $scope.combo.agencia[0] = $scope.auth.user.agencia;
-                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
-                $scope.combo.selected.agencia = $scope.combo.agencia[0];
-            }
+            $scope.combo.sucursal = Sucursal.$search().$object;
         };
         $scope.loadCombo();
 
-        $scope.addCaja = function(){
-            if($scope.form.$valid){
-                $scope.view.caja.bovedas = $scope.combo.selected.boveda;
-                Agencia.$new($scope.combo.selected.agencia.id).$addCaja($scope.view.caja).then(
-                    function(response){
-                        $scope.unblockControl();
-                        Notifications.success("Caja creada");
-                        $state.go('app.organizacion.estructura.editarCaja.resumen', {id: response.id});
-                    },
-                    function error(error){
-                        $scope.unblockControl();
-                        Notifications.error(error.data+".");
-                    }
-                );
-            } else {
-                $scope.form.$setSubmitted();
+        $scope.$watch('combo.selected.sucursal', function(){
+            if(angular.isDefined($scope.combo.selected.sucursal)){
+                $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
             }
-        };
+        }, true);
+        $scope.$watch('combo.selected.agencia', function(){
+            if(angular.isDefined($scope.combo.selected.agencia)){
+                $scope.combo.boveda = Agencia.$new($scope.combo.selected.agencia.id).$getBovedas().$object;
+            }
+        }, true);
+    }).controller('CrearCajaCtrl_Administradorgeneral', function($injector, $scope, Sucursal, Agencia){
+        $injector.invoke(crearCajaCtrl, this, {$scope: $scope});
 
-    }).controller('CrearCajaFromAgenciaCtrl', function($scope, $state, Currency, Sucursal, Notifications){
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = [];
+            $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
+            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+        };
+        $scope.loadCombo();
+
+        $scope.$watch('combo.selected.sucursal', function(){
+            if(angular.isDefined($scope.combo.selected.sucursal)){
+                $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
+            }
+        }, true);
+        $scope.$watch('combo.selected.agencia', function(){
+            if(angular.isDefined($scope.combo.selected.agencia)){
+                $scope.combo.boveda = Agencia.$new($scope.combo.selected.agencia.id).$getBovedas().$object;
+            }
+        }, true);
+    }).controller('CrearCajaCtrl_Administrador', function($injector, $scope, Sucursal, Agencia){
+        $injector.invoke(crearCajaCtrl, this, {$scope: $scope});
+
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = [];
+            $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
+            $scope.combo.agencia = [];
+            $scope.combo.agencia[0] = $scope.auth.user.agencia;
+            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+            $scope.combo.selected.agencia = $scope.combo.agencia[0];
+        };
+        $scope.loadCombo();
+
+        $scope.$watch('combo.selected.agencia', function(){
+            if(angular.isDefined($scope.combo.selected.agencia)){
+                $scope.combo.boveda = Agencia.$new($scope.combo.selected.agencia.id).$getBovedas().$object;
+            }
+        }, true);
+    }).controller('CrearCajaCtrl_Jefecaja', function($injector, $scope, Sucursal, Agencia){
+        $injector.invoke(crearCajaCtrl, this, {$scope: $scope});
+
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = [];
+            $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
+            $scope.combo.agencia = [];
+            $scope.combo.agencia[0] = $scope.auth.user.agencia;
+            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+            $scope.combo.selected.agencia = $scope.combo.agencia[0];
+        };
+        $scope.loadCombo();
+
+        $scope.$watch('combo.selected.agencia', function(){
+            if(angular.isDefined($scope.combo.selected.agencia)){
+                $scope.combo.boveda = Agencia.$new($scope.combo.selected.agencia.id).$getBovedas().$object;
+            }
+        }, true);
+    });
+
+    module.controller('CrearCajaFromAgenciaCtrl', function($scope, $state, Currency, Sucursal, Notifications){
 
         $scope.view = {
             agencia: $scope.$parent.view.agenciaDB,
@@ -95,11 +163,11 @@ define(['../../../module'], function (module) {
                     },
                     function error(error){
                         $scope.unblockControl();
-                        Notifications.error(error.data+".");
+                        Notifications.error(error.data.messaage+".");
                     }
                 );
             }
         };
-
     });
+
 });

@@ -53,6 +53,13 @@ define(['./module'], function (module) {
                         return OrganizacionRestangular.all(url+'/'+this.id+'/bovedas').customPOST(OrganizacionRestangular.copy(boveda),'',{},{});
                     },
                     $addCaja: function(caja){
+                        if(caja.bovedas.length)
+                        {
+                            var bovedas = caja.bovedas;
+                            angular.forEach(bovedas, function(value, index) {
+                                caja.bovedas[index] = {id: value.id};
+                            }, bovedas);
+                        }
                         return OrganizacionRestangular.all(url+'/'+this.id+'/cajas').customPOST(OrganizacionRestangular.copy(caja),'',{},{});
                     }
                 }

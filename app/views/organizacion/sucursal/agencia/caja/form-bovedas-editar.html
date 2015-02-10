@@ -4,7 +4,7 @@
     <div class="col-sm-8">
         <div class="form-group" ng-class="{ 'validate-has-error' : form.boveda.$invalid && (form.boveda.$touched || form.$submitted)}">
             <label>Bovedas disponibles</label>
-            <ui-select name="boveda" ng-model="combo.selected.boveda" required>
+            <ui-select name="boveda" ng-model="combo.selected.boveda" ui-autofocus required>
                 <ui-select-match placeholder="Boveda">{{$select.selected.denominacion}}</ui-select-match>
                 <ui-select-choices repeat="item in combo.boveda | filter: $select.search">
                     <div ng-bind-html="item.denominacion | highlight: $select.search"></div>

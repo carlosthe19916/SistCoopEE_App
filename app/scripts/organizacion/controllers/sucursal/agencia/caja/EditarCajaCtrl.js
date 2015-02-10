@@ -38,7 +38,7 @@ define(['../../../module'], function (module) {
                     },
                     function error(error){
                         $scope.unblockControl();
-                        Notifications.error(error.data+".");
+                        Notifications.error(error.data.message+".");
                     }
                 );
             }
@@ -51,11 +51,11 @@ define(['../../../module'], function (module) {
                     function(response){
                         $scope.unblockControl();
                         Notifications.success("Caja desactivada");
-                        $state.go('app.organizacion.estructura.buscarCaja');
+                        $state.go('^.^.buscarCaja');
                     },
                     function error(error){
                         $scope.unblockControl();
-                        Notifications.error(error.data+".");
+                        Notifications.error(error.data.message+".");
                     }
                 );
             });

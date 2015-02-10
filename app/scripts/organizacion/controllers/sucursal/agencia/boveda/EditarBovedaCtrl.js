@@ -9,9 +9,9 @@ define(['../../../module'], function (module) {
         };
 
         $scope.loadParams = function(){
-            $scope.view.bovedaDB = $scope.params.object;
+            $scope.view.boveda = $scope.params.object;
+            $scope.view.bovedaDB = angular.copy($scope.params.object);
             $scope.view.bovedaDB.cajas = $scope.view.bovedaDB.$getCajas().$object;
-            $scope.view.boveda = angular.copy($scope.view.bovedaDB);
         };
         $scope.loadParams();
 
@@ -39,7 +39,7 @@ define(['../../../module'], function (module) {
                     function(response){
                         $scope.unblockControl();
                         Notifications.success("Boveda desactivada");
-                        $state.go('app.organizacion.estructura.buscarBoveda');
+                        $state.go('^.^.buscarBoveda');
                     },
                     function error(error){
                         $scope.unblockControl();

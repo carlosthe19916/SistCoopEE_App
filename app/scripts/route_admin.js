@@ -190,6 +190,59 @@ define(['./app'], function(app) {
                 controller: 'BovedaDatosPrincipalesCtrl',
                 module: 'ORGANIZACION',
                 roles: ['ADMIN']
+            })
+
+            .state('app.admin.organizacion.estructura.buscarCaja', {
+                url: '/caja/buscar',
+                templateUrl: appHelper.viewPath('organizacion/sucursal/agencia/caja/form-buscar-caja'),
+                controller: 'BuscarCajaCtrl_Admin',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.estructura.crearCaja', {
+                url: '/caja',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-crear-caja"),
+                controller: 'CrearCajaCtrl_Admin',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.estructura.crearCaja.datosPrincipales', {
+                url: '/principal',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-datosPrincipales-crear"),
+                controller: 'CajaDatosPrincipalesCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.estructura.editarCaja', {
+                url: '/caja/{id:[0-9]{1,8}}',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-editar-caja"),
+                resolve: {
+                    caja: function($state, $stateParams, Caja) {
+                        return Caja.$find($stateParams.id);
+                    }
+                },
+                controller: function($scope, $stateParams, caja) {
+                    $scope.params = {};
+                    $scope.params.id = $stateParams.id;
+                    $scope.params.object = caja;
+                },
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.estructura.editarCaja.resumen', {
+                url: '/resumen',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-resumen"),
+                controller: 'CajaResumenCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.estructura.editarCaja.datosPrincipales', {
+                url: '/principal',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-datosPrincipales-editar"),
+                controller: 'CajaDatosPrincipalesCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.estructura.editarCaja.bovedas', {
+                url: '/bovedas',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-bovedas-editar"),
+                controller: 'CajaBovedasCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
             });
 
     });
