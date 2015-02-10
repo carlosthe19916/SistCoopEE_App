@@ -13,6 +13,9 @@ define(['./app'], function(app) {
             }).state('app.admin.organizacion.estructura', {
                 url: '/estructura',
                 template: '<div ui-view></div>'
+            }).state('app.admin.organizacion.rrhh', {
+                url: '/estructura',
+                template: '<div ui-view></div>'
             })
 
             .state('app.admin.organizacion.estructura.buscarSucursal', {
@@ -241,6 +244,65 @@ define(['./app'], function(app) {
                 url: '/bovedas',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-bovedas-editar"),
                 controller: 'CajaBovedasCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            })
+
+            .state('app.admin.organizacion.rrhh.buscarTrabajador', {
+                url: '/trabajador/buscar',
+                templateUrl: appHelper.viewPath('organizacion/sucursal/agencia/trabajador/form-buscar-trabajador'),
+                controller: 'BuscarTrabajadorCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.rrhh.crearTrabajador', {
+                url: '/trabajador',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/trabajador/form-crear-trabajador"),
+                controller: 'CrearTrabajadorCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.rrhh.crearTrabajador.datosPrincipales', {
+                url: '/principal',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/trabajador/form-datosPrincipales-crear"),
+                controller: 'TrabajadorDatosPrincipalesCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.rrhh.editarTrabajador', {
+                url: '/trabajador/{id:[0-9]{1,8}}',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/trabajador/form-editar-trabajador"),
+                resolve: {
+                    trabajador: function($state, $stateParams, Trabajador) {
+                        return Trabajador.$find($stateParams.id);
+                    }
+                },
+                controller: function($scope, $stateParams, trabajador) {
+                    $scope.params = {};
+                    $scope.params.id = $stateParams.id;
+                    $scope.params.object = trabajador;
+                },
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.rrhh.editarTrabajador.resumen', {
+                url: '/resumen',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/trabajador/form-resumen"),
+                controller: 'TrabajadorResumenCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.rrhh.editarTrabajador.datosPrincipales', {
+                url: '/principal',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/trabajador/form-datosPrincipales-editar"),
+                controller: 'TrabajadorDatosPrincipalesCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.rrhh.editarTrabajador.accesoAlSistema', {
+                url: '/acceso',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/trabajador/form-accesoAlSistema"),
+                controller: 'TrabajadorAccesoAlSistemaCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            }).state('app.admin.organizacion.rrhh.editarTrabajador.asignarCaja', {
+                url: '/caja',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/trabajador/form-asignarCaja"),
+                controller: 'TrabajadorAsignarCajaCtrl',
                 module: 'ORGANIZACION',
                 roles: ['ADMIN']
             });
