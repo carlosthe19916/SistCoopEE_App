@@ -251,7 +251,7 @@ define(['./app'], function(app) {
             .state('app.admin.organizacion.rrhh.buscarTrabajador', {
                 url: '/trabajador/buscar',
                 templateUrl: appHelper.viewPath('organizacion/sucursal/agencia/trabajador/form-buscar-trabajador'),
-                controller: 'BuscarTrabajadorCtrl',
+                controller: 'BuscarTrabajadorCtrl_Admin',
                 module: 'ORGANIZACION',
                 roles: ['ADMIN']
             }).state('app.admin.organizacion.rrhh.crearTrabajador', {

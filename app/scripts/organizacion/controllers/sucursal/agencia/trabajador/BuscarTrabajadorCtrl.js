@@ -1,7 +1,7 @@
 define(['../../../module'], function (module) {
     'use strict';
 
-    module.controller('BuscarTrabajadorCtrl', function($scope, $state, activeProfile, Sucursal, Agencia, PersonaNatural){
+    var buscarTrabajadorCtrl = function($scope, $state, Agencia, PersonaNatural){
 
         $scope.combo = {
             sucursal: undefined,
@@ -11,29 +11,6 @@ define(['../../../module'], function (module) {
             sucursal: undefined,
             agencia: undefined
         };
-        var comboSucursalListener = $scope.$watch('combo.selected.sucursal', function(){
-            if(angular.isDefined($scope.combo.selected.sucursal)){
-                $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
-            }
-        }, true);
-        $scope.loadCombo = function(){
-            if(activeProfile.hasRole('ORGANIZACION', ['ADMIN', 'GERENTE_GENERAL'], 'OR')){
-                $scope.combo.sucursal = Sucursal.$search().$object;
-            } else if(activeProfile.hasRole('ORGANIZACION', ['ADMINISTRADOR_GENERAL'], 'OR')){
-                $scope.combo.sucursal = [];
-                $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
-                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
-            } else if(activeProfile.hasRole('ORGANIZACION', ['ADMINISTRADOR', 'JEFE_CAJA'], 'OR')){
-                comboSucursalListener();
-                $scope.combo.sucursal = [];
-                $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
-                $scope.combo.agencia = [];
-                $scope.combo.agencia[0] = $scope.auth.user.agencia;
-                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
-                $scope.combo.selected.agencia = $scope.combo.agencia[0];
-            }
-        };
-        $scope.loadCombo();
 
         $scope.filterOptions = {
             filterText: undefined,
@@ -61,11 +38,11 @@ define(['../../../module'], function (module) {
         };
         $scope.gridActions = {
             edit: function(row){
-                $state.go('app.organizacion.rrhh.editarTrabajador.resumen', {id: row.id});
+                $state.go('^.editarTrabajador.resumen', {id: row.id});
             }
         };
         $scope.nuevo = function(){
-            $state.go('app.organizacion.rrhh.crearTrabajador.datosPrincipales');
+            $state.go('^.crearTrabajador.datosPrincipales');
         };
         $scope.search = function(){
             if($scope.combo.selected.sucursal && $scope.combo.selected.agencia){
@@ -78,5 +55,73 @@ define(['../../../module'], function (module) {
             }
         };
 
+    };
+
+    module.controller('BuscarTrabajadorCtrl_Admin', function($injector, $scope, Sucursal){
+        $injector.invoke(buscarTrabajadorCtrl, this, {$scope: $scope});
+
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = Sucursal.$search().$object;
+        };
+        $scope.loadCombo();
+
+        $scope.$watch('combo.selected.sucursal', function(){
+            if(angular.isDefined($scope.combo.selected.sucursal)){
+                $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
+            }
+        }, true);
+    }).controller('BuscarTrabajadorCtrl_Gerentegeneral', function($injector, $scope, Sucursal){
+        $injector.invoke(buscarTrabajadorCtrl, this, {$scope: $scope});
+
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = Sucursal.$search().$object;
+        };
+        $scope.loadCombo();
+
+        $scope.$watch('combo.selected.sucursal', function(){
+            if(angular.isDefined($scope.combo.selected.sucursal)){
+                $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
+            }
+        }, true);
+    }).controller('BuscarTrabajadorCtrl_Administradorgeneral', function($injector, $scope, Sucursal){
+        $injector.invoke(buscarTrabajadorCtrl, this, {$scope: $scope});
+
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = [];
+            $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
+            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+        };
+        $scope.loadCombo();
+
+        $scope.$watch('combo.selected.sucursal', function(){
+            if(angular.isDefined($scope.combo.selected.sucursal)){
+                $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
+            }
+        }, true);
+    }).controller('BuscarTrabajadorCtrl_Administrador', function($injector, $scope, Sucursal){
+        $injector.invoke(buscarTrabajadorCtrl, this, {$scope: $scope});
+
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = [];
+            $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
+            $scope.combo.agencia = [];
+            $scope.combo.agencia[0] = $scope.auth.user.agencia;
+            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+            $scope.combo.selected.agencia = $scope.combo.agencia[0];
+        };
+        $scope.loadCombo();
+    }).controller('BuscarTrabajadorCtrl_Jefecaja', function($injector, $scope, Sucursal){
+        $injector.invoke(buscarTrabajadorCtrl, this, {$scope: $scope});
+
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = [];
+            $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
+            $scope.combo.agencia = [];
+            $scope.combo.agencia[0] = $scope.auth.user.agencia;
+            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+            $scope.combo.selected.agencia = $scope.combo.agencia[0];
+        };
+        $scope.loadCombo();
     });
+
 });
