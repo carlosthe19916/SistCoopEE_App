@@ -760,6 +760,25 @@ define([
                 })
         });
 
+        app.run(function($rootScope, activeProfile, Usuario){
+
+            $rootScope.user = {
+                username: undefined,
+                sucursal: undefined,
+                agencia: undefined,
+                caja: undefined,
+                trabajador: undefined
+            };
+
+            $rootScope.user.username = activeProfile.idToken.preferred_username;
+
+            $rootScope.user.sucursal = Usuario.$getSucursal($rootScope.user.username).$object;
+            $rootScope.user.agencia = Usuario.$getAgencia($rootScope.user.username).$object;
+            $rootScope.user.caja = Usuario.$getCaja($rootScope.user.username).$object;
+            $rootScope.user.trabajador = Usuario.$getTrabajador($rootScope.user.username).$object;
+
+        });
+
 
 
         /*****************MAIN CONTROLLER******************/

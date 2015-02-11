@@ -60,15 +60,17 @@ define(['../../module'], function (module) {
             $scope.combo.sucursal = Sucursal.$search().$object;
         };
         $scope.loadCombo();
-    }).controller('BuscarAgenciaCtrl_Administradorgeneral', function($injector, $scope, Sucursal){
+    }).controller('BuscarAgenciaCtrl_Administradorgeneral', function($injector, $rootScope, $scope){
         $injector.invoke(buscarAgenciaCtrl, this, {$scope: $scope});
         $scope.loadCombo = function(){
             $scope.combo.sucursal = [];
-            $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
+            $scope.combo.sucursal[0] = $rootScope.user.sucursal;
             $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
         };
         $scope.loadCombo();
-    }).controller('BuscarAgenciaFromSucursalCtrl', function($scope, $state){
+    });
+
+    module.controller('BuscarAgenciaFromSucursalCtrl', function($scope, $state){
 
         $scope.filterOptions = {
             filterText: undefined,
