@@ -144,6 +144,8 @@ require([
     'app',
 
     'route_admin',
+    'route_gerentegeneral',
+    'route_administradorgeneral',
 
     'angular-sanitize',
     'angular-cookies',

@@ -272,6 +272,32 @@ define([
                     } else {
                         return undefined;
                     }
+                } else if(roles.indexOf('GERENTE_GENERAL') != -1){
+                    if(stateName.indexOf('app.gerentegeneral.organizacion') > -1){
+                        var estructura = this.addItem('Estructura', '', 'linecons-inbox');
+                        var rrhh = this.addItem('RRHH', '', 'linecons-t-shirt');
+
+                        estructura.addItem('Sucursales', 'app.gerentegeneral.organizacion.estructura.buscarSucursal');
+                        estructura.addItem('Agencias', 'app.gerentegeneral.organizacion.estructura.buscarAgencia');
+                        estructura.addItem('Bovedas', 'app.gerentegeneral.organizacion.estructura.buscarBoveda');
+                        estructura.addItem('Cajas', 'app.gerentegeneral.organizacion.estructura.buscarCaja');
+                        rrhh.addItem('Trabajadores', 'app.gerentegeneral.organizacion.rrhh.buscarTrabajador');
+                        rrhh.addItem('Usuarios', 'app.gerentegeneral.organizacion.rrhh.buscarUsuario');
+                    } else {
+                        return undefined;
+                    }
+                } else if(roles.indexOf('ADMINISTRADOR_GENERAL') != -1){
+                    if(stateName.indexOf('app.administradorgeneral.organizacion') > -1){
+                        var estructura = this.addItem('Estructura', '', 'linecons-inbox');
+                        var rrhh = this.addItem('RRHH', '', 'linecons-t-shirt');
+
+                        estructura.addItem('Agencias', 'app.administradorgeneral.organizacion.estructura.buscarAgencia');
+                        estructura.addItem('Bovedas', 'app.administradorgeneral.estructura.buscarBoveda');
+                        estructura.addItem('Cajas', 'app.administradorgeneral.estructura.buscarCaja');
+                        rrhh.addItem('Trabajadores', 'app.administradorgeneral.rrhh.buscarTrabajador')
+                    } else {
+                        return undefined;
+                    }
                 }
 
                 return this;
@@ -377,16 +403,8 @@ define([
 
                 } else if(roles.indexOf('GERENTE_GENERAL') != -1){
                     var organizacion = this.addItem('Organizacion', 'app.gerentegeneral.organizacion', 'linecons-desktop');
-                    var cliente = this.addItem('Clientes', 'app.cliente', 'linecons-database');
-                    var transaccion = this.addItem('Transacciones', 'app.transaccion', 'linecons-doc');
-                    var administracion = this.addItem('Administracion', 'app.administracion', 'linecons-params');
-                    var configuracion = this.addItem('Configuracion', 'app.configuracion', 'linecons-cog');
                 } else if(roles.indexOf('ADMINISTRADOR_GENERAL') != -1){
                     var organizacion = this.addItem('Organizacion', 'app.administradorgeneral.organizacion', 'linecons-desktop');
-                    var cliente = this.addItem('Clientes', 'app.cliente', 'linecons-database');
-                    var transaccion = this.addItem('Transacciones', 'app.transaccion', 'linecons-doc');
-                    var administracion = this.addItem('Administracion', 'app.administracion', 'linecons-params');
-                    var configuracion = this.addItem('Configuracion', 'app.configuracion', 'linecons-cog');
                 } else if(roles.indexOf('ADMINISTRADOR') != -1){
                     var organizacion = this.addItem('Organizacion', 'app.organizacion', 'linecons-desktop');
                     var cliente = this.addItem('Clientes', 'app.cliente', 'linecons-database');
