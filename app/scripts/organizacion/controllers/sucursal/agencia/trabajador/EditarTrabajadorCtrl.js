@@ -1,7 +1,7 @@
 define(['../../../module'], function (module) {
     'use strict';
 
-    module.controller('EditarTrabajadorCtrl', function($scope, $state, PersonaNatural, Notifications){
+    module.controller('EditarTrabajadorCtrl', function($scope, $state, PersonaNatural, Notifications, Dialog){
 
         $scope.view = {
             trabajador: undefined,
@@ -44,15 +44,32 @@ define(['../../../module'], function (module) {
                         $scope.unblockControl();
                         Notifications.success("Trabajador actualizado.");
                         $scope.view.trabajadorDB = angular.copy($scope.view.trabajador);
-                        $state.go('^.resumen');
                     },
                     function error(error){
                         $scope.unblockControl();
-                        Notifications.error(error.data+".");
+                        Notifications.error(error.data.message+".");
                     }
                 );
             }
         };
+
+        $scope.desactivar = function(){
+            Dialog.confirmDelete('', 'trabajador', function() {
+                $scope.blockControl();
+                $scope.view.trabajadorDB.$desactivar().then(
+                    function(response){
+                        $scope.unblockControl();
+                        Notifications.success("Trabajador desactivado");
+                        $state.go('^.^.buscarTrabajador');
+                    },
+                    function error(error){
+                        $scope.unblockControl();
+                        Notifications.error(error.data.message+".");
+                    }
+                );
+            });
+        };
+
     });
 });
 

@@ -1,7 +1,7 @@
 define(['../../../module'], function (module) {
     'use strict';
 
-    var crearTrabajadorCtrl = function($scope, $state, Sucursal, Agencia, Trabajador, PersonaNatural, TipoDocumento, Notifications){
+    module.controller('CrearTrabajadorCtrl', function($scope, $state, Sucursal, Agencia, Trabajador, PersonaNatural, TipoDocumento, Notifications){
 
         $scope.view = {
             trabajador: Trabajador.$build()
@@ -50,11 +50,6 @@ define(['../../../module'], function (module) {
                 );
             }
         };
-    };
-
-    module.controller('CrearTrabajadorCtrl', function($scope, $state, Sucursal, Agencia, Trabajador, PersonaNatural, TipoDocumento, Notifications, activeProfile){
-
-
 
     });
 });

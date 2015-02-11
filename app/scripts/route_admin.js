@@ -263,7 +263,7 @@ define(['./app'], function(app) {
             }).state('app.admin.organizacion.rrhh.crearTrabajador.datosPrincipales', {
                 url: '/principal',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/trabajador/form-datosPrincipales-crear"),
-                controller: 'TrabajadorDatosPrincipalesCtrl',
+                controller: 'TrabajadorDatosPrincipalesCtrl_Admin',
                 module: 'ORGANIZACION',
                 roles: ['ADMIN']
             }).state('app.admin.organizacion.rrhh.editarTrabajador', {
@@ -290,7 +290,7 @@ define(['./app'], function(app) {
             }).state('app.admin.organizacion.rrhh.editarTrabajador.datosPrincipales', {
                 url: '/principal',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/trabajador/form-datosPrincipales-editar"),
-                controller: 'TrabajadorDatosPrincipalesCtrl',
+                controller: 'TrabajadorDatosPrincipalesCtrl_Admin',
                 module: 'ORGANIZACION',
                 roles: ['ADMIN']
             }).state('app.admin.organizacion.rrhh.editarTrabajador.accesoAlSistema', {
@@ -303,6 +303,14 @@ define(['./app'], function(app) {
                 url: '/caja',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/trabajador/form-asignarCaja"),
                 controller: 'TrabajadorAsignarCajaCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
+            })
+
+            .state('app.admin.organizacion.rrhh.buscarUsuario', {
+                url: '/usuario/buscar',
+                templateUrl: appHelper.viewPath('organizacion/usuario/form-buscar-usuario'),
+                controller: 'BuscarUsuarioCtrl',
                 module: 'ORGANIZACION',
                 roles: ['ADMIN']
             });

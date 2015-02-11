@@ -18,7 +18,7 @@
     <div class="col-sm-4">
         <div class="form-group" ng-class="{ 'validate-has-error' : form.caja.$invalid && (form.caja.$touched || form.$submitted)}">
             <label>Caja</label>
-            <ui-select name="caja" ng-model="combo.selected.caja" required>
+            <ui-select name="caja" ng-model="combo.selected.caja" ui-autofocus required>
                 <ui-select-autoload pk-name="id" comparator="view.trabajador.caja.id"></ui-select-autoload>
                 <ui-select-match placeholder="Seleccione">{{$select.selected.denominacion}}</ui-select-match>
                 <ui-select-choices repeat="item in combo.caja | filter: $select.search">

@@ -6,7 +6,12 @@ define(['./module'], function (module) {
 
         OrganizacionRestangular.extendModel(url, function(obj) {
             obj.$save = function() {
-                return OrganizacionRestangular.one(url, this.id).customPUT(OrganizacionRestangular.copy(this),'',{},{});
+                var trabajador = OrganizacionRestangular.copy(this);
+                if(trabajador.agencia)
+                {
+                    trabajador.agencia = {id: trabajador.agencia.id}
+                }
+                return OrganizacionRestangular.one(url, this.id).customPUT(trabajador,'',{},{});
             };
             obj.$addCaja = function(caja){
                 return OrganizacionRestangular.all(url+'/'+this.id+'/cajas').post(OrganizacionRestangular.copy(caja));
@@ -25,6 +30,10 @@ define(['./module'], function (module) {
                 return {
                     id: undefined,
                     $save: function(){
+                        if(this.agencia)
+                        {
+                            this.agencia = {id: this.agencia.id}
+                        }
                         return OrganizacionRestangular.all(url).post(angular.copy(this));
                     }
                 }
