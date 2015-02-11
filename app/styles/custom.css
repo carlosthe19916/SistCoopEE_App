@@ -10,6 +10,10 @@ body {
 a {
 }
 
+.page-body.skin-white .sidebar-menu .main-menu li.has-sub>a:before {
+    color: #666;
+}
+
 /*navbar*/
 .navbar.horizontal-menu.navbar-minimal.navbar-fixed-top+.page-container>div>.sidebar-menu.fixed .sidebar-menu-inner{
     top: 55px;

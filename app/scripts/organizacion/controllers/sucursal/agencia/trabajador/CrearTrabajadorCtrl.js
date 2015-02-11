@@ -1,7 +1,7 @@
 define(['../../../module'], function (module) {
     'use strict';
 
-    module.controller('CrearTrabajadorCtrl', function($scope, $state, Sucursal, Agencia, Trabajador, PersonaNatural, TipoDocumento, Notifications, activeProfile){
+    var crearTrabajadorCtrl = function($scope, $state, Sucursal, Agencia, Trabajador, PersonaNatural, TipoDocumento, Notifications){
 
         $scope.view = {
             trabajador: Trabajador.$build()
@@ -40,15 +40,21 @@ define(['../../../module'], function (module) {
                     function(response){
                         $scope.unblockControl();
                         Notifications.success("Trabajador creado.");
-                        $state.go('app.organizacion.rrhh.editarTrabajador.resumen', {id: response.id});
+                        $state.go('^.^.editarTrabajador.resumen', {id: response.id});
+
                     },
                     function error(error){
                         $scope.unblockControl();
-                        Notifications.error(error.data+".");
+                        Notifications.error(error.data.message+".");
                     }
                 );
             }
         };
+    };
+
+    module.controller('CrearTrabajadorCtrl', function($scope, $state, Sucursal, Agencia, Trabajador, PersonaNatural, TipoDocumento, Notifications, activeProfile){
+
+
 
     });
 });
