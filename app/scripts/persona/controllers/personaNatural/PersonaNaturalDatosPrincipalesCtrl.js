@@ -1,7 +1,7 @@
 define(['../module'], function (module) {
     'use strict';
 
-    module.controller('PersonaNaturalDatosPrincipalesCtrl', function($scope, $state, Storage, Pais, Sexo, EstadoCivil, PersonaNatural, TipoDocumento, Notifications){
+    module.controller('PersonaNaturalDatosPrincipalesCtrl', function($scope, $state, Pais, Sexo, EstadoCivil, PersonaNatural, TipoDocumento, Notifications){
 
         $scope.refreshPage = function(){
             $scope.form.$setPristine();

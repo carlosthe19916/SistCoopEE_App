@@ -149,6 +149,7 @@ require([
     'keycloak',
     'app',
 
+    'route_common',
     'route_admin',
     'route_gerentegeneral',
     'route_administradorgeneral',

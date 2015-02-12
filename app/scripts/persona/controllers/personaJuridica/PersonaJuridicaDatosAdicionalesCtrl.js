@@ -5,7 +5,7 @@ define(['../module'], function (module) {
 
         $scope.goTabRepresentante = function(){
             if($scope.form.$valid){
-                $state.go('app.administracion.crearPersonaJuridica.representante');
+                $state.go('^.^.crearPersonaJuridica.representante');
             } else {
                 $scope.form.$setSubmitted();
             }

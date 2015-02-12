@@ -1,7 +1,7 @@
 define(['../module'], function (module) {
     'use strict';
 
-    module.controller('AccionistaCtrl', function($scope, $state, TipoDocumento, PersonaNatural, Notifications, Navigation){
+    module.controller('AccionistaCtrl', function($scope, $state, TipoDocumento, PersonaNatural, Notifications){
 
         $scope.entradas = {
             tipoDocumento: undefined,
@@ -49,20 +49,18 @@ define(['../module'], function (module) {
                     },
                     function error(error){
                         $scope.unblockControl();
-                        Notifications.error(error.data+".");
+                        Notifications.error(error.data.message+".");
                     }
                 );
             }
         };
 
         $scope.editarPersonaNatural = function(item){
-            $state.go('app.administracion.editarPersonaNatural', {id:item.id});
+            $state.go('^.^.editarPersonaNatural.resumen', {id:item.id});
         };
 
         $scope.goCrearPersonaNatural = function(){
-            //$scope.combo.synchronize();
-            Navigation.addState({name: 'Editar P.juridica', state: 'app.administracion.editarPersonaJuridica.accionista', params:{id: $scope.view.personaDB.id}, object: $scope.view});
-            $state.go('app.administracion.crearPersonaNatural');
+            $state.go('^.^.crearPersonaNatural.datosPrincipales');
         };
 
     });

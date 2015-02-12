@@ -28,7 +28,7 @@ define(['../../../module'], function (module) {
         };
 
         $scope.addPersona = function(){
-            $state.go('^.^.crearPersonaNatural.datosPrincipales');
+            $state.go('app.common.administracion.personas.crearPersonaNatural.datosPrincipales');
         };
 
     };

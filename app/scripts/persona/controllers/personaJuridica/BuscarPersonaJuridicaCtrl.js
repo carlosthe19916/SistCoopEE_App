@@ -4,7 +4,7 @@ define(['../module'], function (module) {
     module.controller('BuscarPersonaJuridicaCtrl', function($scope, $state, PersonaJuridica){
 
         $scope.nuevo = function(){
-            $state.go('app.administracion.personas.crearPersonaJuridica.datosPrincipales');
+            $state.go('^.crearPersonaJuridica.datosPrincipales');
         };
 
         $scope.filterOptions = {
@@ -33,7 +33,7 @@ define(['../module'], function (module) {
         };
         $scope.gridActions = {
             edit: function(row){
-                $state.go('app.administracion.personas.editarPersonaJuridica.datosPrincipales', {id: row.id});
+                $state.go('^.editarPersonaJuridica.datosPrincipales', {id: row.id});
             }
         };
 

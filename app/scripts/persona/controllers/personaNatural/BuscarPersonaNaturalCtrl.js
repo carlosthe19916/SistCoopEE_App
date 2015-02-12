@@ -1,10 +1,10 @@
 define(['../module'], function (module) {
     'use strict';
 
-    module.controller('BuscarPersonaNaturalCtrl', function($scope, $state, Storage, PersonaNatural){
+    module.controller('BuscarPersonaNaturalCtrl', function($scope, $state, PersonaNatural){
 
         $scope.nuevo = function(){
-            $state.go('app.administracion.personas.crearPersonaNatural.datosPrincipales');
+            $state.go('^.crearPersonaNatural.datosPrincipales');
         };
 
         $scope.filterOptions = {
@@ -34,8 +34,7 @@ define(['../module'], function (module) {
         };
         $scope.gridActions = {
             edit: function(row){
-                Storage.setObject(row);
-                $state.go('app.administracion.personas.editarPersonaNatural.resumen', {id: row.id});
+                $state.go('^..editarPersonaNatural.resumen', {id: row.id});
             }
         };
 

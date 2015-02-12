@@ -1,7 +1,7 @@
 define(['../module'], function (module) {
     'use strict';
 
-    module.controller('PersonaJuridicaRepresentanteLegalCtrl', function($scope, $state, TipoDocumento, PersonaNatural, Notifications, Navigation){
+    module.controller('PersonaJuridicaRepresentanteLegalCtrl', function($scope, $state, TipoDocumento, PersonaNatural, Notifications){
 
         $scope.representante = {
             tipoDocumento: undefined,

@@ -47,11 +47,11 @@ define(['../module'], function (module) {
                 function(response){
                     $scope.unblockControl();
                     Notifications.success("Persona creada");
-                    $state.go('app.administracion.personas.editarPersonaJuridica.resumen', {id: response.data.id});
+                    $state.go('^.^.editarPersonaJuridica.resumen', {id: response.data.id});
                 },
                 function error(error){
                     $scope.unblockControl();
-                    Notifications.error(error.data+".");
+                    Notifications.error(error.data.message+".");
                 }
             );
         };

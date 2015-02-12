@@ -3,7 +3,7 @@ define(['../module'], function (module) {
 
     module.controller('PersonaJuridicaResumenCtrl', function($scope, $state){
         $scope.verPersona = function(item){
-            $state.go('app.administracion.editarPersonaNatural.resumen', {id: item.id});
+            $state.go('^.^.editarPersonaNatural.resumen', {id: item.id});
         };
     });
 });
