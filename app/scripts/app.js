@@ -760,7 +760,13 @@ define([
                 })
         });
 
-        app.run(function($rootScope, activeProfile, Usuario){
+        app.run(function($rootScope, $timeout, activeProfile, Usuario){
+
+            $rootScope.logout = function(time){
+                $timeout(function() {
+                    activeProfile.logout();
+                }, (time ? time : 0));
+            };
 
             $rootScope.user = {
                 username: undefined,
@@ -771,11 +777,52 @@ define([
             };
 
             $rootScope.user.username = activeProfile.idToken.preferred_username;
-
             $rootScope.user.sucursal = Usuario.$getSucursal($rootScope.user.username).$object;
             $rootScope.user.agencia = Usuario.$getAgencia($rootScope.user.username).$object;
             $rootScope.user.caja = Usuario.$getCaja($rootScope.user.username).$object;
             $rootScope.user.trabajador = Usuario.$getTrabajador($rootScope.user.username).$object;
+
+            if(activeProfile.realmAccess.roles.indexOf('ADMIN') != -1){
+
+            } else if(activeProfile.realmAccess.roles.indexOf('GERENTE_GENERAL') != -1){
+                $rootScope.$watch('user.sucursal', function(newValue, oldValue){
+                    if( jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.logout(7000);
+                    }
+                });
+            } else if(activeProfile.realmAccess.roles.indexOf('ADMINISTRADOR_GENERAL') != -1){
+                $rootScope.$watchGroup(['user.sucursal', 'user.trabajador'], function(newValue, oldValue){
+                    if( jQuery.isEmptyObject(newValue[0]) || jQuery.isEmptyObject(newValue[1]) ) {
+                        $rootScope.logout(7000);
+                    }
+                });
+            } else if(activeProfile.realmAccess.roles.indexOf('ADMINISTRADOR') != -1){
+                $rootScope.$watchGroup(['user.sucursal', 'user.agencia', 'user.trabajador'], function(newValue, oldValue){
+                    if( jQuery.isEmptyObject(newValue[0]) || jQuery.isEmptyObject(newValue[1]) || jQuery.isEmptyObject(newValue[2]) ) {
+                        $rootScope.logout(7000);
+                    }
+                });
+            } else if(activeProfile.realmAccess.roles.indexOf('PLATAFORMA') != -1){
+                $rootScope.$watchGroup(['user.sucursal', 'user.agencia', 'user.trabajador'], function(newValue, oldValue){
+                    if( jQuery.isEmptyObject(newValue[0]) || jQuery.isEmptyObject(newValue[1]) || jQuery.isEmptyObject(newValue[2]) ) {
+                        $rootScope.logout(7000);
+                    }
+                });
+            } else if(activeProfile.realmAccess.roles.indexOf('JEFE_CAJA') != -1){
+                $rootScope.$watchGroup(['user.sucursal', 'user.agencia', 'user.trabajador'], function(newValue, oldValue){
+                    if( jQuery.isEmptyObject(newValue[0]) || jQuery.isEmptyObject(newValue[1]) || jQuery.isEmptyObject(newValue[2]) ) {
+                        $rootScope.logout(7000);
+                    }
+                });
+            } else if(activeProfile.realmAccess.roles.indexOf('CAJERO') != -1){
+                $rootScope.$watchGroup(['user.sucursal', 'user.agencia', 'user.trabajador', 'user.caja'], function(newValue, oldValue){
+                    if( jQuery.isEmptyObject(newValue[0]) || jQuery.isEmptyObject(newValue[1]) || jQuery.isEmptyObject(newValue[2]) || jQuery.isEmptyObject(newValue[3]) ) {
+                        $rootScope.logout(7000);
+                    }
+                });
+            } else {
+                $rootScope.logout();
+            }
 
         });
 
