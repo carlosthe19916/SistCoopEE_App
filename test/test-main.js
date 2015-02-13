@@ -24,6 +24,7 @@ requirejs.config({
         'angular-recursion': '../../bower_components/angular-recursion/angular-recursion',
         'angular-sanitize': '../../bower_components/angular-sanitize/angular-sanitize',
         'angular-scenario': '../../bower_components/angular-scenario/angular-scenario',
+        'angular-timer': '../../bower_components/angular-timer/dist/angular-timer',
         'angular-touch': '../../bower_components/angular-touch/angular-touch',
         'angular-ui-grid': '../../bower_components/angular-ui-grid/ui-grid',
         'angular-ui-router': '../../bower_components/angular-ui-router/release/angular-ui-router',

@@ -19,7 +19,7 @@ define([
 
         var consoleBaseUrl = consoleBaseUrl + "/" + baseAdminUrl;
 
-        var configUrl = consoleBaseUrl + "/config";
+        var configUrl = consoleBaseUrl + "/config.json";
         window.auth = {};
 
         angular.element(document).ready(function ($http) {
