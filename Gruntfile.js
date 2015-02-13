@@ -208,28 +208,28 @@ module.exports = function (grunt) {
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
     // minification. These next options are pre-configured if you do not wish
     // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css',
-    //         '<%= yeoman.app %>/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
+     cssmin: {
+       dist: {
+         files: {
+           '<%= yeoman.dist %>/styles/main.css': [
+             '.tmp/styles/{,*/}*.css',
+             '<%= yeoman.app %>/styles/{,*/}*.css'
+           ]
+         }
+       }
+     },
+     uglify: {
+       dist: {
+         files: {
+           '<%= yeoman.dist %>/scripts/scripts.js': [
+             '<%= yeoman.dist %>/scripts/scripts.js'
+           ]
+        }
+       }
+     },
+     concat: {
+       dist: {}
+     },
 
     // The following *-min tasks produce minified files in the dist folder
     imagemin: {
@@ -305,7 +305,7 @@ module.exports = function (grunt) {
             'admin/{,*/}*.*',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'fonts/{,*/}*.*'
+            'fonts/**/*.*'
           ]
         }, {
           expand: true,
@@ -317,6 +317,11 @@ module.exports = function (grunt) {
           cwd: '.',
           dest: '<%= yeoman.dist %>',
           src: ['bower_components/requirejs/*']
+        }, {
+            expand: true,
+            cwd: '.',
+            dest: '<%= yeoman.dist %>',
+            src: ['bower_components/**/*.css']//carlos añadido para copiar  los css a bower components
         }, {
           expand: true,
           cwd: '.tmp/images',
