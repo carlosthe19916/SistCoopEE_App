@@ -11,7 +11,7 @@ define(['../module'], function (module) {
 
         $scope.gridOptions = {
             data: [],
-            enableRowSelection: false,
+            enableRowSelection: true,
             enableRowHeaderSelection: false,
             multiSelect: false,
             columnDefs: [
@@ -21,7 +21,7 @@ define(['../module'], function (module) {
                 {
                     name: 'edit',
                     displayName: 'Edit',
-                    cellTemplate: '<div style="text-align: center; padding-top: 4px;"><button type="button" ng-click="getExternalScopes().edit(row.entity)" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"></span>Editar</button></div>'
+                    cellTemplate: '<div style="text-align: center; padding-top: 4px;"><button type="button" ng-click="grid.appScope.gridActions.edit(row.entity)" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"></span>Editar</button></div>'
                 }
             ]
         };
