@@ -1,7 +1,7 @@
 define(['../../module'], function (module) {
     'use strict';
 
-    var buscarAgenciaCtrl = function($scope, $state, activeProfile, Sucursal){
+    var buscarAgenciaCtrl = function($scope, $state){
 
         $scope.combo = {
             sucursal: undefined
@@ -17,7 +17,7 @@ define(['../../module'], function (module) {
         };
         $scope.gridOptions = {
             data: [],
-            enableRowSelection: false,
+            enableRowSelection: true,
             enableRowHeaderSelection: false,
             multiSelect: false,
             columnDefs: [
@@ -60,12 +60,14 @@ define(['../../module'], function (module) {
             $scope.combo.sucursal = Sucursal.$search().$object;
         };
         $scope.loadCombo();
-    }).controller('BuscarAgenciaCtrl_Administradorgeneral', function($injector, $rootScope, $scope){
+    }).controller('BuscarAgenciaCtrl_Administradorgeneral', function($injector, $rootScope, $scope, Sucursal){
         $injector.invoke(buscarAgenciaCtrl, this, {$scope: $scope});
         $scope.loadCombo = function(){
             $scope.combo.sucursal = [];
-            $scope.combo.sucursal[0] = $rootScope.user.sucursal;
-            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+            $rootScope.$watch('user.sucursal', function(newValue){
+                $scope.combo.sucursal[0] = newValue ? angular.extend(newValue, Sucursal.$new(newValue.id)) : newValue;
+                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+            }, true);
         };
         $scope.loadCombo();
     });

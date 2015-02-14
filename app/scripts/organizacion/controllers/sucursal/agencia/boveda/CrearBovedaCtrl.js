@@ -1,7 +1,7 @@
 define(['../../../module'], function (module) {
     'use strict';
 
-    var crearBovedaCtrl = function($scope, $state, Sucursal, Agencia, Currency, Notifications){
+    var crearBovedaCtrl = function($scope, $state, Agencia, Notifications){
 
         $scope.view = {
             boveda: undefined
@@ -39,7 +39,7 @@ define(['../../../module'], function (module) {
 
     };
 
-    module.controller('CrearBovedaCtrl_Admin', function($injector, $scope, Sucursal, Currency, Agencia){
+    module.controller('CrearBovedaCtrl_Admin', function($injector, $scope, Sucursal, Currency){
         $injector.invoke(crearBovedaCtrl, this, {$scope: $scope});
         $scope.loadCombo = function(){
             $scope.combo.sucursal = Sucursal.$search().$object;
@@ -63,12 +63,14 @@ define(['../../../module'], function (module) {
                 $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
             }
         }, true);
-    }).controller('CrearBovedaCtrl_Administradorgeneral', function($injector, $scope, Sucursal, Currency){
+    }).controller('CrearBovedaCtrl_Administradorgeneral', function($injector, $rootScope, $scope, Sucursal, Currency){
         $injector.invoke(crearBovedaCtrl, this, {$scope: $scope});
         $scope.loadCombo = function(){
             $scope.combo.sucursal = [];
-            $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
-            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+            $rootScope.$watch('user.sucursal', function(newValue){
+                $scope.combo.sucursal[0] = newValue ? angular.extend(newValue, Sucursal.$new(newValue.id)) : newValue;
+                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+            }, true);
 
             $scope.combo.moneda = Currency.$search().$object;
         };
@@ -78,32 +80,38 @@ define(['../../../module'], function (module) {
                 $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
             }
         }, true);
-    }).controller('CrearBovedaCtrl_Administrador', function($injector, $scope, Sucursal, Currency, Agencia){
+    }).controller('CrearBovedaCtrl_Administrador', function($injector, $scope, $rootScope, Sucursal, Agencia, Currency){
         $injector.invoke(crearBovedaCtrl, this, {$scope: $scope});
         $scope.loadCombo = function(){
             $scope.combo.sucursal = [];
-            $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
+            $rootScope.$watch('user.sucursal', function(newValue){
+                $scope.combo.sucursal[0] = newValue ? angular.extend(newValue, Sucursal.$new(newValue.id)) : newValue;
+                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+            }, true);
 
             $scope.combo.agencia = [];
-            $scope.combo.agencia[0] = $scope.auth.user.agencia;
-
-            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
-            $scope.combo.selected.agencia = $scope.combo.agencia[0];
+            $rootScope.$watch('user.agencia', function(newValue){
+                $scope.combo.agencia[0] = newValue ? angular.extend(newValue, Agencia.$new(newValue.id)) : newValue;
+                $scope.combo.selected.agencia = $scope.combo.sucursal[0];
+            }, true);
 
             $scope.combo.moneda = Currency.$search().$object;
         };
         $scope.loadCombo();
-    }).controller('CrearBovedaCtrl_Jefecaja', function($injector, $scope, Sucursal, Currency, Agencia){
+    }).controller('CrearBovedaCtrl_Jefecaja', function($injector, $scope, $rootScope, Sucursal, Agencia, Currency){
         $injector.invoke(crearBovedaCtrl, this, {$scope: $scope});
         $scope.loadCombo = function(){
             $scope.combo.sucursal = [];
-            $scope.combo.sucursal[0] = $scope.auth.user.sucursal;
+            $rootScope.$watch('user.sucursal', function(newValue){
+                $scope.combo.sucursal[0] = newValue ? angular.extend(newValue, Sucursal.$new(newValue.id)) : newValue;
+                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+            }, true);
 
             $scope.combo.agencia = [];
-            $scope.combo.agencia[0] = $scope.auth.user.agencia;
-
-            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
-            $scope.combo.selected.agencia = $scope.combo.agencia[0];
+            $rootScope.$watch('user.agencia', function(newValue){
+                $scope.combo.agencia[0] = newValue ? angular.extend(newValue, Agencia.$new(newValue.id)) : newValue;
+                $scope.combo.selected.agencia = $scope.combo.sucursal[0];
+            }, true);
 
             $scope.combo.moneda = Currency.$search().$object;
         };

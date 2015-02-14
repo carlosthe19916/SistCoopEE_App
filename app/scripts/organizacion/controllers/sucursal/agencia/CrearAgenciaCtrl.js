@@ -36,15 +36,30 @@ define(['../../module'], function (module) {
     };
 
     module.controller('CrearAgenciaCtrl_Admin', function($injector, $scope, $state, Sucursal){
-
         $injector.invoke(crearAgenciaCtrl, this, {$scope: $scope});
-
         $scope.loadCombo = function(){
             $scope.combo.sucursal = Sucursal.$search().$object;
         };
         $scope.loadCombo();
+    }).controller('CrearAgenciaCtrl_Gerentegeneral', function($injector, $scope, $state, Sucursal){
+        $injector.invoke(crearAgenciaCtrl, this, {$scope: $scope});
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = Sucursal.$search().$object;
+        };
+        $scope.loadCombo();
+    }).controller('CrearAgenciaCtrl_Administradorgeneral', function($injector, $rootScope, $scope, Sucursal){
+        $injector.invoke(crearAgenciaCtrl, this, {$scope: $scope});
+        $scope.loadCombo = function(){
+            $scope.combo.sucursal = [];
+            $rootScope.$watch('user.sucursal', function(newValue){
+                $scope.combo.sucursal[0] = newValue ? angular.extend(newValue, Sucursal.$new(newValue.id)) : newValue;
+                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
+            }, true);
+        };
+        $scope.loadCombo();
+    });
 
-    }).controller('CrearAgenciaFromSucursalCtrl', function($scope, $state, Sucursal, activeProfile, Notifications){
+    module.controller('CrearAgenciaFromSucursalCtrl', function($scope, $state, Sucursal, activeProfile, Notifications){
 
         $scope.view = {
             sucursal: $scope.$parent.view.sucursalDB,

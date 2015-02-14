@@ -1,7 +1,7 @@
 define(['../../../module'], function (module) {
     'use strict';
 
-    module.controller('CajaAbrirCtrl', function($scope, $state, Sucursal, Agencia, Currency, activeProfile, Notifications){
+    module.controller('CajaAbrirCtrl', function($scope, $state, Notifications){
 
         $scope.loadParams = function(){
             $scope.view.boveda = $scope.params.object;
@@ -20,7 +20,7 @@ define(['../../../module'], function (module) {
                     },
                     function error(error){
                         $scope.unblockControl();
-                        Notifications.error(error.data+".");
+                        Notifications.error(error.data.message+".");
                     }
                 );
             }

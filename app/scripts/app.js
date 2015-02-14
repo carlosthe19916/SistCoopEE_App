@@ -303,10 +303,64 @@ define([
                         var rrhh = this.addItem('RRHH', '', 'linecons-t-shirt');
 
                         estructura.addItem('Agencias', 'app.administradorgeneral.organizacion.estructura.buscarAgencia');
-                        estructura.addItem('Bovedas', 'app.administradorgeneral.estructura.buscarBoveda');
-                        estructura.addItem('Cajas', 'app.administradorgeneral.estructura.buscarCaja');
-                        rrhh.addItem('Trabajadores', 'app.administradorgeneral.rrhh.buscarTrabajador')
+                        estructura.addItem('Bovedas', 'app.administradorgeneral.organizacion.estructura.buscarBoveda');
+                        estructura.addItem('Cajas', 'app.administradorgeneral.organizacion.estructura.buscarCaja');
+                        rrhh.addItem('Trabajadores', 'app.administradorgeneral.organizacion.rrhh.buscarTrabajador')
                     } else if( stateName.indexOf('app.common.administracion') > -1 ) {
+                        var administracion = this.addItem('Personas', '', 'linecons-user');
+
+                        administracion.addItem('Naturales', 'app.common.administracion.personas.buscarPersonaNatural');
+                        administracion.addItem('Juridicas', 'app.common.administracion.personas.buscarPersonaJuridica');
+                    } else {
+                        return undefined;
+                    }
+                } else if(roles.indexOf('ADMINISTRADOR') != -1){
+                    if( stateName.indexOf('app.administrador.organizacion') > -1 ) {
+                        var estructura = this.addItem('Estructura', '', 'linecons-inbox');
+                        var rrhh = this.addItem('RRHH', '', 'linecons-t-shirt');
+
+                        estructura.addItem('Bovedas', 'app.administrador.organizacion.estructura.buscarBoveda');
+                        estructura.addItem('Cajas', 'app.administrador.organizacion.estructura.buscarCaja');
+                        rrhh.addItem('Trabajadores', 'app.administrador.organizacion.rrhh.buscarTrabajador')
+                    } else if( stateName.indexOf('app.common.administracion') > -1 ) {
+                        var administracion = this.addItem('Personas', '', 'linecons-user');
+
+                        administracion.addItem('Naturales', 'app.common.administracion.personas.buscarPersonaNatural');
+                        administracion.addItem('Juridicas', 'app.common.administracion.personas.buscarPersonaJuridica');
+                    } else {
+                        return undefined;
+                    }
+                } else if(roles.indexOf('JEFE_CAJA') != -1){
+                    if( stateName.indexOf('app.jefecaja.organizacion') > -1 ) {
+                        var estructura = this.addItem('Estructura', '', 'linecons-inbox');
+                        var rrhh = this.addItem('RRHH', '', 'linecons-t-shirt');
+
+                        estructura.addItem('Bovedas', 'app.jefecaja.organizacion.estructura.buscarBoveda');
+                        estructura.addItem('Cajas', 'app.jefecaja.organizacion.estructura.buscarCaja');
+                        rrhh.addItem('Trabajadores', 'app.jefecaja.organizacion.rrhh.buscarTrabajador')
+                    } else if( stateName.indexOf('app.common.administracion') > -1 ) {
+                        var administracion = this.addItem('Personas', '', 'linecons-user');
+
+                        administracion.addItem('Naturales', 'app.common.administracion.personas.buscarPersonaNatural');
+                        administracion.addItem('Juridicas', 'app.common.administracion.personas.buscarPersonaJuridica');
+                    } else {
+                        return undefined;
+                    }
+                } else if(roles.indexOf('PLATAFORMA') != -1){
+                    if( stateName.indexOf('app.plataforma.organizacion') > -1 ) {
+
+                    } else if( stateName.indexOf('app.common.administracion') > -1 ) {
+                        var administracion = this.addItem('Personas', '', 'linecons-user');
+
+                        administracion.addItem('Naturales', 'app.common.administracion.personas.buscarPersonaNatural');
+                        administracion.addItem('Juridicas', 'app.common.administracion.personas.buscarPersonaJuridica');
+                    } else {
+                        return undefined;
+                    }
+                } else if(roles.indexOf('CAJERO') != -1){
+                    if( stateName.indexOf('app.cajero.organizacion') > -1 ) {
+
+                    } else if( stateName.indexOf('app.cajero.administracion') > -1 ) {
                         var administracion = this.addItem('Personas', '', 'linecons-user');
 
                         administracion.addItem('Naturales', 'app.common.administracion.personas.buscarPersonaNatural');
@@ -336,7 +390,7 @@ define([
                     var organizacion = this.addItem('Organizacion', 'app.administradorgeneral.organizacion', 'linecons-desktop');
                     var administracion = this.addItem('Administracion', 'app.common.administracion', 'linecons-params');
                 } else if(roles.indexOf('ADMINISTRADOR') != -1){
-                    var organizacion = this.addItem('Organizacion', 'app.organizacion', 'linecons-desktop');
+                    var organizacion = this.addItem('Organizacion', 'app.administrador.organizacion', 'linecons-desktop');
                     var cliente = this.addItem('Clientes', 'app.cliente', 'linecons-database');
                     var transaccion = this.addItem('Transacciones', 'app.transaccion', 'linecons-doc');
                     var administracion = this.addItem('Administracion', 'app.common.administracion', 'linecons-params');
@@ -346,7 +400,7 @@ define([
                     var administracion = this.addItem('Administracion', 'app.common.administracion', 'linecons-params');
                     var configuracion = this.addItem('Configuracion', 'app.configuracion', 'linecons-cog');
                 } else if(roles.indexOf('JEFE_CAJA') != -1){
-                    var organizacion = this.addItem('Organizacion', 'app.organizacion', 'linecons-desktop');
+                    var organizacion = this.addItem('Organizacion', 'app.jefecaja.organizacion', 'linecons-desktop');
                     var cliente = this.addItem('Clientes', 'app.cliente', 'linecons-database');
                     var transaccion = this.addItem('Transacciones', 'app.transaccion', 'linecons-doc');
                     var administracion = this.addItem('Administracion', 'app.common.administracion', 'linecons-params');
@@ -707,10 +761,10 @@ define([
             };
 
             $rootScope.user.username = activeProfile.idToken.preferred_username;
-            $rootScope.user.sucursal = Usuario.$getSucursal($rootScope.user.username).$object;
-            $rootScope.user.agencia = Usuario.$getAgencia($rootScope.user.username).$object;
-            $rootScope.user.caja = Usuario.$getCaja($rootScope.user.username).$object;
-            $rootScope.user.trabajador = Usuario.$getTrabajador($rootScope.user.username).$object;
+            Usuario.$getSucursal($rootScope.user.username).then(function(response){$rootScope.user.sucursal = response});
+            Usuario.$getAgencia($rootScope.user.username).then(function(response){$rootScope.user.agencia = response});
+            Usuario.$getCaja($rootScope.user.username).then(function(response){$rootScope.user.caja = response});
+            Usuario.$getTrabajador($rootScope.user.username).then(function(response){$rootScope.user.trabajador = response});
 
             $rootScope.blockMessage = {
                 timeout: 11000,
@@ -719,56 +773,148 @@ define([
             };
 
             var error = {
-                sucursal: 'no tiene una SUCURSAL asignada. ',
-                agencia: 'no tiene una AGENCIA asignada. ',
-                caja: 'no tiene una CAJA asignada. ',
-                trabajador: 'no tiene un TRABAJADOR asociado. '
+                sucursal: 'No tiene una SUCURSAL asignada. ',
+                agencia: 'No tiene una AGENCIA asignada. ',
+                caja: 'No tiene una CAJA asignada. ',
+                trabajador: 'No tiene un TRABAJADOR asociado. '
             };
 
             if(activeProfile.realmAccess.roles.indexOf('ADMIN') != -1){
 
             } else if(activeProfile.realmAccess.roles.indexOf('GERENTE_GENERAL') != -1){
-                $rootScope.$watch('user.sucursal', function(newValue, oldValue){
-                    if( jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = 'El usuario ' + error.sucursal;
+                var listenerSucursal = $rootScope.$watch('user.sucursal', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.sucursal;
                         $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerSucursal();
                     }
-                });
+                }, true);
             } else if(activeProfile.realmAccess.roles.indexOf('ADMINISTRADOR_GENERAL') != -1){
-                $rootScope.$watchGroup(['user.sucursal', 'user.trabajador'], function(newValue, oldValue){
-                    if( jQuery.isEmptyObject(newValue[0]) || jQuery.isEmptyObject(newValue[1]) ) {
-                        $rootScope.blockMessage.message = 'El usuario ' + (jQuery.isEmptyObject(newValue[0]) ? error.sucursal : '') + (jQuery.isEmptyObject(newValue[1]) ? error.trabajador : '');
+                var listenerSucursal = $rootScope.$watch('user.sucursal', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.sucursal;
                         $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerSucursal();
                     }
-                });
+                }, true);
+                var listenerTrabajador = $rootScope.$watch('user.trabajador', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.trabajador;
+                        $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerTrabajador();
+                    }
+                }, true);
             } else if(activeProfile.realmAccess.roles.indexOf('ADMINISTRADOR') != -1){
-                $rootScope.$watchGroup(['user.sucursal', 'user.agencia', 'user.trabajador'], function(newValue, oldValue){
-                    if( jQuery.isEmptyObject(newValue[0]) || jQuery.isEmptyObject(newValue[1]) || jQuery.isEmptyObject(newValue[2]) ) {
-                        $rootScope.blockMessage.message = 'El usuario ' + (jQuery.isEmptyObject(newValue[0]) ? error.sucursal : '') + (jQuery.isEmptyObject(newValue[1]) ? error.agencia : '') + (jQuery.isEmptyObject(newValue[2]) ? error.trabajador : '');
+                var listenerSucursal = $rootScope.$watch('user.sucursal', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.sucursal;
                         $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerSucursal();
                     }
-                });
+                }, true);
+                var listenerAgencia = $rootScope.$watch('user.agencia', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.agencia;
+                        $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerAgencia();
+                    }
+                }, true);
+                var listenerTrabajador = $rootScope.$watch('user.trabajador', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.trabajador;
+                        $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerTrabajador();
+                    }
+                }, true);
             } else if(activeProfile.realmAccess.roles.indexOf('PLATAFORMA') != -1){
-                $rootScope.$watchGroup(['user.sucursal', 'user.agencia', 'user.trabajador'], function(newValue, oldValue){
-                    if( jQuery.isEmptyObject(newValue[0]) || jQuery.isEmptyObject(newValue[1]) || jQuery.isEmptyObject(newValue[2]) ) {
-                        $rootScope.blockMessage.message = 'El usuario ' + (jQuery.isEmptyObject(newValue[0]) ? error.sucursal : '') + (jQuery.isEmptyObject(newValue[1]) ? error.agencia : '') + (jQuery.isEmptyObject(newValue[2]) ? error.trabajador : '');
+                var listenerSucursal = $rootScope.$watch('user.sucursal', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.sucursal;
                         $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerSucursal();
                     }
-                });
+                }, true);
+                var listenerAgencia = $rootScope.$watch('user.agencia', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.agencia;
+                        $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerAgencia();
+                    }
+                }, true);
+                var listenerTrabajador = $rootScope.$watch('user.trabajador', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.trabajador;
+                        $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerTrabajador();
+                    }
+                }, true);
             } else if(activeProfile.realmAccess.roles.indexOf('JEFE_CAJA') != -1){
-                $rootScope.$watchGroup(['user.sucursal', 'user.agencia', 'user.trabajador'], function(newValue, oldValue){
-                    if( jQuery.isEmptyObject(newValue[0]) || jQuery.isEmptyObject(newValue[1]) || jQuery.isEmptyObject(newValue[2]) ) {
-                        $rootScope.blockMessage.message = 'El usuario ' + (jQuery.isEmptyObject(newValue[0]) ? error.sucursal : '') + (jQuery.isEmptyObject(newValue[1]) ? error.agencia : '') + (jQuery.isEmptyObject(newValue[2]) ? error.trabajador : '');
+                var listenerSucursal = $rootScope.$watch('user.sucursal', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.sucursal;
                         $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerSucursal();
                     }
-                });
+                }, true);
+                var listenerAgencia = $rootScope.$watch('user.agencia', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.agencia;
+                        $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerAgencia();
+                    }
+                }, true);
+                var listenerTrabajador = $rootScope.$watch('user.trabajador', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.trabajador;
+                        $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerTrabajador();
+                    }
+                }, true);
             } else if(activeProfile.realmAccess.roles.indexOf('CAJERO') != -1){
-                $rootScope.$watchGroup(['user.sucursal', 'user.agencia', 'user.trabajador', 'user.caja'], function(newValue, oldValue){
-                    if( jQuery.isEmptyObject(newValue[0]) || jQuery.isEmptyObject(newValue[1]) || jQuery.isEmptyObject(newValue[2]) || jQuery.isEmptyObject(newValue[3]) ) {
-                        $rootScope.blockMessage.message = 'El usuario ' + (jQuery.isEmptyObject(newValue[0]) ? error.sucursal : '') + (jQuery.isEmptyObject(newValue[1]) ? error.agencia : '') + (jQuery.isEmptyObject(newValue[2]) ? error.trabajador : '') + (jQuery.isEmptyObject(newValue[3]) ? error.caja : '');
+                var listenerSucursal = $rootScope.$watch('user.sucursal', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.sucursal;
                         $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerSucursal();
                     }
-                });
+                }, true);
+                var listenerAgencia = $rootScope.$watch('user.agencia', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.agencia;
+                        $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerAgencia();
+                    }
+                }, true);
+                var listenerTrabajador = $rootScope.$watch('user.trabajador', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.trabajador;
+                        $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerTrabajador();
+                    }
+                }, true);
+                var listenerCaja = $rootScope.$watch('user.caja', function(newValue, oldValue){
+                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
+                        $rootScope.blockMessage.message = error.trabajador;
+                        $rootScope.logout($rootScope.blockMessage.timeout);
+                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
+                        listenerCaja();
+                    }
+                }, true);
             } else {
                 $rootScope.logout();
             }

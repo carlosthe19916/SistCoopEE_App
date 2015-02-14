@@ -1,7 +1,7 @@
 define(['../../../module'], function (module) {
     'use strict';
 
-    module.controller('BovedaResumenCtrl', function($scope, $state, Sucursal){
+    module.controller('BovedaResumenCtrl', function($scope){
 
     });
 });

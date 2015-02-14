@@ -1,7 +1,7 @@
 define(['../../../module'], function (module) {
     'use strict';
 
-    module.controller('BovedaAbrirCtrl', function($scope, $state, Sucursal, Agencia, Currency, activeProfile, Notifications){
+    module.controller('BovedaAbrirCtrl', function($scope, $state, Currency, Notifications){
 
         $scope.loadParams = function(){
             $scope.view.boveda = $scope.params.object;
@@ -25,13 +25,13 @@ define(['../../../module'], function (module) {
         };
 
         $scope.abrir = function(){
-            if($scope.view.boveda.abierto == true){
+            if($scope.view.bovedaDB.abierto == true){
                 Notifications.warn('Boveda abierta, no se puede abrir nuevamente.');
                 return;
             }
             if ($scope.form.$valid) {
                 $scope.blockControl();
-                $scope.view.boveda.$abrir().then(
+                $scope.view.bovedaDB.$abrir().then(
                     function(response){
                         $scope.unblockControl();
                         Notifications.success('Boveda abierta');
@@ -41,7 +41,7 @@ define(['../../../module'], function (module) {
                     },
                     function error(error){
                         $scope.unblockControl();
-                        Notifications.error(error.data+".");
+                        Notifications.error(error.data.message+".");
                     }
                 );
             }

@@ -301,9 +301,6 @@ define(['./module'], function (module) {
 
                     sidebarDropdownCtrl.toggledElement = element;
 
-                    scope.$on('$destroy', function() {
-                        element.unbind('click', toggleDropdown);
-                    });
                 }
             };
         });

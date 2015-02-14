@@ -30,10 +30,7 @@ define(['./module'], function (module) {
                         numeroDocumento: undefined
                     },
                     $save: function(){
-                        var config = PersonaRestangular.withConfig(function(RestangularConfigurer) {
-                            RestangularConfigurer.setFullResponse(true);
-                        });
-                        return config.all(url).post({'personaJuridica': angular.copy(this)});
+                        return PersonaRestangular.all(url).post(angular.copy(this));
                     }
                 }
             },

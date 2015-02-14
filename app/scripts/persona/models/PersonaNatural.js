@@ -28,10 +28,7 @@ define(['./module'], function (module) {
                     sexo: undefined,
                     estadoCivil: undefined,
                     $save: function(){
-                        var config = PersonaRestangular.withConfig(function(RestangularConfigurer) {
-                            RestangularConfigurer.setFullResponse(true);
-                        });
-                        return config.all(url).post({'personaNatural': angular.copy(this)});
+                        return PersonaRestangular.all(url).post(angular.copy(this));
                     }
                 }
             },

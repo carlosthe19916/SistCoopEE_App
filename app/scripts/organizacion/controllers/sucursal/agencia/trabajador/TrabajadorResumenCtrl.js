@@ -1,7 +1,7 @@
 define(['../../../module'], function (module) {
     'use strict';
 
-    module.controller('TrabajadorResumenCtrl', function($scope, $state){
+    module.controller('TrabajadorResumenCtrl', function($scope){
 
     });
 });

@@ -47,7 +47,7 @@ define(['../module'], function (module) {
                 function(response){
                     $scope.unblockControl();
                     Notifications.success("Persona creada");
-                    $state.go('^.^.editarPersonaJuridica.resumen', {id: response.data.id});
+                    $state.go('^.^.editarPersonaJuridica.resumen', {id: response.id});
                 },
                 function error(error){
                     $scope.unblockControl();

@@ -153,6 +153,10 @@ require([
     'route_admin',
     'route_gerentegeneral',
     'route_administradorgeneral',
+    'route_administrador',
+    'route_jefecaja',
+    'route_plataforma',
+    'route_cajero',
 
     'angular-sanitize',
     'angular-cookies',
