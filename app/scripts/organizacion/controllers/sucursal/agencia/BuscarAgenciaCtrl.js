@@ -60,14 +60,12 @@ define(['../../module'], function (module) {
             $scope.combo.sucursal = Sucursal.$search().$object;
         };
         $scope.loadCombo();
-    }).controller('BuscarAgenciaCtrl_Administradorgeneral', function($injector, $rootScope, $scope, Sucursal){
+    }).controller('BuscarAgenciaCtrl_Administradorgeneral', function($injector, $rootScope, $scope, Sucursal, sucursal){
         $injector.invoke(buscarAgenciaCtrl, this, {$scope: $scope});
         $scope.loadCombo = function(){
             $scope.combo.sucursal = [];
-            $rootScope.$watch('user.sucursal', function(newValue){
-                $scope.combo.sucursal[0] = newValue ? angular.extend(newValue, Sucursal.$new(newValue.id)) : newValue;
-                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
-            }, true);
+            $scope.combo.sucursal[0] = angular.extend(sucursal, Sucursal.$new(sucursal.id));
+            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
         };
         $scope.loadCombo();
     });
@@ -109,6 +107,6 @@ define(['../../module'], function (module) {
             $scope.gridOptions.data = $scope.view.sucursalDB.$getAgencias().$object;
         };
         $scope.search();
-
     });
+
 });

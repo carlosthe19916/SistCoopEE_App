@@ -23,7 +23,8 @@ require.config({
         oclazyload: '../../bower_components/oclazyload/dist/ocLazyLoad.min',
         'requirejs-domready': '../../bower_components/requirejs-domready/domReady',
         restangular: '../../bower_components/restangular/dist/restangular',
-        underscore: '../../bower_components/underscore/underscore'
+        underscore: '../../bower_components/underscore/underscore',
+        'angular-input-masks': '../../bower_components/angular-input-masks/releases/masks.min'
     },
     shim: {
         jquery: {
@@ -124,6 +125,11 @@ require.config({
         underscore: {
             exports: '_'
         },
+        'angular-input-masks': {
+            deps: [
+                'angular'
+            ]
+        },
         'angular-mocks': {
             deps: [
                 'angular'
@@ -174,7 +180,8 @@ require([
     'angular-recursion',
     'oclazyload',
     'restangular',
-    'underscore'
+    'underscore',
+    'angular-input-masks'
 
 ], function() {
 

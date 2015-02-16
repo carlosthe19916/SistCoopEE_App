@@ -21,12 +21,28 @@ define(['./app'], function(app) {
             .state('app.jefecaja.organizacion.estructura.buscarBoveda', {
                 url: '/boveda/buscar',
                 templateUrl: appHelper.viewPath('organizacion/sucursal/agencia/boveda/form-buscar-boveda'),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    },
+                    agencia: function($rootScope){
+                        return $rootScope.user.agencia;
+                    }
+                },
                 controller: 'BuscarBovedaCtrl_Jefecaja',
                 module: 'ORGANIZACION',
                 roles: ['JEFE_CAJA']
             }).state('app.jefecaja.organizacion.estructura.crearBoveda', {
                 url: '/boveda',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/boveda/form-crear-boveda"),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    },
+                    agencia: function($rootScope){
+                        return $rootScope.user.agencia;
+                    }
+                },
                 controller: 'CrearBovedaCtrl_Jefecaja',
                 module: 'ORGANIZACION',
                 roles: ['JEFE_CAJA']
@@ -80,12 +96,28 @@ define(['./app'], function(app) {
             .state('app.jefecaja.organizacion.estructura.buscarCaja', {
                 url: '/caja/buscar',
                 templateUrl: appHelper.viewPath('organizacion/sucursal/agencia/caja/form-buscar-caja'),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    },
+                    agencia: function($rootScope){
+                        return $rootScope.user.agencia;
+                    }
+                },
                 controller: 'BuscarCajaCtrl_Jefecaja',
                 module: 'ORGANIZACION',
                 roles: ['JEFE_CAJA']
             }).state('app.jefecaja.organizacion.estructura.crearCaja', {
                 url: '/caja',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-crear-caja"),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    },
+                    agencia: function($rootScope){
+                        return $rootScope.user.agencia;
+                    }
+                },
                 controller: 'CrearCajaCtrl_Jefecaja',
                 module: 'ORGANIZACION',
                 roles: ['JEFE_CAJA']
@@ -139,6 +171,14 @@ define(['./app'], function(app) {
             .state('app.jefecaja.organizacion.rrhh.buscarTrabajador', {
                 url: '/trabajador/buscar',
                 templateUrl: appHelper.viewPath('organizacion/sucursal/agencia/trabajador/form-buscar-trabajador'),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    },
+                    agencia: function($rootScope){
+                        return $rootScope.user.agencia;
+                    }
+                },
                 controller: 'BuscarTrabajadorCtrl_Jefecaja',
                 module: 'ORGANIZACION',
                 roles: ['JEFE_CAJA']
@@ -151,6 +191,14 @@ define(['./app'], function(app) {
             }).state('app.jefecaja.organizacion.rrhh.crearTrabajador.datosPrincipales', {
                 url: '/principal',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/trabajador/form-datosPrincipales-crear"),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    },
+                    agencia: function($rootScope){
+                        return $rootScope.user.agencia;
+                    }
+                },
                 controller: 'TrabajadorDatosPrincipalesCtrl_Jefecaja',
                 module: 'ORGANIZACION',
                 roles: ['JEFE_CAJA']

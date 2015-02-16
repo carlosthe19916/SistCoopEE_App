@@ -80,6 +80,11 @@ define(['./app'], function(app) {
             .state('app.gerentegeneral.organizacion.estructura.buscarAgencia', {
                 url: '/agencia/buscar',
                 templateUrl: appHelper.viewPath('organizacion/sucursal/agencia/form-buscar-agencia'),
+                resolve: {
+                    sucursal: function($rootScope) {
+                        return $rootScope.user.sucursal;
+                    }
+                },
                 controller: 'BuscarAgenciaCtrl_Gerentegeneral',
                 module: 'ORGANIZACION',
                 roles: ['GERENTE_GENERAL']

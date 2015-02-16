@@ -23,7 +23,7 @@ define(['./app'], function(app) {
                         return $rootScope.user.caja;
                     }
                 },
-                controller: function($scope, caja, Caja) {
+                controller: function($scope, Caja, caja) {
                     $scope.params = {};
                     $scope.params.object = angular.extend(caja, Caja.$new(caja.id));
                 },

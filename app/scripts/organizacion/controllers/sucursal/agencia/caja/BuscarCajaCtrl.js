@@ -76,15 +76,13 @@ define(['../../../module'], function (module) {
                 $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
             }
         }, true);
-    }).controller('BuscarCajaCtrl_Administradorgeneral', function($injector, $rootScope, $scope, Sucursal){
+    }).controller('BuscarCajaCtrl_Administradorgeneral', function($injector, $rootScope, $scope, Sucursal, sucursal){
         $injector.invoke(buscarCajaCtrl, this, {$scope: $scope});
 
         $scope.loadCombo = function(){
             $scope.combo.sucursal = [];
-            $rootScope.$watch('user.sucursal', function(newValue){
-                $scope.combo.sucursal[0] = newValue ? angular.extend(newValue, Sucursal.$new(newValue.id)) : newValue;
-                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
-            }, true);
+            $scope.combo.sucursal[0] = angular.extend(sucursal, Sucursal.$new(sucursal.id));
+            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
         };
         $scope.loadCombo();
 
@@ -93,38 +91,30 @@ define(['../../../module'], function (module) {
                 $scope.combo.agencia = $scope.combo.selected.sucursal.$getAgencias().$object;
             }
         }, true);
-    }).controller('BuscarCajaCtrl_Administrador', function($injector, $rootScope, $scope, Sucursal, Agencia){
+    }).controller('BuscarCajaCtrl_Administrador', function($injector, $rootScope, $scope, Sucursal, Agencia, sucursal, agencia){
         $injector.invoke(buscarCajaCtrl, this, {$scope: $scope});
 
         $scope.loadCombo = function(){
             $scope.combo.sucursal = [];
-            $rootScope.$watch('user.sucursal', function(newValue){
-                $scope.combo.sucursal[0] = newValue ? angular.extend(newValue, Sucursal.$new(newValue.id)) : newValue;
-                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
-            }, true);
+            $scope.combo.sucursal[0] = angular.extend(sucursal, Sucursal.$new(sucursal.id));
+            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
 
             $scope.combo.agencia = [];
-            $rootScope.$watch('user.agencia', function(newValue){
-                $scope.combo.agencia[0] = newValue ? angular.extend(newValue, Agencia.$new(newValue.id)) : newValue;
-                $scope.combo.selected.agencia = $scope.combo.sucursal[0];
-            }, true);
+            $scope.combo.agencia[0] = angular.extend(agencia, Agencia.$new(agencia.id));
+            $scope.combo.selected.agencia = $scope.combo.sucursal[0];
         };
         $scope.loadCombo();
-    }).controller('BuscarCajaCtrl_Jefecaja', function($injector, $rootScope, $scope, Sucursal, Agencia){
+    }).controller('BuscarCajaCtrl_Jefecaja', function($injector, $rootScope, $scope, Sucursal, Agencia, sucursal, agencia){
         $injector.invoke(buscarCajaCtrl, this, {$scope: $scope});
 
         $scope.loadCombo = function(){
             $scope.combo.sucursal = [];
-            $rootScope.$watch('user.sucursal', function(newValue){
-                $scope.combo.sucursal[0] = newValue ? angular.extend(newValue, Sucursal.$new(newValue.id)) : newValue;
-                $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
-            }, true);
+            $scope.combo.sucursal[0] = angular.extend(sucursal, Sucursal.$new(sucursal.id));
+            $scope.combo.selected.sucursal = $scope.combo.sucursal[0];
 
             $scope.combo.agencia = [];
-            $rootScope.$watch('user.agencia', function(newValue){
-                $scope.combo.agencia[0] = newValue ? angular.extend(newValue, Agencia.$new(newValue.id)) : newValue;
-                $scope.combo.selected.agencia = $scope.combo.sucursal[0];
-            }, true);
+            $scope.combo.agencia[0] = angular.extend(agencia, Agencia.$new(agencia.id));
+            $scope.combo.selected.agencia = $scope.combo.sucursal[0];
         };
         $scope.loadCombo();
     });

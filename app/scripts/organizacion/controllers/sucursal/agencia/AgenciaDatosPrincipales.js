@@ -1,7 +1,7 @@
 define(['../../module'], function (module) {
     'use strict';
 
-    module.controller('AgenciaDatosPrincipalesCtrl', function($scope, $state, Sucursal){
+    module.controller('AgenciaDatosPrincipalesCtrl', function($scope){
 
     });
 });

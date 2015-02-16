@@ -44,6 +44,9 @@ define(['./module'], function (module) {
                     },
                     $getTrabajadores:function() {
                         return OrganizacionRestangular.all(url+'/'+this.id+'/trabajadores').getList();
+                    },
+                    $getDetalle: function() {
+                        return OrganizacionRestangular.all(url+'/'+this.id+'/detalle').getList();
                     }
                 }
             },

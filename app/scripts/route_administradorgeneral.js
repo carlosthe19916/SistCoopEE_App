@@ -68,12 +68,22 @@ define(['./app'], function(app) {
             .state('app.administradorgeneral.organizacion.estructura.buscarAgencia', {
                 url: '/agencia/buscar',
                 templateUrl: appHelper.viewPath('organizacion/sucursal/agencia/form-buscar-agencia'),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    }
+                },
                 controller: 'BuscarAgenciaCtrl_Administradorgeneral',
                 module: 'ORGANIZACION',
                 roles: ['ADMINISTRADOR_GENERAL']
             }).state('app.administradorgeneral.organizacion.estructura.crearAgencia', {
                 url: '/agencia',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/form-crear-agencia"),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    }
+                },
                 controller: 'CrearAgenciaCtrl_Administradorgeneral',
                 module: 'ORGANIZACION',
                 roles: ['ADMINISTRADOR_GENERAL']
@@ -139,12 +149,22 @@ define(['./app'], function(app) {
             .state('app.administradorgeneral.organizacion.estructura.buscarBoveda', {
                 url: '/boveda/buscar',
                 templateUrl: appHelper.viewPath('organizacion/sucursal/agencia/boveda/form-buscar-boveda'),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    }
+                },
                 controller: 'BuscarBovedaCtrl_Administradorgeneral',
                 module: 'ORGANIZACION',
                 roles: ['ADMINISTRADOR_GENERAL']
             }).state('app.administradorgeneral.organizacion.estructura.crearBoveda', {
                 url: '/boveda',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/boveda/form-crear-boveda"),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    }
+                },
                 controller: 'CrearBovedaCtrl_Administradorgeneral',
                 module: 'ORGANIZACION',
                 roles: ['ADMINISTRADOR_GENERAL']
@@ -186,12 +206,22 @@ define(['./app'], function(app) {
             .state('app.administradorgeneral.organizacion.estructura.buscarCaja', {
                 url: '/caja/buscar',
                 templateUrl: appHelper.viewPath('organizacion/sucursal/agencia/caja/form-buscar-caja'),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    }
+                },
                 controller: 'BuscarCajaCtrl_Administradorgeneral',
                 module: 'ORGANIZACION',
                 roles: ['ADMINISTRADOR_GENERAL']
             }).state('app.administradorgeneral.organizacion.estructura.crearCaja', {
                 url: '/caja',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-crear-caja"),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    }
+                },
                 controller: 'CrearCajaCtrl_Administradorgeneral',
                 module: 'ORGANIZACION',
                 roles: ['ADMINISTRADOR_GENERAL']
@@ -239,6 +269,11 @@ define(['./app'], function(app) {
             .state('app.administradorgeneral.organizacion.rrhh.buscarTrabajador', {
                 url: '/trabajador/buscar',
                 templateUrl: appHelper.viewPath('organizacion/sucursal/agencia/trabajador/form-buscar-trabajador'),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    }
+                },
                 controller: 'BuscarTrabajadorCtrl_Administradorgeneral',
                 module: 'ORGANIZACION',
                 roles: ['ADMINISTRADOR_GENERAL']
@@ -251,6 +286,11 @@ define(['./app'], function(app) {
             }).state('app.administradorgeneral.organizacion.rrhh.crearTrabajador.datosPrincipales', {
                 url: '/principal',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/trabajador/form-datosPrincipales-crear"),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    }
+                },
                 controller: 'TrabajadorDatosPrincipalesCtrl_Administradorgeneral',
                 module: 'ORGANIZACION',
                 roles: ['ADMINISTRADOR_GENERAL']
@@ -278,6 +318,11 @@ define(['./app'], function(app) {
             }).state('app.administradorgeneral.organizacion.rrhh.editarTrabajador.datosPrincipales', {
                 url: '/principal',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/trabajador/form-datosPrincipales-editar"),
+                resolve: {
+                    sucursal: function($rootScope){
+                        return $rootScope.user.sucursal;
+                    }
+                },
                 controller: 'TrabajadorDatosPrincipalesCtrl_Administradorgeneral',
                 module: 'ORGANIZACION',
                 roles: ['ADMINISTRADOR_GENERAL']

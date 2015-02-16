@@ -17,8 +17,6 @@ define(['../../../module'], function (module) {
                         row.total = row.total + (subRow.valor * subRow.cantidad);
                     });
                 });
-
-                console.log($scope.view.caja.detalle);
             });
         };
         $scope.loadParams();

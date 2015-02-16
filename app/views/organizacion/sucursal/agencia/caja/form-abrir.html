@@ -14,7 +14,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-12">
-                <form name="form" ng-submit="submit()" novalidate>
+                <form name="form" novalidate>
                     <strong ng-if="!view.caja.detalle.length">No se encontró detalle de caja, si es la primera vez que abre la caja haga click en GUARDAR, sino pongase en contacto con su administrador.</strong>
                     <tabset ng-if="view.caja.detalle.length" vertical="true" type="pills" class="tabs-vertical-env tabs-vertical-bordered">
                         <tab ng-repeat="tab in view.caja.detalle" heading="{{tab.boveda.denominacion}}">

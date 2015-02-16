@@ -36,6 +36,7 @@ define([
                 'oc.lazyLoad',
                 'timer',
                 'RecursionHelper',
+                'ui.utils.masks',
 
                 /*sistcoop*/
                 'persona',
@@ -361,8 +362,7 @@ define([
                     if( stateName.indexOf('app.cajero.caja') > -1 ) {
                         var operaciones = this.addItem('Operaciones', '', 'linecons-key');
 
-                        operaciones.addItem('Ver', 'app.cajero.caja.operaciones.verCaja');
-                        operaciones.addItem('Cerrar', 'app.cajero.caja.operaciones.editarCaja');
+                        operaciones.addItem('Cerrar', 'app.cajero.caja.operaciones.editarCaja.cerrar');
                     } else if( stateName.indexOf('app.cajero.administracion') > -1 ) {
                         var administracion = this.addItem('Personas', '', 'linecons-user');
 
@@ -783,142 +783,65 @@ define([
                 trabajador: 'No tiene un TRABAJADOR asociado. '
             };
 
+            var listeners = {
+                sucursal: function(){
+                    $rootScope.user.sucursal.then(function(response){
+                        if(angular.isUndefined(response)){
+                            $rootScope.blockMessage.message = error.sucursal;
+                            $rootScope.logout($rootScope.blockMessage.timeout);
+                        }
+                    });
+                },
+                agencia: function(){
+                    $rootScope.user.agencia.then(function(response){
+                        if(angular.isUndefined(response)){
+                            $rootScope.blockMessage.message = error.agencia;
+                            $rootScope.logout($rootScope.blockMessage.timeout);
+                        }
+                    });
+                },
+                trabajador: function(){
+                    $rootScope.user.trabajador.then(function(response){
+                        if(angular.isUndefined(response)){
+                            $rootScope.blockMessage.message = error.trabajador;
+                            $rootScope.logout($rootScope.blockMessage.timeout);
+                        }
+                    });
+                },
+                caja: function(){
+                    $rootScope.user.caja.then(function(response){
+                        if(angular.isUndefined(response)){
+                            $rootScope.blockMessage.message = error.caja;
+                            $rootScope.logout($rootScope.blockMessage.timeout);
+                        }
+                    });
+                }
+            };
+
             if(activeProfile.realmAccess.roles.indexOf('ADMIN') != -1){
 
             } else if(activeProfile.realmAccess.roles.indexOf('GERENTE_GENERAL') != -1){
-                var listenerSucursal = $rootScope.$watch('user.sucursal', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.sucursal;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerSucursal();
-                    }
-                }, true);
+                listeners.sucursal();
             } else if(activeProfile.realmAccess.roles.indexOf('ADMINISTRADOR_GENERAL') != -1){
-                var listenerSucursal = $rootScope.$watch('user.sucursal', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.sucursal;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerSucursal();
-                    }
-                }, true);
-                var listenerTrabajador = $rootScope.$watch('user.trabajador', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.trabajador;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerTrabajador();
-                    }
-                }, true);
+                listeners.sucursal();
+                listeners.trabajador();
             } else if(activeProfile.realmAccess.roles.indexOf('ADMINISTRADOR') != -1){
-                var listenerSucursal = $rootScope.$watch('user.sucursal', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.sucursal;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerSucursal();
-                    }
-                }, true);
-                var listenerAgencia = $rootScope.$watch('user.agencia', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.agencia;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerAgencia();
-                    }
-                }, true);
-                var listenerTrabajador = $rootScope.$watch('user.trabajador', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.trabajador;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerTrabajador();
-                    }
-                }, true);
+                listeners.sucursal();
+                listeners.agencia();
+                listeners.trabajador();
             } else if(activeProfile.realmAccess.roles.indexOf('PLATAFORMA') != -1){
-                var listenerSucursal = $rootScope.$watch('user.sucursal', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.sucursal;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerSucursal();
-                    }
-                }, true);
-                var listenerAgencia = $rootScope.$watch('user.agencia', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.agencia;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerAgencia();
-                    }
-                }, true);
-                var listenerTrabajador = $rootScope.$watch('user.trabajador', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.trabajador;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerTrabajador();
-                    }
-                }, true);
+                listeners.sucursal();
+                listeners.agencia();
+                listeners.trabajador();
             } else if(activeProfile.realmAccess.roles.indexOf('JEFE_CAJA') != -1){
-                var listenerSucursal = $rootScope.$watch('user.sucursal', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.sucursal;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerSucursal();
-                    }
-                }, true);
-                var listenerAgencia = $rootScope.$watch('user.agencia', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.agencia;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerAgencia();
-                    }
-                }, true);
-                var listenerTrabajador = $rootScope.$watch('user.trabajador', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.trabajador;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerTrabajador();
-                    }
-                }, true);
+                listeners.sucursal();
+                listeners.agencia();
+                listeners.trabajador();
             } else if(activeProfile.realmAccess.roles.indexOf('CAJERO') != -1){
-                var listenerSucursal = $rootScope.$watch('user.sucursal', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.sucursal;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerSucursal();
-                    }
-                }, true);
-                var listenerAgencia = $rootScope.$watch('user.agencia', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.agencia;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerAgencia();
-                    }
-                }, true);
-                var listenerTrabajador = $rootScope.$watch('user.trabajador', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.trabajador;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerTrabajador();
-                    }
-                }, true);
-                var listenerCaja = $rootScope.$watch('user.caja', function(newValue, oldValue){
-                    if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.caja;
-                        $rootScope.logout($rootScope.blockMessage.timeout);
-                    } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
-                        listenerCaja();
-                    }
-                }, true);
+                listeners.sucursal();
+                listeners.agencia();
+                listeners.trabajador();
+                listeners.caja();
             } else {
                 $rootScope.logout();
             }

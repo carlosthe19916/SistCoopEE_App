@@ -36,7 +36,8 @@ requirejs.config({
         oclazyload: '../../bower_components/oclazyload/dist/ocLazyLoad.min',
         'requirejs-domready': '../../bower_components/requirejs-domready/domReady',
         restangular: '../../bower_components/restangular/dist/restangular',
-        underscore: '../../bower_components/underscore/underscore'
+        underscore: '../../bower_components/underscore/underscore',
+        'angular-input-masks': '../../bower_components/angular-input-masks/releases/masks.min'
     },
 
     shim: {
