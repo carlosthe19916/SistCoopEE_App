@@ -7,51 +7,29 @@ define(['./app'], function(app) {
             .state('app.cajero', {
                 url: '/cajero',
                 templateUrl: appHelper.templatePath('layout/app-body')
-            }).state('app.cajero.organizacion', {
-                url: '/organizacion',
+            }).state('app.cajero.caja', {
+                url: '/caja',
                 template: '<div ui-view></div>'
-            }).state('app.cajero.organizacion.estructura', {
-                url: '/estructura',
-                template: '<div ui-view></div>'
-            }).state('app.cajero.organizacion.rrhh', {
-                url: '/estructura',
+            }).state('app.cajero.caja.operaciones', {
+                url: '/operaciones',
                 template: '<div ui-view></div>'
             })
 
-            .state('app.cajero.organizacion.estructura.editarCaja', {
-                url: '/caja/{id:[0-9]{1,8}}',
+            .state('app.cajero.caja.operaciones.editarCaja', {
+                url: '/caja/session',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-editar-caja"),
                 resolve: {
-                    caja: function($state, $stateParams, Caja) {
-                        return Caja.$find($stateParams.id);
+                    caja: function($rootScope) {
+                        return $rootScope.user.caja;
                     }
                 },
-                controller: function($scope, $stateParams, caja) {
+                controller: function($scope, caja, Caja) {
                     $scope.params = {};
-                    $scope.params.id = $stateParams.id;
-                    $scope.params.object = caja;
+                    $scope.params.object = angular.extend(caja, Caja.$new(caja.id));
                 },
                 module: 'ORGANIZACION',
                 roles: ['CAJERO']
-            }).state('app.cajero.organizacion.estructura.editarCaja.resumen', {
-                url: '/resumen',
-                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-resumen"),
-                controller: 'CajaResumenCtrl',
-                module: 'ORGANIZACION',
-                roles: ['CAJERO']
-            }).state('app.cajero.organizacion.estructura.editarCaja.datosPrincipales', {
-                url: '/principal',
-                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-datosPrincipales-editar"),
-                controller: 'CajaDatosPrincipalesCtrl',
-                module: 'ORGANIZACION',
-                roles: ['CAJERO']
-            }).state('app.cajero.organizacion.estructura.editarCaja.bovedas', {
-                url: '/bovedas',
-                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-bovedas-editar"),
-                controller: 'CajaBovedasCtrl',
-                module: 'ORGANIZACION',
-                roles: ['CAJERO']
-            }).state('app.cajero.organizacion.estructura.editarCaja.cerrar', {
+            }).state('app.cajero.caja.operaciones.editarCaja.cerrar', {
                 url: '/cerrar',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-cerrar"),
                 controller: 'CajaCerrarCtrl',

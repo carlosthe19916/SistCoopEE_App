@@ -358,8 +358,11 @@ define([
                         return undefined;
                     }
                 } else if(roles.indexOf('CAJERO') != -1){
-                    if( stateName.indexOf('app.cajero.organizacion') > -1 ) {
+                    if( stateName.indexOf('app.cajero.caja') > -1 ) {
+                        var operaciones = this.addItem('Operaciones', '', 'linecons-key');
 
+                        operaciones.addItem('Ver', 'app.cajero.caja.operaciones.verCaja');
+                        operaciones.addItem('Cerrar', 'app.cajero.caja.operaciones.editarCaja');
                     } else if( stateName.indexOf('app.cajero.administracion') > -1 ) {
                         var administracion = this.addItem('Personas', '', 'linecons-user');
 
@@ -406,7 +409,7 @@ define([
                     var administracion = this.addItem('Administracion', 'app.common.administracion', 'linecons-params');
                     var configuracion = this.addItem('Configuracion', 'app.configuracion', 'linecons-cog');
                 } else if(roles.indexOf('CAJERO') != -1){
-                    var caja = this.addItem('Caja', 'app.cliente', 'linecons-database').setLabel('New Items', 'purple');
+                    var caja = this.addItem('Caja', 'app.cajero.caja', 'linecons-cloud');
                     var cliente = this.addItem('Clientes', 'app.cliente', 'linecons-database');
                     var transaccion = this.addItem('Transacciones', 'app.transaccion', 'linecons-doc');
                     var administracion = this.addItem('Administracion', 'app.common.administracion', 'linecons-params');
@@ -762,10 +765,10 @@ define([
             };
 
             $rootScope.user.username = activeProfile.idToken.preferred_username;
-            Usuario.$getSucursal($rootScope.user.username).then(function(response){$rootScope.user.sucursal = response});
-            Usuario.$getAgencia($rootScope.user.username).then(function(response){$rootScope.user.agencia = response});
-            Usuario.$getCaja($rootScope.user.username).then(function(response){$rootScope.user.caja = response});
-            Usuario.$getTrabajador($rootScope.user.username).then(function(response){$rootScope.user.trabajador = response});
+            $rootScope.user.sucursal = Usuario.$getSucursal($rootScope.user.username);
+            $rootScope.user.agencia = Usuario.$getAgencia($rootScope.user.username);
+            $rootScope.user.trabajador = Usuario.$getTrabajador($rootScope.user.username);
+            $rootScope.user.caja = Usuario.$getCaja($rootScope.user.username);
 
             $rootScope.blockMessage = {
                 timeout: 11000,
@@ -910,7 +913,7 @@ define([
                 }, true);
                 var listenerCaja = $rootScope.$watch('user.caja', function(newValue, oldValue){
                     if( angular.isDefined(newValue) && jQuery.isEmptyObject(newValue) ) {
-                        $rootScope.blockMessage.message = error.trabajador;
+                        $rootScope.blockMessage.message = error.caja;
                         $rootScope.logout($rootScope.blockMessage.timeout);
                     } else if(angular.isDefined(newValue) && !jQuery.isEmptyObject(newValue)){
                         listenerCaja();

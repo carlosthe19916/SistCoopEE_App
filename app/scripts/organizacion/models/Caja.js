@@ -38,7 +38,13 @@ define(['./module'], function (module) {
         return {
             $new: function(id){
                 return {
-                    id: id
+                    id: id,
+                    $getBovedas: function() {
+                        return OrganizacionRestangular.all(url+'/'+this.id+'/bovedas').getList();
+                    },
+                    $getTrabajadores:function() {
+                        return OrganizacionRestangular.all(url+'/'+this.id+'/trabajadores').getList();
+                    }
                 }
             },
             $find: function(id){
