@@ -406,6 +406,7 @@ define([
                     var administracion = this.addItem('Administracion', 'app.common.administracion', 'linecons-params');
                     var configuracion = this.addItem('Configuracion', 'app.configuracion', 'linecons-cog');
                 } else if(roles.indexOf('CAJERO') != -1){
+                    var caja = this.addItem('Caja', 'app.cliente', 'linecons-database').setLabel('New Items', 'purple');
                     var cliente = this.addItem('Clientes', 'app.cliente', 'linecons-database');
                     var transaccion = this.addItem('Transacciones', 'app.transaccion', 'linecons-doc');
                     var administracion = this.addItem('Administracion', 'app.common.administracion', 'linecons-params');
