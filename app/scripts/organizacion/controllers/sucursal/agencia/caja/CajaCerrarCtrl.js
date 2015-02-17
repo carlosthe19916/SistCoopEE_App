@@ -3,6 +3,13 @@ define(['../../../module'], function (module) {
 
     module.controller('CajaCerrarCtrl', function($scope, $state, Notifications){
 
+        $scope.config = {
+            checkbox: {
+                cantidad: true,
+                subtotal: false
+            }
+        };
+
         $scope.loadParams = function(){
             $scope.view.caja.$getDetalle().then(function(response){
                 angular.forEach(response, function(row){
