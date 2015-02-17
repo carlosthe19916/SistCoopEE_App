@@ -127,7 +127,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="item in view.cajaDB.bovedas">
+                            <tr ng-repeat="item in view.cajaDB.bovedas track by item.id | orderBy: id">
                                 <td><span ng-bind="$index+1"></span></td>
                                 <td>
                                     <span ng-bind="item.moneda"></span>
@@ -174,7 +174,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="item in view.cajaDB.trabajadores">
+                            <tr ng-repeat="item in view.cajaDB.trabajadores track by item.id | orderBy: id">
                                 <td><span ng-bind="$index+1"></span></td>
                                 <td>
                                     <span ng-bind="item.tipoDocumento"></span>

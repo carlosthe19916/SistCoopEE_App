@@ -29,6 +29,12 @@ define(['./app'], function(app) {
                 },
                 module: 'ORGANIZACION',
                 roles: ['CAJERO']
+            }).state('app.cajero.caja.operaciones.editarCaja.resumen', {
+                url: '/resumen',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-resumen"),
+                controller: 'CajaResumenCtrl',
+                module: 'ORGANIZACION',
+                roles: ['CAJERO']
             }).state('app.cajero.caja.operaciones.editarCaja.cerrar', {
                 url: '/cerrar',
                 templateUrl: appHelper.viewPath("organizacion/sucursal/agencia/caja/form-cerrar"),

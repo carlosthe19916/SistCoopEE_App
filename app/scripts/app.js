@@ -745,7 +745,15 @@ define([
                             alert('State unauthorized.');
                         }
                     }
-                })
+                });
+
+            $rootScope.$on('$stateNotFound',function(event, unfoundState, fromState, fromParams){
+                event.preventDefault();
+                alert('State not found.');
+            });
+            $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams, error){
+                alert('Error: no se pudo cargar la pagina solicitada.');
+            });
         });
 
         app.run(function($rootScope, $timeout, activeProfile, Usuario){

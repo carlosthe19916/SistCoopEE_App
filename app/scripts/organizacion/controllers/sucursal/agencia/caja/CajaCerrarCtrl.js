@@ -4,19 +4,23 @@ define(['../../../module'], function (module) {
     module.controller('CajaCerrarCtrl', function($scope, $state, Notifications){
 
         $scope.loadParams = function(){
-            $scope.view.caja = $scope.params.object;
             $scope.view.caja.$getDetalle().then(function(response){
                 angular.forEach(response, function(row){
-                    row.total = 0;
                     angular.forEach(row.detalleHistorial, function(subRow){
                         subRow.getSubTotal = function(){
                             return this.valor * this.cantidad;
                         };
-                        row.total = row.total + (subRow.valor * subRow.cantidad);
                     });
+
+                    row.getTotal = function(){
+                        var total = 0;
+                        angular.forEach(this.detalleHistorial, function(subRow){
+                            total = total + subRow.getSubTotal();
+                        });
+                        return total;
+                    };
                 });
-                $scope.view.caja.detalleOld = angular.copy(response);
-                $scope.view.caja.detalleNew = angular.copy(response);
+                $scope.view.caja.detalle = angular.copy(response);
             });
         };
         $scope.loadParams();

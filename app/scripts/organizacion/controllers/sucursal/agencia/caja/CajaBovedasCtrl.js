@@ -1,7 +1,18 @@
 define(['../../../module'], function (module) {
     'use strict';
 
-    module.controller('CajaBovedasCtrl', function($scope, $state, Notifications, Dialog){
+    module.controller('CajaBovedasCtrl', function($scope, $state, Agencia, Notifications, Dialog){
+
+        $scope.combo = {
+            boveda: undefined
+        };
+        $scope.combo.selected = {
+            boveda: undefined
+        };
+        $scope.loadCombo = function() {
+            $scope.combo.boveda = Agencia.$new($scope.view.cajaDB.agencia.id).$getBovedas().$object;
+        };
+        $scope.loadCombo();
 
         $scope.addBoveda = function(){
             if(angular.isUndefined($scope.combo.selected.boveda)){
