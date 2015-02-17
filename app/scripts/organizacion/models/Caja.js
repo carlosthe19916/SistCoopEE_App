@@ -11,8 +11,8 @@ define(['./module'], function (module) {
             obj.$abrir = function() {
                 return OrganizacionRestangular.all(url+'/'+this.id+'/abrir').post();
             };
-            obj.$cerrar = function() {
-                return OrganizacionRestangular.all(url+'/'+this.id+'/cerrar').post();
+            obj.$cerrar = function(detalle) {
+                return OrganizacionRestangular.all(url+'/'+this.id+'/cerrar').post(OrganizacionRestangular.copy(detalle));
             };
             obj.$getBovedas = function() {
                 return OrganizacionRestangular.all(url+'/'+this.id+'/bovedas').getList();
@@ -39,6 +39,12 @@ define(['./module'], function (module) {
             $new: function(id){
                 return {
                     id: id,
+                    $abrir:function() {
+                        return OrganizacionRestangular.all(url+'/'+this.id+'/abrir').post();
+                    },
+                    $cerrar: function(detalle) {
+                        return OrganizacionRestangular.all(url+'/'+this.id+'/cerrar').post(OrganizacionRestangular.copy(detalle));
+                    },
                     $getBovedas: function() {
                         return OrganizacionRestangular.all(url+'/'+this.id+'/bovedas').getList();
                     },

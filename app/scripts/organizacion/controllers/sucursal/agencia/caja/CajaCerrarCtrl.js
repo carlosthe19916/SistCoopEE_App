@@ -1,12 +1,11 @@
 define(['../../../module'], function (module) {
     'use strict';
 
-    module.controller('CajaCerrarCtrl', function($scope, $state, Notifications){
+    module.controller('CajaCerrarCtrl', function($scope, $state, $filter, Notifications){
 
         $scope.config = {
             checkbox: {
-                cantidad: true,
-                subtotal: false
+                cantidad: true
             }
         };
 
@@ -37,9 +36,17 @@ define(['../../../module'], function (module) {
                 Notifications.warn('Caja cerrada, no se puede cerrar nuevamente.');
                 return;
             }
+            //cuadrando caja
+            for(var i=0; i<$scope.view.caja.detalle.length; i++){
+                if($scope.view.caja.detalle[i].boveda.saldo != $scope.view.caja.detalle[i].getTotal()){
+                    Notifications.warn('Saldo no coincide, ' + $scope.view.caja.detalle[i].boveda.denominacion + ' debe tener un total de: ' + $filter('currency')($scope.view.caja.detalle[i].boveda.saldo, '', 2));
+                    return;
+                }
+            }
+
             if ($scope.form.$valid) {
                 $scope.blockControl();
-                $scope.view.cajaDB.$cerrar().then(
+                $scope.view.cajaDB.$cerrar($scope.view.caja.detalle).then(
                     function(response){
                         $scope.unblockControl();
                         Notifications.success('Caja cerrada');

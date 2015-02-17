@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-sm-12">
                 <form name="form" novalidate>
-                    <strong ng-if="!view.caja.detalle.length">No se encontró detalle de caja, verifique que la caja este abierta.</strong>
-                    <tabset ng-if="view.caja.detalle.length" vertical="true" type="pills" class="tabs-vertical-env tabs-vertical-bordered">
+                    <strong ng-cloak ng-if="!view.caja.detalle.length">No se encontró detalle de caja, verifique que la caja este abierta.</strong>
+                    <tabset ng-cloak ng-if="view.caja.detalle.length" vertical="true" type="pills" class="tabs-vertical-env tabs-vertical-bordered">
                         <tab ng-repeat="tab in ::view.caja.detalle track by tab.boveda.id | orderBy: boveda.id" heading="{{tab.boveda.denominacion}}">
                             <div class="row">
                                 <div class="col-sm-6">
