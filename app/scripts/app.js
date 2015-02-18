@@ -362,6 +362,8 @@ define([
                     if( stateName.indexOf('app.cajero.caja') > -1 ) {
                         var operaciones = this.addItem('Operaciones', '', 'linecons-key');
 
+                        operaciones.addItem('Ver', 'app.cajero.caja.operaciones.editarCaja.resumen');
+                        operaciones.addItem('Pendientes', 'app.cajero.caja.operaciones.editarCaja.resumen');
                         operaciones.addItem('Cerrar', 'app.cajero.caja.operaciones.editarCaja.cerrar');
                     } else if( stateName.indexOf('app.cajero.administracion') > -1 ) {
                         var administracion = this.addItem('Personas', '', 'linecons-user');
