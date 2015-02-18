@@ -420,3 +420,224 @@ VALUES (71, 'T', CURRENT_TIMESTAMP, 0, 17, 24);
 
 INSERT INTO boveda_caja(id, estado, optlk, saldo, boveda_id, caja_id)
 VALUES (72, 'T', CURRENT_TIMESTAMP, 0, 18, 24);
+
+
+
+/**CREAR TRABAJADORES*/
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (1, 'T', 'DNI', '28212199', CURRENT_TIMESTAMP, 'jacarmen_caja', 1);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (2, 'T', 'DNI', '28213768', CURRENT_TIMESTAMP, 'pmpetronila_caja', 1);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (3, 'T', 'DNI', '28200766', CURRENT_TIMESTAMP, 'dcyrene_caja', 1);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (4, 'T', 'DNI', '28214821', CURRENT_TIMESTAMP, 'qpandres_caja', 1);
+
+
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (5, 'T', 'DNI', '28237806', CURRENT_TIMESTAMP, 'vpwalter_caja', 2);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (6, 'T', 'DNI', '28269111', CURRENT_TIMESTAMP, 'ptfilomeno_caja', 2);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (7, 'T', 'DNI', '28213753', CURRENT_TIMESTAMP, 'hgfeliciano_caja', 2);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (8, 'T', 'DNI', '28202338', CURRENT_TIMESTAMP, 'aobenito_caja', 2);
+
+
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (9, 'T', 'DNI', '28205601', CURRENT_TIMESTAMP, 'tmenma_caja', 3);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (10, 'T', 'DNI', '28235769', CURRENT_TIMESTAMP, 'ffoctavio_caja', 3);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (11, 'T', 'DNI', '28289835', CURRENT_TIMESTAMP, 'qlcarlos_caja', 3);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (12, 'T', 'DNI', '28262098', CURRENT_TIMESTAMP, 'bcvictor_caja', 3);
+
+
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (13, 'T', 'DNI', '28207191', CURRENT_TIMESTAMP, 'pvmarciana_caja', 4);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (14, 'T', 'DNI', '21092365', CURRENT_TIMESTAMP, 'vateofila_caja', 4);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (15, 'T', 'DNI', '09181356', CURRENT_TIMESTAMP, 'arisaac_caja', 4);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (16, 'T', 'DNI', '28215545', CURRENT_TIMESTAMP, 'jafrancisco_caja', 4);
+
+
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (17, 'T', 'DNI', '28223351', CURRENT_TIMESTAMP, 'cmrosa_caja', 5);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (18, 'T', 'DNI', '23697235', CURRENT_TIMESTAMP, 'ormacelino_caja', 5);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (19, 'T', 'DNI', '28237294', CURRENT_TIMESTAMP, 'cssocorro_caja', 5);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (20, 'T', 'DNI', '28201392', CURRENT_TIMESTAMP, 'cojulio_caja', 5);
+
+
+	
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (21, 'T', 'DNI', '28236387', CURRENT_TIMESTAMP, 'alnemesio_caja', 6);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (22, 'T', 'DNI', '28291967', CURRENT_TIMESTAMP, 'hafrancisco_caja', 6);	
+	
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (23, 'T', 'DNI', '28220014', CURRENT_TIMESTAMP, 'lcfrancisco_caja', 6);	
+	
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (24, 'T', 'DNI', '28206070', CURRENT_TIMESTAMP, 'bcgregorio_caja', 6);	
+
+
+/**TRABAJADORES PLATAFORMA**/
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (25, 'T', 'DNI', '28218966', CURRENT_TIMESTAMP, 'yzbertha_plataforma', 1);	
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (26, 'T', 'DNI', '28216370', CURRENT_TIMESTAMP, 'eljuan_plataforma', 2);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (27, 'T', 'DNI', '00123520', CURRENT_TIMESTAMP, 'mcmamerto_plataforma', 3);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (28, 'T', 'DNI', '28268159', CURRENT_TIMESTAMP, 'aafausto_plataforma', 4);	
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (29, 'T', 'DNI', '80499976', CURRENT_TIMESTAMP, 'avtharwin_plataforma', 5);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (30, 'T', 'DNI', '28312414', CURRENT_TIMESTAMP, 'cfteofilo_plataforma', 6);
+
+
+/**TRABAJADORES ADMINISTRADOR**/
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (31, 'T', 'DNI', '41293587', CURRENT_TIMESTAMP, 'dcedgar_administrador', 1);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (32, 'T', 'DNI', '80365056', CURRENT_TIMESTAMP, 'hrgerardo_administrador', 2);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (33, 'T', 'DNI', '28288536', CURRENT_TIMESTAMP, 'mqhector_administrador', 3);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (34, 'T', 'DNI', '10468407', CURRENT_TIMESTAMP, 'mawilber_administrador', 4);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (35, 'T', 'DNI', '28302819', CURRENT_TIMESTAMP, 'ngartemio_administrador', 5);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (36, 'T', 'DNI', '40839257', CURRENT_TIMESTAMP, 'oqfredy_administrador', 6);
+
+
+/**TRABAJADORES ADMINISTRADOR GENERAL*/
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (37, 'T', 'DNI', '40208005', CURRENT_TIMESTAMP, 'pgarturo_administradorgeneral', 1);
+
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (38, 'T', 'DNI', '28315991', CURRENT_TIMESTAMP, 'rqdavid_administradorgeneral', 4);
+
+
+/**TRABAJADORES GERENTE GENERAL*/
+INSERT INTO trabajador(id, estado, tipodocumento, numerodocumento, optlk , usuario, agencia_id)
+VALUES (39, 'T', 'DNI', '28317407', CURRENT_TIMESTAMP, 'rgjorge_gerentegeneral', 1);
+
+
+
+
+
+/**CREAR TRABAJADOR_CAJA*/
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (1, CURRENT_TIMESTAMP, 1, 1);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (2, CURRENT_TIMESTAMP, 2, 2);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (3, CURRENT_TIMESTAMP, 3, 3);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (4, CURRENT_TIMESTAMP, 4, 4);
+
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (5, CURRENT_TIMESTAMP, 5, 5);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (6, CURRENT_TIMESTAMP, 6, 6);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (7, CURRENT_TIMESTAMP, 7, 7);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (8, CURRENT_TIMESTAMP, 8, 8);
+
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (9, CURRENT_TIMESTAMP, 9, 9);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (10, CURRENT_TIMESTAMP, 10, 10);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (11, CURRENT_TIMESTAMP, 11, 11);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (12, CURRENT_TIMESTAMP, 12, 12);
+
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (13, CURRENT_TIMESTAMP, 13, 13);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (14, CURRENT_TIMESTAMP, 14, 14);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (15, CURRENT_TIMESTAMP, 15, 15);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (16, CURRENT_TIMESTAMP, 16, 16);
+
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (17, CURRENT_TIMESTAMP, 17, 17);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (18, CURRENT_TIMESTAMP, 18, 18);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (19, CURRENT_TIMESTAMP, 19, 19);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (20, CURRENT_TIMESTAMP, 20, 20);
+
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (21, CURRENT_TIMESTAMP, 21, 21);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (22, CURRENT_TIMESTAMP, 22, 22);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (23, CURRENT_TIMESTAMP, 23, 23);
+
+INSERT INTO trabajador_caja(id, optlk, caja_id, trabajador_id)
+VALUES (24, CURRENT_TIMESTAMP, 24, 24);

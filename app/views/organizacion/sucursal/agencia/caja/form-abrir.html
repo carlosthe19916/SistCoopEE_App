@@ -18,7 +18,7 @@
                     <p  ng-cloak ng-if="!view.caja.detalle.length">
                         <strong>No se encontró detalle de caja, si es la primera vez que abre la caja haga click en GUARDAR, sino pongase en contacto con su administrador.</strong>
                     </p>
-                    <tabset ng-if="view.caja.detalle.length" vertical="true" type="pills" class="tabs-vertical-env tabs-vertical-bordered">
+                    <tabset ng-cloak ng-if="view.caja.detalle.length" vertical="true" type="pills" class="tabs-vertical-env tabs-vertical-bordered">
                         <tab ng-repeat="tab in view.caja.detalle" heading="{{tab.boveda.denominacion}}">
                             <table class="table table-bordered table-striped table-condensed table-hover">
                                 <thead>
