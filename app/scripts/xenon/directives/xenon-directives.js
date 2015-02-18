@@ -160,11 +160,24 @@ define(['./module'], function (module) {
         };
     });
 
-    module.directive('sidebarProfile', function(){
+    module.directive('sidebarProfile', function($rootScope, PersonaNatural, activeProfile){
         return {
             restrict: 'E',
             replace: true,
-            templateUrl: appHelper.templatePath('layout/sidebar-profile')
+            templateUrl: appHelper.templatePath('layout/sidebar-profile'),
+            controller: function($scope){
+                $scope.roles = activeProfile.realmAccess.roles;
+                $rootScope.user.trabajador.then(function(response){
+                    $scope.persona = PersonaNatural.$findByTipoNumeroDocumento(response.tipoDocumento, response.numeroDocumento).$object;
+                });
+                $scope.profile = function(){
+                    activeProfile.accountManagement();
+                };
+                $scope.logout = function(){
+                    activeProfile.logout();
+                };
+
+            }
         };
     }).directive('sidebarMenu', function($timeout, $state,  $menuItems, activeProfile){
         return {

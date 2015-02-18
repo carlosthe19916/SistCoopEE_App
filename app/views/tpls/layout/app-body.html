@@ -1,6 +1,18 @@
-<div class="sidebar-menu" ng-if="layoutOptions.sidebar.isVisible" ng-class="{'collapsed': layoutOptions.sidebar.isCollapsed, 'toggle-others': layoutOptions.sidebar.toggleOthers, 'fixed': layoutOptions.sidebar.isFixed && layoutOptions.container.isBoxed == false}">
+<div class="sidebar-menu" ng-if="layoutOptions.sidebar.isVisible"
+     ng-class="{
+     'collapsed': layoutOptions.sidebar.isCollapsed,
+     'toggle-others': layoutOptions.sidebar.toggleOthers,
+     'fixed': layoutOptions.sidebar.isFixed && layoutOptions.container.isBoxed == false}">
+
+    <button ng-show="layoutOptions.sidebar.isCollapsed" ng-click="sidebarCollapse()" class="btn btn-gray btn-icon btn-icon-standalone btn-xs" style="float: right;">
+        <i class="fa fa-angle-double-right"></i>
+    </button>
 
     <div class="sidebar-menu-inner">
+
+        <button ng-show="!layoutOptions.sidebar.isCollapsed" ng-click="sidebarCollapse()" class="btn btn-gray btn-icon btn-icon-standalone btn-xs" style="float: right;">
+            <i class="fa fa-angle-double-left"></i>
+        </button>
 
         <sidebar-profile></sidebar-profile>
         <sidebar-menu></sidebar-menu>

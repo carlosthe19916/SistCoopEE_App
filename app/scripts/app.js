@@ -144,7 +144,9 @@ define([
 
             //mode puede ser AND o OR
             profile.hasRole = function(moduleName, roles, operator){
+
                 var module = getModule(moduleName);
+
                 if(Array.isArray(roles)){
                     var result = true;
                     if(operator){
@@ -360,12 +362,12 @@ define([
                     }
                 } else if(roles.indexOf('CAJERO') != -1){
                     if( stateName.indexOf('app.cajero.caja') > -1 ) {
+                        var caja = this.addItem('Caja session', 'app.cajero.caja.operaciones.editarCaja.resumen', 'linecons-pencil');
                         var operaciones = this.addItem('Operaciones', '', 'linecons-key');
 
-                        operaciones.addItem('Ver', 'app.cajero.caja.operaciones.editarCaja.resumen');
-                        operaciones.addItem('Pendientes', 'app.cajero.caja.operaciones.editarCaja.resumen');
-                        operaciones.addItem('Cerrar', 'app.cajero.caja.operaciones.editarCaja.cerrar');
-                    } else if( stateName.indexOf('app.cajero.administracion') > -1 ) {
+                        operaciones.addItem('Cerrar caja', 'app.cajero.caja.operaciones.editarCaja.cerrar');
+                        operaciones.addItem('Pendientes', 'app.cajero.caja.operaciones.buscarPendientes');
+                    } else if( stateName.indexOf('app.common.administracion') > -1 ) {
                         var administracion = this.addItem('Personas', '', 'linecons-user');
 
                         administracion.addItem('Naturales', 'app.common.administracion.personas.buscarPersonaNatural');
@@ -373,6 +375,8 @@ define([
                     } else {
                         return undefined;
                     }
+
+
                 }
 
                 return this;
@@ -901,6 +905,10 @@ define([
                 },
                 pageTitles: true,
                 userInfoNavVisible	: false
+            };
+
+            $rootScope.sidebarCollapse = function(){
+                  $rootScope.layoutOptions.sidebar.isCollapsed = !$rootScope.layoutOptions.sidebar.isCollapsed;
             };
 
             //Control functions
