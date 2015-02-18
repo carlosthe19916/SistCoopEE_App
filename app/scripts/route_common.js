@@ -20,7 +20,7 @@ define(['./app'], function(app) {
                 templateUrl: appHelper.viewPath('persona/natural/form-buscar-personaNatural'),
                 controller: 'BuscarPersonaNaturalCtrl',
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER', 'PUBLIC'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.crearPersonaNatural', {
                 url: '/natural?tipoDocumento&numeroDocumento',
@@ -31,14 +31,14 @@ define(['./app'], function(app) {
                     $scope.params.numeroDocumento = $stateParams.numeroDocumento;
                 },
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.crearPersonaNatural.datosPrincipales', {
                 url: '/principal',
                 templateUrl: appHelper.viewPath("persona/natural/form-datosPrincipales"),
                 controller: 'PersonaNaturalDatosPrincipalesCtrl',
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.editarPersonaNatural', {
                 url: '/natural/{id:[0-9]{1,8}}',
@@ -54,28 +54,28 @@ define(['./app'], function(app) {
                     $scope.params.object = personaNatural;
                 },
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER', 'PUBLIC'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.editarPersonaNatural.resumen', {
                 url: '/resumen',
                 templateUrl: appHelper.viewPath("persona/natural/form-resumen"),
                 controller: 'PersonaNaturalResumenCtrl',
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER', 'PUBLIC'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.editarPersonaNatural.datosPrincipales', {
                 url: '/principal',
                 templateUrl: appHelper.viewPath("persona/natural/form-datosPrincipales"),
                 controller: 'PersonaNaturalDatosPrincipalesCtrl',
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.editarPersonaNatural.datosAdicionales', {
                 url: '/adicionales',
                 templateUrl: appHelper.viewPath("persona/natural/form-datosAdicionales"),
                 controller: 'PersonaNaturalDatosAdicionalesCtrl',
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER'],
                 operator: 'OR'
             })
 
@@ -84,7 +84,7 @@ define(['./app'], function(app) {
                 templateUrl: appHelper.viewPath('persona/juridica/form-buscar-personaJuridica'),
                 controller: 'BuscarPersonaJuridicaCtrl',
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER', 'PUBLIC'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.crearPersonaJuridica', {
                 url: '/juridica?tipoDocumento&numeroDocumento',
@@ -95,21 +95,21 @@ define(['./app'], function(app) {
                     $scope.params.numeroDocumento = $stateParams.numeroDocumento;
                 },
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.crearPersonaJuridica.datosPrincipales', {
                 url: '/principal',
                 templateUrl: appHelper.viewPath("persona/juridica/form-datosPrincipales"),
                 controller: 'PersonaJuridicaDatosPrincipalesCtrl',
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.crearPersonaJuridica.representante', {
                 url: '/representante',
                 templateUrl: appHelper.viewPath("persona/juridica/form-representante"),
                 controller: 'PersonaJuridicaRepresentanteLegalCtrl',
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.editarPersonaJuridica', {
                 url: '/juridica/{id:[0-9]{1,8}}',
@@ -125,42 +125,42 @@ define(['./app'], function(app) {
                     $scope.params.object = personaJuridica;
                 },
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER', 'PUBLIC'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.editarPersonaJuridica.resumen', {
                 url: '/resumen',
                 templateUrl: appHelper.viewPath("persona/juridica/form-resumen"),
                 controller: 'PersonaJuridicaResumenCtrl',
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER', 'PUBLIC'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.editarPersonaJuridica.datosPrincipales', {
                 url: '/principal',
                 templateUrl: appHelper.viewPath("persona/juridica/form-datosPrincipales"),
                 controller: 'PersonaJuridicaDatosPrincipalesCtrl',
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.editarPersonaJuridica.datosAdicionales', {
                 url: '/adicionales',
                 templateUrl: appHelper.viewPath("persona/juridica/form-datosAdicionales"),
                 controller: 'PersonaJuridicaDatosAdicionalesCtrl',
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.editarPersonaJuridica.representante', {
                 url: '/representante',
                 templateUrl: appHelper.viewPath("persona/juridica/form-representante"),
                 controller: 'PersonaJuridicaRepresentanteLegalCtrl',
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER'],
                 operator: 'OR'
             }).state('app.common.administracion.personas.editarPersonaJuridica.crearAccionista', {
                 url: '/accionista',
                 templateUrl: appHelper.viewPath("persona/juridica/form-accionista"),
                 controller: 'PersonaJuridicaDatosAdicionalesCtrl',
                 module: 'PERSONA',
-                roles: ['ADMIN', 'GERENTE_GENERAL', 'ADMINISTRADOR_GENERAL', 'ADMINISTRADOR', 'PLATAFORMA', 'JEFE_CAJA', 'CAJERO'],
+                roles: ['ADMIN', 'USER'],
                 operator: 'OR'
             });
 
