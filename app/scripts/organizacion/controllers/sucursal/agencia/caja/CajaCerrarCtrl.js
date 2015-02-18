@@ -32,9 +32,17 @@ define(['../../../module'], function (module) {
         $scope.loadParams();
 
         $scope.cerrar = function(){
+            //verificar boveda abierta
             if($scope.view.cajaDB.abierto == false){
                 Notifications.warn('Caja cerrada, no se puede cerrar nuevamente.');
                 return;
+            }
+            //verificando bovedas abiertas
+            for(var i=0; i<$scope.view.caja.detalle.length; i++){
+                if($scope.view.caja.detalle[i].boveda.abierto != true){
+                    Notifications.warn($scope.view.caja.detalle[i].boveda.denominacion + ' debe estar abierta.');
+                    return;
+                }
             }
             //cuadrando caja
             for(var i=0; i<$scope.view.caja.detalle.length; i++){
