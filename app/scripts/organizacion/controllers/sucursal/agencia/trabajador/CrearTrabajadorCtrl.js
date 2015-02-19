@@ -33,18 +33,16 @@ define(['../../../module'], function (module) {
                     Notifications.warn("El trabajador ya fue registrado, no puede continuar.");
                     return;
                 }
-                $scope.blockControl();
+
                 $scope.view.trabajador.agencia = $scope.combo.selected.agencia;
                 $scope.view.trabajador.tipoDocumento = $scope.combo.selected.tipoDocumento.abreviatura;
                 $scope.view.trabajador.$save().then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success("Trabajador creado.");
                         $state.go('^.^.editarTrabajador.resumen', {id: response.id});
 
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );

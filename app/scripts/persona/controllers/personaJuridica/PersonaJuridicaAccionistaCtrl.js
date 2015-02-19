@@ -41,14 +41,12 @@ define(['../module'], function (module) {
                 };
                 $scope.view.persona.$addAccionista(accionista).then(
                     function(data){
-                        $scope.unblockControl();
                         Notifications.success("Accionista agregado");
                         $scope.buscados.persona.porcentajeParticipacion = $scope.entradas.porcentaje;
                         $scope.view.persona.accionistas.push($scope.buscados.persona);
                         $scope.view.personaDB.accionistas.push($scope.buscados.persona);
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );

@@ -25,10 +25,8 @@ define(['../module'], function (module) {
                     return;
                 }
 
-                $scope.blockControl();
                 PersonaJuridica.$findByTipoNumeroDocumento($scope.view.persona.tipoDocumento, $scope.view.persona.numeroDocumento).then(function(response){
                     if(response) {
-                        $scope.unblockControl();
                         Notifications.error("Documento de identidad no disponible.");
                     } else {
                         $scope.save();
@@ -38,19 +36,16 @@ define(['../module'], function (module) {
         };
 
         $scope.save = function(){
-            $scope.blockControl();
             $scope.view.persona.representanteLegal = {
                 tipoDocumento: $scope.view.persona.representanteLegal.tipoDocumento,
                 numeroDocumento: $scope.view.persona.representanteLegal.numeroDocumento
             };
             $scope.view.persona.$save().then(
                 function(response){
-                    $scope.unblockControl();
                     Notifications.success("Persona creada");
                     $state.go('^.^.editarPersonaJuridica.resumen', {id: response.id});
                 },
                 function error(error){
-                    $scope.unblockControl();
                     Notifications.error(error.data.message+".");
                 }
             );

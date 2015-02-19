@@ -23,12 +23,10 @@ define(['../../../module'], function (module) {
                 $scope.view.caja.bovedas = $scope.combo.selected.boveda;
                 Agencia.$new($scope.combo.selected.agencia.id).$addCaja($scope.view.caja).then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success("Caja creada");
                         $state.go('^.^.editarCaja.resumen', {id: response.id});
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );
@@ -156,15 +154,12 @@ define(['../../../module'], function (module) {
         $scope.addCaja = function(){
             if($scope.form.$valid){
                 $scope.view.caja.bovedas = $scope.combo.selected.boveda;
-                $scope.blockControl();
                 $scope.view.agencia.$addCaja($scope.view.caja).then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success("Caja creada");
                         $state.go('^.^.resumen');
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.messaage+".");
                     }
                 );

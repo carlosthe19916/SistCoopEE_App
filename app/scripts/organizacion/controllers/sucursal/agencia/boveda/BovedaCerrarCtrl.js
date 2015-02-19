@@ -29,18 +29,20 @@ define(['../../../module'], function (module) {
                 Notifications.warn('Boveda cerrada, no se puede cerrar nuevamente.');
                 return;
             }
+            if($scope.view.bovedaDB.estado == false){
+                Notifications.error('Boveda inactiva, no se puede cerrar.');
+                return;
+            }
+
             if ($scope.form.$valid) {
-                $scope.blockControl();
                 $scope.view.bovedaDB.$cerrar().then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success('Boveda cerrada');
                         $scope.view.bovedaDB.abierto = false;
                         $scope.view.boveda = angular.copy($scope.view.bovedaDB);
                         $state.go('^.resumen');
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );

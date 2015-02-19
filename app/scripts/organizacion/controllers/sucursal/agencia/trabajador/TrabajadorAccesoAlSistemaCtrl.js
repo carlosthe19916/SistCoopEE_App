@@ -21,17 +21,14 @@ define(['../../../module'], function (module) {
 
         $scope.desvincular = function(){
             Dialog.confirm('Desvincular', 'Estas seguro de quitar el usuario para el trabajador?', function() {
-                $scope.blockControl();
                 $scope.view.trabajador.usuario = undefined;
                 $scope.view.trabajador.$save().then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success("Trabajador actualizado.");
                         $scope.combo.selected.usuario = undefined;
                         $scope.view.trabajadorDB = angular.copy($scope.view.trabajador);
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );
@@ -40,16 +37,13 @@ define(['../../../module'], function (module) {
 
         $scope.setUsuario = function(){
             if ($scope.form.$valid) {
-                $scope.blockControl();
                 $scope.view.trabajador.usuario = $scope.combo.selected.usuario.username;
                 $scope.view.trabajador.$save().then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success("Trabajador actualizado.");
                         $scope.view.trabajadorDB = angular.copy($scope.view.trabajador);
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );

@@ -53,17 +53,14 @@ define(['../../../module'], function (module) {
             }
 
             if ($scope.form.$valid) {
-                $scope.blockControl();
                 $scope.view.cajaDB.$cerrar($scope.view.caja.detalle).then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success('Caja cerrada');
                         $scope.view.cajaDB.abierto = false;
                         $scope.view.caja = angular.copy($scope.view.cajaDB);
                         $state.go('^.resumen');
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );

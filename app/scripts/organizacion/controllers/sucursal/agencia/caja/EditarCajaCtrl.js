@@ -16,16 +16,13 @@ define(['../../../module'], function (module) {
 
         $scope.submit = function(){
             if ($scope.form.$valid) {
-                $scope.blockControl();
                 $scope.view.caja.$save().then(
                     function(response){
                         $scope.form.$setPristine();
-                        $scope.unblockControl();
                         Notifications.success("Caja actualizada");
                         $scope.view.cajaDB = angular.copy($scope.view.caja);
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );
@@ -34,15 +31,12 @@ define(['../../../module'], function (module) {
 
         $scope.desactivar = function(){
             Dialog.confirmDelete($scope.view.cajaDB.denominacion, 'caja', function() {
-                $scope.blockControl();
                 $scope.view.caja.$desactivar().then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success("Caja desactivada");
                         $state.go('^.^.buscarCaja');
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );

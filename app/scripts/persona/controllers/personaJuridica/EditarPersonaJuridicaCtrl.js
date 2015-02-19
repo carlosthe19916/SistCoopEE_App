@@ -17,16 +17,13 @@ define(['../module'], function (module) {
 
         $scope.submit = function(){
             if ($scope.form.$valid) {
-                $scope.blockControl();
                 var save = function(){
                     $scope.view.persona.$save().then(
                         function(data){
-                            $scope.unblockControl();
                             $scope.view.personaDB = angular.copy($scope.view.persona);
                             Notifications.success("Persona actualizada");
                         },
                         function error(error){
-                            $scope.unblockControl();
                             Notifications.error(error.data.message+".");
                         }
                     );

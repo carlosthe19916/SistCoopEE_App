@@ -722,11 +722,55 @@ define([
             };
         });
 
-
-
         /*************************************RUN**************************************/
-        app.run(function(Restangular, Notifications) {
+        app.run(function($q, $rootScope, Restangular, Notifications, Loader) {
+
+            //controllar el spiner del ladda button
+            $rootScope.control = Loader;
+
+            //quita el id en operaciones put
+            Restangular.setRequestInterceptor(
+                function(elem, operation, what, url) {
+                    if (operation === 'put') {
+                        elem.id = undefined;
+                        return elem;
+                    }
+                    return elem;
+                }
+            );
+
+            //activa/desactiva el control en loader
+            Restangular.addFullRequestInterceptor(function (element, operation, route, url, headers, params, httpConfig) {
+                if(operation == 'post' || operation == 'put'){
+                    Loader.blockControl();
+                }
+            });
+            Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+                if(operation == 'post' || operation == 'put'){
+                    Loader.unblockControl();
+                }
+                return data;
+            });
+
+            //no permite que objeto con estado false puedan hacer transacciones
+            Restangular.addFullRequestInterceptor(function (element, operation, route, url, headers, params, httpConfig) {
+                if(operation == 'post' || operation == 'put'){
+                    if(angular.isDefined(element.estado) && element.estado == false){
+                        var defer = $q.defer();
+                        defer.resolve({ message: 'Objeto inactivo, no se puede actualizar.' });
+                        httpConfig.timeout = defer.promise;
+                        return {
+                            element: element,
+                            headers: headers,
+                            params: params,
+                            httpConfig: httpConfig
+                        };
+                    }
+                }
+            });
+
             Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
+                Loader.unblockControl();
                 if(response.status === 0) {
                     Notifications.error('Al parecer no se pudo realizar la conexion al sistema, actualice la pagina presionando F5.');
                     return false; // error handled
@@ -740,6 +784,7 @@ define([
                 }
                 return true; // error not handled
             });
+
         });
 
         app.run(function($rootScope, $state, activeProfile) {
@@ -909,17 +954,6 @@ define([
 
             $rootScope.sidebarCollapse = function(){
                   $rootScope.layoutOptions.sidebar.isCollapsed = !$rootScope.layoutOptions.sidebar.isCollapsed;
-            };
-
-            //Control functions
-            $scope.control = {
-                block: false
-            };
-            $scope.blockControl = function(){
-                $scope.control.block = true;
-            };
-            $scope.unblockControl = function(){
-                $scope.control.block = false;
             };
 
         });

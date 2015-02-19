@@ -27,17 +27,14 @@ define(['../../../module'], function (module) {
                 return;
             }
             if ($scope.form.$valid) {
-                $scope.blockControl();
                 $scope.view.cajaDB.$abrir().then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success('Caja abierta');
                         $scope.view.cajaDB.abierto = true;
                         $scope.view.caja = angular.copy($scope.view.cajaDB);
                         $state.go('^.resumen');
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );

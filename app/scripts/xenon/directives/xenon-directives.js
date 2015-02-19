@@ -168,7 +168,8 @@ define(['./module'], function (module) {
             controller: function($scope){
                 $scope.roles = activeProfile.realmAccess.roles;
                 $rootScope.user.trabajador.then(function(response){
-                    $scope.persona = PersonaNatural.$findByTipoNumeroDocumento(response.tipoDocumento, response.numeroDocumento).$object;
+                    if(response)
+                        $scope.persona = PersonaNatural.$findByTipoNumeroDocumento(response.tipoDocumento, response.numeroDocumento).$object;
                 });
                 $scope.profile = function(){
                     activeProfile.accountManagement();

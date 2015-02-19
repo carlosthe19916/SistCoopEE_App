@@ -15,16 +15,13 @@ define(['../module'], function (module) {
 
         $scope.submit = function(){
             if ($scope.form.$valid) {
-                $scope.blockControl();
                 var save = function(){
                     $scope.view.persona.$save().then(
                         function(response){
-                            $scope.unblockControl();
                             Notifications.success("Persona creada");
                             $state.go('^.^.editarPersonaNatural.resumen', {id: response.id});
                         },
                         function error(error){
-                            $scope.unblockControl();
                             Notifications.error(error.data.message+".");
                         }
                     );
@@ -32,7 +29,6 @@ define(['../module'], function (module) {
                 PersonaNatural.$findByTipoNumeroDocumento($scope.view.persona.tipoDocumento, $scope.view.persona.numeroDocumento).then(function(data){
                     if(data) {
                         Notifications.error("Documento de identidad no disponible.");
-                        $scope.unblockControl();
                     } else {
                         save();
                     }

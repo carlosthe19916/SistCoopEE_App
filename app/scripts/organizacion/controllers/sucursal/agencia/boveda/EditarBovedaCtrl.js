@@ -17,15 +17,12 @@ define(['../../../module'], function (module) {
 
         $scope.submit = function(){
             if ($scope.form.$valid) {
-                $scope.blockControl();
                 $scope.view.boveda.$save().then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success("Boveda actualizada");
                         $scope.view.bovedaDB = angular.copy($scope.view.boveda);
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );
@@ -37,12 +34,10 @@ define(['../../../module'], function (module) {
                 $scope.blockControl();
                 $scope.view.bovedaDB.$desactivar().then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success("Boveda desactivada");
                         $state.go('^.^.buscarBoveda');
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );

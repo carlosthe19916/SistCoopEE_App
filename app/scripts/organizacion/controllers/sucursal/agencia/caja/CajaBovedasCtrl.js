@@ -36,10 +36,8 @@ define(['../../../module'], function (module) {
             }
 
             Dialog.confirm('Vincular', '¿Estas seguro de vincular la caja para la boveda?', function() {
-                $scope.blockControl();
                 $scope.view.caja.$addBoveda($scope.combo.selected.boveda).then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success("Boveda vinculada.");
 
                         if(angular.isDefined($scope.view.caja.bovedas)){
@@ -54,7 +52,6 @@ define(['../../../module'], function (module) {
                         $scope.view.cajaDB = angular.copy($scope.view.caja);
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );
@@ -78,17 +75,14 @@ define(['../../../module'], function (module) {
             }
 
             Dialog.confirm('Eliminar', '¿Estas seguro de desvincular la boveda para la caja?. Debes de asegurarte que no existe saldo en caja en la moneda de la boveda para continuar.', function() {
-                $scope.blockControl();
                 $scope.view.cajaDB.$desactivarBoveda(item.id).then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success("Boveda desvinculada.");
 
                         $scope.view.cajaDB.bovedas.splice($index, 1);
                         $scope.view.caja = angular.copy($scope.view.cajaDB);
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );

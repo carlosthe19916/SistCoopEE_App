@@ -37,11 +37,10 @@
     <div class="col-sm-4">
         <div class="form-group" ng-class="{ 'validate-has-error' : form.denominacion.$invalid && (form.denominacion.$touched || form.$submitted)}">
             <label>Denominacion</label>
-            <input type="text" name="denominacion" ng-model="view.boveda.denominacion" ng-minlength="1" ng-maxlength="30" class="form-control" required/>
+            <input type="text" name="denominacion" ng-model="view.boveda.denominacion" ng-maxlength="60" class="form-control" required/>
             <div ng-messages="form.denominacion.$error" ng-if="form.denominacion.$touched || form.$submitted">
                 <div class="validate-has-error" ng-message="required">Ingrese denominacion.</div>
-                <div class="validate-has-error" ng-message="minlength">Debe tener minimo 1 digitos.</div>
-                <div class="validate-has-error" ng-message="maxlength">Debe tener maximo 30 digitos.</div>
+                <div class="validate-has-error" ng-message="maxlength">Maximo 60 caracteres.</div>
             </div>
         </div>
     </div>

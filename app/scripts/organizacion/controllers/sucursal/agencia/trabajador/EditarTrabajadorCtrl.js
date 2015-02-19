@@ -37,16 +37,13 @@ define(['../../../module'], function (module) {
                     Notifications.warn("Debe de seleccionar una persona.");
                     return;
                 }
-                $scope.blockControl();
                 $scope.view.trabajador.agencia = $scope.combo.selected.agencia;
                 $scope.view.trabajador.$save().then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success("Trabajador actualizado.");
                         $scope.view.trabajadorDB = angular.copy($scope.view.trabajador);
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );
@@ -55,15 +52,12 @@ define(['../../../module'], function (module) {
 
         $scope.desactivar = function(){
             Dialog.confirmDelete('', 'trabajador', function() {
-                $scope.blockControl();
                 $scope.view.trabajadorDB.$desactivar().then(
                     function(response){
-                        $scope.unblockControl();
                         Notifications.success("Trabajador desactivado");
                         $state.go('^.^.buscarTrabajador');
                     },
                     function error(error){
-                        $scope.unblockControl();
                         Notifications.error(error.data.message+".");
                     }
                 );
