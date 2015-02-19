@@ -19,6 +19,7 @@ define(['../../../module'], function (module) {
                 $scope.blockControl();
                 $scope.view.caja.$save().then(
                     function(response){
+                        $scope.form.$setPristine();
                         $scope.unblockControl();
                         Notifications.success("Caja actualizada");
                         $scope.view.cajaDB = angular.copy($scope.view.caja);

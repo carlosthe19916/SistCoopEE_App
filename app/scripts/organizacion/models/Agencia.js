@@ -23,10 +23,11 @@ define(['./module'], function (module) {
             obj.$addCaja = function(caja){
                 if(caja.bovedas.length)
                 {
-                    var bovedas = caja.bovedas;
+                    var bovedas = angular.copy(caja.bovedas);
                     angular.forEach(bovedas, function(value, index) {
-                        caja.bovedas[index] = {id: value.id};
+                        bovedas[index] = {id: value.id};
                     }, bovedas);
+                    caja.bovedas = bovedas;
                 }
                 return OrganizacionRestangular.all(url+'/'+this.id+'/cajas').customPOST(OrganizacionRestangular.copy(caja),'',{},{});
             };
@@ -55,10 +56,11 @@ define(['./module'], function (module) {
                     $addCaja: function(caja){
                         if(caja.bovedas.length)
                         {
-                            var bovedas = caja.bovedas;
+                            var bovedas = angular.copy(caja.bovedas);
                             angular.forEach(bovedas, function(value, index) {
-                                caja.bovedas[index] = {id: value.id};
+                                bovedas[index] = {id: value.id};
                             }, bovedas);
+                            caja.bovedas = bovedas;
                         }
                         return OrganizacionRestangular.all(url+'/'+this.id+'/cajas').customPOST(OrganizacionRestangular.copy(caja),'',{},{});
                     }
