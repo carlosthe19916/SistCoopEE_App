@@ -757,7 +757,7 @@ define([
                 if(operation == 'post' || operation == 'put'){
                     if(angular.isDefined(element.estado) && element.estado == false){
                         var defer = $q.defer();
-                        defer.resolve({ message: 'Objeto inactivo, no se puede actualizar.' });
+                        defer.resolve('Objeto inactivo, no se puede actualizar.');
                         httpConfig.timeout = defer.promise;
                         return {
                             element: element,
@@ -770,9 +770,16 @@ define([
             });
 
             Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
-                Loader.unblockControl();
+                if(response.config.method == 'POST' || response.config.method == 'PUT'){
+                    Loader.unblockControl();
+                }
+
                 if(response.status === 0) {
-                    Notifications.error('Al parecer no se pudo realizar la conexion al sistema, actualice la pagina presionando F5.');
+                    if(response.config.timeout){
+                        Notifications.error(response.config.timeout.$$state.value);
+                    } else {
+                        Notifications.error('No se pudo realizar la conexion al sistema, verifique que la base de datos este funcionando.');
+                    }
                     return false; // error handled
                 }
                 if(response.status === 403) {
