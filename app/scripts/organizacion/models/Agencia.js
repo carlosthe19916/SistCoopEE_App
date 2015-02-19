@@ -2,25 +2,39 @@ define(['./module'], function (module) {
     'use strict';
 
     module.factory('Agencia', function(OrganizacionRestangular) {
+
         var url = "agencias";
 
-        OrganizacionRestangular.extendModel(url, function(obj) {
-            obj.$save = function() {
+        var modelMethos = {
+            //create
+            $new: function(id){
+                return angular.extend({id: id}, modelMethos);
+            },
+            $build: function(){
+                return angular.extend({id: undefined}, modelMethos, {$save: function(){
+                    return OrganizacionRestangular.all(url).post(this);
+                }});
+            },
+            $save: function() {
                 return OrganizacionRestangular.one(url, this.id).customPUT(OrganizacionRestangular.copy(this),'',{},{});
-            };
-            obj.$getBovedas = function(){
-                return OrganizacionRestangular.all(url+'/'+this.id+'/bovedas').getList();
-            };
-            obj.$getCajas = function(){
-                return OrganizacionRestangular.all(url+'/'+this.id+'/cajas').getList();
-            };
-            obj.$getTrabajadores = function(queryParams){
-                return OrganizacionRestangular.all(url+'/'+this.id+'/trabajadores').getList(queryParams);
-            };
-            obj.$addBoveda = function(boveda){
+            },
+
+            //searchers
+            $find: function(id){
+                return OrganizacionRestangular.one(url, id).get();
+            },
+            $getByCodigo: function(codigo){
+                return OrganizacionRestangular.one(url+'/codigo/'+codigo).get();
+            },
+            $search: function(queryParams){
+                return OrganizacionRestangular.all(url).getList(queryParams);
+            },
+
+            //One to Many
+            $addBoveda: function(boveda){
                 return OrganizacionRestangular.all(url+'/'+this.id+'/bovedas').customPOST(OrganizacionRestangular.copy(boveda),'',{},{});
-            };
-            obj.$addCaja = function(caja){
+            },
+            $addCaja: function(caja){
                 if(caja.bovedas.length)
                 {
                     var bovedas = angular.copy(caja.bovedas);
@@ -30,48 +44,27 @@ define(['./module'], function (module) {
                     caja.bovedas = bovedas;
                 }
                 return OrganizacionRestangular.all(url+'/'+this.id+'/cajas').customPOST(OrganizacionRestangular.copy(caja),'',{},{});
-            };
-            obj.$desactivar = function(){
-                return OrganizacionRestangular.all(url+'/'+this.id+'/desactivar').post();
-            };
-            return obj;
-        });
+            },
 
-        return {
-            $new: function(id){
-                return {
-                    id: id,
-                    $getBovedas: function(){
-                        return OrganizacionRestangular.all(url + '/' + this.id + '/bovedas').getList();
-                    },
-                    $getCajas:function() {
-                        return OrganizacionRestangular.all(url + '/' + this.id + '/cajas').getList();
-                    },
-                    $getTrabajadores:function() {
-                        return OrganizacionRestangular.all(url + '/' + this.id + '/trabajadores').getList();
-                    },
-                    $addBoveda: function(boveda){
-                        return OrganizacionRestangular.all(url+'/'+this.id+'/bovedas').customPOST(OrganizacionRestangular.copy(boveda),'',{},{});
-                    },
-                    $addCaja: function(caja){
-                        if(caja.bovedas.length)
-                        {
-                            var bovedas = angular.copy(caja.bovedas);
-                            angular.forEach(bovedas, function(value, index) {
-                                bovedas[index] = {id: value.id};
-                            }, bovedas);
-                            caja.bovedas = bovedas;
-                        }
-                        return OrganizacionRestangular.all(url+'/'+this.id+'/cajas').customPOST(OrganizacionRestangular.copy(caja),'',{},{});
-                    }
-                }
+            $getBovedas: function(){
+                return OrganizacionRestangular.all(url+'/'+this.id+'/bovedas').getList();
             },
-            $getByCodigo: function(codigo){
-                return OrganizacionRestangular.one(url+'/codigo/'+codigo).get();
+            $getCajas: function(agencia){
+                return OrganizacionRestangular.all(url+'/'+this.id+'/cajas').getList();
             },
-            $find: function(id){
-                return OrganizacionRestangular.one(url, id).get();
+            $getTrabajadores: function(){
+                return OrganizacionRestangular.all(url+'/'+this.id+'/trabajadores').getList(queryParams);
+            },
+
+            $desactivar: function(){
+                return OrganizacionRestangular.all(url+'/'+this.id+'/desactivar').post();
             }
         };
+
+        OrganizacionRestangular.extendModel(url, function(obj) {
+            return angular.extend(obj, modelMethos);
+        });
+
+        return modelMethos;
     });
 });

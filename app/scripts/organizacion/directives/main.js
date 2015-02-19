@@ -1,6 +1,7 @@
 define([
     'angular',
-    './sgCodigoAgenciaValidate'
+    './sgCodigoAgenciaValidate',
+    './sgDenominacionSucursalValidate'
 ], function () {
 
 });

@@ -24,7 +24,9 @@ require.config({
         'requirejs-domready': '../../bower_components/requirejs-domready/domReady',
         restangular: '../../bower_components/restangular/dist/restangular',
         underscore: '../../bower_components/underscore/underscore',
-        'angular-input-masks': '../../bower_components/angular-input-masks/releases/masks.min'
+        'angular-input-masks': '../../bower_components/angular-input-masks/releases/masks.min',
+        'angular-spinner': '../../bower_components/angular-spinner/angular-spinner',
+        spin: '../../bower_components/spin.js/spin'
     },
     shim: {
         jquery: {
@@ -130,6 +132,11 @@ require.config({
                 'angular'
             ]
         },
+        'angular-spinner': {
+            deps: [
+                'angular'
+            ]
+        },
         'angular-mocks': {
             deps: [
                 'angular'
@@ -181,7 +188,8 @@ require([
     'oclazyload',
     'restangular',
     'underscore',
-    'angular-input-masks'
+    'angular-input-masks',
+    'angular-spinner'
 
 ], function() {
 

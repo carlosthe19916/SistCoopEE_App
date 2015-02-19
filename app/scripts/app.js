@@ -37,6 +37,7 @@ define([
                 'timer',
                 'RecursionHelper',
                 'ui.utils.masks',
+                'angularSpinner',
 
                 /*sistcoop*/
                 'persona',
@@ -780,6 +781,10 @@ define([
                     } else {
                         Notifications.error('No se pudo realizar la conexion al sistema, verifique que la base de datos este funcionando.');
                     }
+                    return false; // error handled
+                }
+                if(response.status === 400) {
+                    Notifications.error('Bad request.');
                     return false; // error handled
                 }
                 if(response.status === 403) {

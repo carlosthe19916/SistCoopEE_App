@@ -16,11 +16,13 @@
         <div class="col-sm-4">
             <div class="form-group" ng-class="{ 'validate-has-error' : form.denominacion.$invalid && (form.denominacion.$touched || form.$submitted)}">
                 <label>Denominacion</label>
-                <input type="text" name="denominacion" ng-model="view.sucursal.denominacion" ng-maxlength="60" class="form-control" required/>
+                <input type="text" name="denominacion" ng-model="view.sucursal.denominacion" sg-denominacion-sucursal-validate ng-maxlength="60" class="form-control" required/>
                 <div ng-messages="form.denominacion.$error" ng-if="form.denominacion.$touched || form.$submitted">
                     <div class="validate-has-error" ng-message="required">Ingrese denominacion.</div>
                     <div class="validate-has-error" ng-message="maxlength">Maximo 60 caracteres.</div>
+                    <div class="validate-has-error" ng-message="disponible">Denominacion no disponible.</div>
                 </div>
+                <span ng-show="form.denominacion.$pending" us-spinner="{radius:4, width:1, length: 2, top: '54%', left: '90%'}"></span>
             </div>
         </div>
     </div>
