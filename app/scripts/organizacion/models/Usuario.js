@@ -19,6 +19,11 @@ define(['./module'], function (module) {
             $search: function(queryParams){
                 return KeycloakRestangular.all(keycloakUrl).getList(queryParams);
             },
+            $roleMappings : function(username){
+                return KeycloakRestangular.one(keycloakUrl + '/' + username + '/role-mappings').get();
+            },
+
+
             $getSucursal: function(username){
                 return OrganizacionRestangular.one(url+'/'+username+'/sucursal').get();
             },

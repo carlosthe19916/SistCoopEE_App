@@ -143,6 +143,8 @@ define([
                 return result;
             };
 
+            profile.getModule = getModule;
+
             //mode puede ser AND o OR
             profile.hasRole = function(moduleName, roles, operator){
 

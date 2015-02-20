@@ -205,14 +205,14 @@
                                 <p><strong ng-bind="view.trabajadorDB.usuario"></strong></p>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" sg-data-keep="{module: 'ORGANIZACION', rol: ['ADMIN']}">
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <p>Rol:&nbsp;</p>
                                 </div>
                             </div>
                             <div class="col-sm-9">
-                                <p><strong></strong></p>
+                                <p><strong>{{view.loaded.userKeycloak.rolesAssigned}}</strong></p>
                             </div>
                         </div>
                     </div>
