@@ -16,6 +16,12 @@ define(['../module'], function (module) {
 
         $scope.submit = function(){
             if ($scope.form.$valid) {
+
+                if($scope.view.sucursal.estado == false){
+                    Notifications.info("Sucursal inactiva, no se puede actualizar.");
+                    return;
+                }
+
                 $scope.view.sucursal.$save().then(
                     function(response){
                         Notifications.success("Sucursal actualizada");
@@ -29,6 +35,11 @@ define(['../module'], function (module) {
         };
 
         $scope.desactivar = function(){
+            if($scope.view.sucursalDB.estado == false){
+                Notifications.info("Sucursal inactiva, no se puede actualizar.");
+                return;
+            }
+
             Dialog.confirmDelete($scope.view.sucursalDB.denominacion, 'sucursal', function() {
                 $scope.view.sucursalDB.$desactivar().then(
                     function(response){

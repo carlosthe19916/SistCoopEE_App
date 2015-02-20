@@ -21,10 +21,10 @@
                        ui-mask="99"
                        class="form-control" autofocus required/>
                 <div ng-messages="form.codigo.$error" ng-if="form.codigo.$touched || form.$submitted">
-                    <div class="validate-has-error" ng-message="codigoDisponible">Codigo no disponible.</div>
-                    <div class="validate-has-error" ng-message="required">Ingrese abreviatura.</div>
+                    <div class="validate-has-error" ng-message="disponible">Codigo no disponible.</div>
+                    <div class="validate-has-error" ng-message="required">Ingrese codigo.</div>
                 </div>
-                <span ng-show="form.codigo.$pending">Verificando...</span>
+                <span ng-show="form.codigo.$pending" us-spinner="spinnerConfig"></span>
             </div>
         </div>
         <div class="col-sm-4">

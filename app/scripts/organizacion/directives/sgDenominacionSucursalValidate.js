@@ -5,18 +5,29 @@ define(['./module'], function (module) {
         return {
             restrict:'AE',
             require: 'ngModel',
-            link:function($scope,elem,attrs,ngModel){
-                ngModel.$asyncValidators.disponible=function(modelValue,viewValue){
+            scope: {
+                sgExclude: '=sgExclude'
+            },
+            link:function($scope, elem, attrs, ngModel){
+                var selfInclude = $scope.$eval(attrs.sgSelfInclude);
+                ngModel.$asyncValidators.disponible = function(modelValue, viewValue){
                     var value = modelValue || viewValue;
                     return Sucursal.$findByDenominacion(value).then(
                         function(response){
-                            if(response)
+                            if(response){
+                                if($scope.sgExclude){
+                                    if(response.id == $scope.sgExclude.id){
+                                        return true;
+                                    }
+                                }
                                 return $q.reject('Denominacion ya existe.');
-                            else
+                            }
+                            else {
                                 return true;
+                            }
                         },
                         function error(response){
-                            return $q.reject('error');
+                            return $q.reject('Error al buscar sucursal.');
                         }
                     );
                 };

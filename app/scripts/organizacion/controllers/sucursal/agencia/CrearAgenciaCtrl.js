@@ -64,6 +64,12 @@ define(['../../module'], function (module) {
 
         $scope.addAgencia = function(){
             if($scope.form.$valid){
+
+                if($scope.view.sucursal.estado == false){
+                    Notifications.info("Sucursal inactiva, no se puede actualizar.");
+                    return;
+                }
+
                 $scope.view.sucursal.$addAgencia($scope.view.agencia).then(
                     function(response){
                         Notifications.success("Agencia creada");
@@ -73,6 +79,8 @@ define(['../../module'], function (module) {
                         Notifications.error(error.data.message+".");
                     }
                 );
+            } else {
+                $scope.form.$setSubmitted();
             }
         };
 

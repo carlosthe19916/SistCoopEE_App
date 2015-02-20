@@ -821,6 +821,14 @@ define([
 
         app.run(function($rootScope, $timeout, activeProfile, Usuario){
 
+            $rootScope.spinnerConfig = {
+                radius:4,
+                width:1,
+                length: 2,
+                top: '54%',
+                left: '90%'
+            };
+
             $rootScope.logout = function(time){
                 $timeout(function() {
                     activeProfile.logout();

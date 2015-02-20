@@ -6,7 +6,7 @@ define(['./module'], function (module) {
             restrict:'AE',
             require: 'ngModel',
             link:function($scope,elem,attrs,ngModel){
-                ngModel.$asyncValidators.codigoDisponible=function(modelValue,viewValue){
+                ngModel.$asyncValidators.disponible = function(modelValue,viewValue){
                     var value = modelValue || viewValue;
                     return Agencia.$getByCodigo(value).then(
                         function(response){
