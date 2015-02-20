@@ -139,17 +139,17 @@ define(['../../../module'], function (module) {
                 {
                     name: 'edit',
                     displayName: 'Edit',
-                    cellTemplate: '<div style="text-align: center; padding-top: 5px;"><button type="button" ng-click="getExternalScopes().edit(row.entity)" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"></span>Editar</button></div>'
+                    cellTemplate: '<div style="text-align: center; padding-top: 5px;"><button type="button" ng-click="grid.appScope.gridActions.edit(row.entity)" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"></span>Editar</button></div>'
                 }
             ]
         };
         $scope.gridActions = {
             edit: function(row){
-                $state.go('app.organizacion.editarSucursal.editarAgencia', {id: row.id});
+                $state.go('^.^.editarCaja.resumen', {id: row.id});
             }
         };
         $scope.nuevo = function(){
-            $state.go('app.organizacion.estructura.editarAgencia.crearCaja.datosPrincipales');
+            $state.go('^.crearCaja.datosPrincipales');
         };
         $scope.search = function(){
             $scope.gridOptions.data = $scope.view.agenciaDB.$getCajas().$object;

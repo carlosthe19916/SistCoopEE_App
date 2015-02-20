@@ -43,7 +43,7 @@ define(['../../module'], function (module) {
         };
         $scope.search = function(){
             if($scope.combo.selected.sucursal)
-                $scope.gridOptions.data = $scope.combo.selected.sucursal.$getAgencias().$object;
+                $scope.gridOptions.data = $scope.combo.selected.sucursal.$getAgencias($scope.filterOptions).$object;
         };
 
     };

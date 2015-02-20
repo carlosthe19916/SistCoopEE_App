@@ -17,6 +17,12 @@ define(['../../module'], function (module) {
 
         $scope.addAgencia = function(){
             if($scope.form.$valid){
+
+                if($scope.combo.selected.sucursal.estado == false){
+                    Notifications.info("Sucursal inactiva, no se puede crear agencia.");
+                    return;
+                }
+
                 $scope.combo.selected.sucursal.$addAgencia($scope.view.agencia).then(
                     function(response){
                         Notifications.success("Agencia creada.");

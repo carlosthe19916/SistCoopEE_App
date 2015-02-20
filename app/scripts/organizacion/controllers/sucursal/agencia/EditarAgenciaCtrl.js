@@ -16,6 +16,12 @@ define(['../../module'], function (module) {
 
         $scope.submit = function(){
             if ($scope.form.$valid) {
+
+                if($scope.view.agencia.estado == false){
+                    Notifications.info("Agencia inactiva, no se puede actualizar.");
+                    return;
+                }
+
                 $scope.view.agencia.$save().then(
                     function(response){
                         Notifications.success("Agencia actualizada");
@@ -29,6 +35,12 @@ define(['../../module'], function (module) {
         };
 
         $scope.desactivar = function(){
+
+            if($scope.view.agenciaDB.estado == false){
+                Notifications.info("Agencia inactiva, no se puede actualizar.");
+                return;
+            }
+
             Dialog.confirmDelete($scope.view.agenciaDB.denominacion, 'agencia', function() {
                 $scope.view.agenciaDB.$desactivar().then(
                     function(response){
