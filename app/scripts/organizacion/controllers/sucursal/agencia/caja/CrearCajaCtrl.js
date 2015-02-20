@@ -153,6 +153,12 @@ define(['../../../module'], function (module) {
 
         $scope.addCaja = function(){
             if($scope.form.$valid){
+
+                if($scope.view.agencia.estado == false){
+                    Notifications.info("Agencia inactiva, no se puede actualizar.");
+                    return;
+                }
+
                 $scope.view.caja.bovedas = $scope.combo.selected.boveda;
                 $scope.view.agencia.$addCaja($scope.view.caja).then(
                     function(response){

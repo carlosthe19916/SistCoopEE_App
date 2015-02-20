@@ -126,6 +126,12 @@ define(['../../../module'], function (module) {
 
         $scope.addBoveda = function(){
             if($scope.form.$valid){
+
+                if($scope.view.agencia.estado == false){
+                    Notifications.info("Agencia inactiva, no se puede actualizar.");
+                    return;
+                }
+
                 $scope.view.boveda.moneda = $scope.combo.selected.moneda.code;
                 $scope.view.agencia.$addBoveda($scope.view.boveda).then(
                     function(response){
@@ -136,6 +142,8 @@ define(['../../../module'], function (module) {
                         Notifications.error(error.data+".");
                     }
                 );
+            } else {
+                $scope.form.$setSubmitted();
             }
         };
 

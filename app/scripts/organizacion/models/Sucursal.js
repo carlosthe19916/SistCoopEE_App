@@ -31,8 +31,8 @@ define(['./module'], function (module) {
             },
 
             //One to Many
-            $getAgencias: function(filterOptions){
-                return OrganizacionRestangular.all(url+'/'+this.id+'/agencias').getList(filterOptions);
+            $getAgencias: function(queryParams){
+                return OrganizacionRestangular.all(url+'/'+this.id+'/agencias').getList(queryParams);
             },
             $addAgencia: function(agencia){
                 return OrganizacionRestangular.all(url+'/'+this.id+'/agencias').post(agencia);

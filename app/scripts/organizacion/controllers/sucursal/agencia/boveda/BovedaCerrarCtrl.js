@@ -30,7 +30,7 @@ define(['../../../module'], function (module) {
                 return;
             }
             if($scope.view.bovedaDB.estado == false){
-                Notifications.error('Boveda inactiva, no se puede cerrar.');
+                Notifications.info('Boveda inactiva, no se puede cerrar.');
                 return;
             }
 

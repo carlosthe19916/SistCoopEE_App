@@ -826,7 +826,7 @@ define([
                 width:1,
                 length: 2,
                 top: '54%',
-                left: '90%'
+                left: '89.8%'
             };
 
             $rootScope.logout = function(time){

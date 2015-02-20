@@ -17,6 +17,12 @@ define(['../../../module'], function (module) {
 
         $scope.submit = function(){
             if ($scope.form.$valid) {
+
+                if($scope.view.boveda.estado == false){
+                    Notifications.info("Boveda inactiva, no se puede actualizar.");
+                    return;
+                }
+
                 $scope.view.boveda.$save().then(
                     function(response){
                         Notifications.success("Boveda actualizada");
@@ -30,6 +36,12 @@ define(['../../../module'], function (module) {
         };
 
         $scope.desactivar = function(){
+
+            if($scope.view.bovedaDB.estado == false){
+                Notifications.info("Boveda inactiva, no se puede actualizar.");
+                return;
+            }
+
             Dialog.confirmDelete($scope.view.bovedaDB.denominacion, 'boveda', function() {
                 $scope.blockControl();
                 $scope.view.bovedaDB.$desactivar().then(

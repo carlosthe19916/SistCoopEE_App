@@ -44,7 +44,7 @@ define(['../../../module'], function (module) {
         };
         $scope.search = function(){
             if($scope.combo.selected.sucursal && $scope.combo.selected.agencia){
-                $scope.gridOptions.data = Agencia.$new($scope.combo.selected.agencia.id).$getCajas().$object;
+                $scope.gridOptions.data = Agencia.$new($scope.combo.selected.agencia.id).$getCajas($scope.filterOptions).$object;
             }
         };
 

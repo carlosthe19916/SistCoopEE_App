@@ -32,6 +32,12 @@ define(['../../../module'], function (module) {
         $scope.loadParams();
 
         $scope.cerrar = function(){
+
+            if($scope.view.cajaDB.estado == false){
+                Notifications.info("Caja inactiva, no se puede actualizar.");
+                return;
+            }
+
             //verificar boveda abierta
             if($scope.view.cajaDB.abierto == false){
                 Notifications.warn('Caja cerrada, no se puede cerrar nuevamente.');

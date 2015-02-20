@@ -18,6 +18,11 @@ define(['../../../module'], function (module) {
             if(angular.isUndefined($scope.combo.selected.boveda)){
                 return;
             }
+            if($scope.view.cajaDB.estado == false){
+                Notifications.info("Caja inactiva, no se puede actualizar.");
+                return;
+            }
+
             if($scope.view.cajaDB.abierto){
                 Notifications.warn('Caja abierta, debe cerrarla antes de vincular boveda.');
                 return;

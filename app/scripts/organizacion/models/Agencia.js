@@ -46,13 +46,13 @@ define(['./module'], function (module) {
                 return OrganizacionRestangular.all(url+'/'+this.id+'/cajas').customPOST(OrganizacionRestangular.copy(caja),'',{},{});
             },
 
-            $getBovedas: function(){
-                return OrganizacionRestangular.all(url+'/'+this.id+'/bovedas').getList();
+            $getBovedas: function(queryParams){
+                return OrganizacionRestangular.all(url+'/'+this.id+'/bovedas').getList(queryParams);
             },
-            $getCajas: function(agencia){
-                return OrganizacionRestangular.all(url+'/'+this.id+'/cajas').getList();
+            $getCajas: function(queryParams){
+                return OrganizacionRestangular.all(url+'/'+this.id+'/cajas').getList(queryParams);
             },
-            $getTrabajadores: function(){
+            $getTrabajadores: function(queryParams){
                 return OrganizacionRestangular.all(url+'/'+this.id+'/trabajadores').getList(queryParams);
             },
 

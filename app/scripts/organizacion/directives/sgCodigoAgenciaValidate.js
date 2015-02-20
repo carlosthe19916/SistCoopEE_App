@@ -11,12 +11,12 @@ define(['./module'], function (module) {
                     return Agencia.$getByCodigo(value).then(
                         function(response){
                             if(response)
-                                return $q.reject('exists');
+                                return $q.reject('Codigo ya existente.');
                             else
                                 return true;
                         },
                         function error(response){
-                            return $q.reject('error');
+                            return $q.reject('Error.');
                         }
                     );
                 };

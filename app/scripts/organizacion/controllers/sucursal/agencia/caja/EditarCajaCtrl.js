@@ -16,6 +16,12 @@ define(['../../../module'], function (module) {
 
         $scope.submit = function(){
             if ($scope.form.$valid) {
+
+                if($scope.view.caja.estado == false){
+                    Notifications.info("Caja inactiva, no se puede actualizar.");
+                    return;
+                }
+
                 $scope.view.caja.$save().then(
                     function(response){
                         $scope.form.$setPristine();
@@ -30,6 +36,12 @@ define(['../../../module'], function (module) {
         };
 
         $scope.desactivar = function(){
+
+            if($scope.view.cajaDB.estado == false){
+                Notifications.info("Caja inactiva, no se puede actualizar.");
+                return;
+            }
+
             Dialog.confirmDelete($scope.view.cajaDB.denominacion, 'caja', function() {
                 $scope.view.caja.$desactivar().then(
                     function(response){

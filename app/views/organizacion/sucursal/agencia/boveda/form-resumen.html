@@ -125,7 +125,6 @@
                                 <th>Abierto</th>
                                 <th>Movimiento</th>
                                 <th>Estado</th>
-                                <th>Edit</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -142,9 +141,6 @@
                                 </td>
                                 <td>
                                     <span ng-bind="item.estado | si_no:'Activo'"></span>
-                                </td>
-                                <td style="text-align: center">
-                                    <button type="button" ng-click="gridActions.edit(item)" class="btn btn-info btn-xs">Ver</button>
                                 </td>
                             </tr>
                             </tbody>

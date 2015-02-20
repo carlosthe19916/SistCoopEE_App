@@ -22,10 +22,16 @@ define(['../../../module'], function (module) {
         $scope.loadParams();
 
         $scope.abrir = function(){
+
+            if($scope.view.cajaDB.estado == false){
+                Notifications.info("Caja inactiva, no se puede actualizar.");
+                return;
+            }
             if($scope.view.cajaDB.abierto == true){
                 Notifications.warn('Caja abierta, no se puede abrir nuevamente.');
                 return;
             }
+
             if ($scope.form.$valid) {
                 $scope.view.cajaDB.$abrir().then(
                     function(response){
