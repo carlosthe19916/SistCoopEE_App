@@ -45,6 +45,13 @@ define(['./module'], function (module) {
                 }
                 return OrganizacionRestangular.all(url+'/'+this.id+'/cajas').customPOST(OrganizacionRestangular.copy(caja),'',{},{});
             },
+            $addTrabajador: function(trabajador){
+                var newTrabajador = {
+                    tipoDocumento: trabajador.tipoDocumento,
+                    numeroDocumento: trabajador.numeroDocumento
+                }
+                return OrganizacionRestangular.all(url+'/'+this.id+'/trabajadores').customPOST(OrganizacionRestangular.copy(newTrabajador),'',{},{});
+            },
 
             $getBovedas: function(queryParams){
                 return OrganizacionRestangular.all(url+'/'+this.id+'/bovedas').getList(queryParams);

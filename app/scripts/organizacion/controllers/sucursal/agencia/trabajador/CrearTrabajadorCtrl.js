@@ -36,7 +36,7 @@ define(['../../../module'], function (module) {
 
                 $scope.view.trabajador.agencia = $scope.combo.selected.agencia;
                 $scope.view.trabajador.tipoDocumento = $scope.combo.selected.tipoDocumento.abreviatura;
-                $scope.view.trabajador.$save().then(
+                Agencia.$new($scope.combo.selected.agencia.id).$addTrabajador($scope.view.trabajador).then(
                     function(response){
                         Notifications.success("Trabajador creado.");
                         $state.go('^.^.editarTrabajador.resumen', {id: response.id});
