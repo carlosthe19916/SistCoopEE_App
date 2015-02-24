@@ -49,8 +49,14 @@ define(['./module'], function (module) {
                 return OrganizacionRestangular.all(url+'/'+this.id+'/bovedas/'+idBoveda+'/desactivar').post();
             },
 
+            $getDetalle: function(agencia){
+                return OrganizacionRestangular.all(url+'/'+this.id+'/detalle').getList();
+            },
             $getBovedas: function(){
                 return OrganizacionRestangular.all(url+'/'+this.id+'/bovedas').getList();
+            },
+            $getBovedasCaja: function(){
+                return OrganizacionRestangular.all(url+'/'+this.id+'/bovedasCaja').getList();
             },
             $getTrabajadores: function(agencia){
                 return OrganizacionRestangular.all(url+'/'+this.id+'/trabajadores').getList();

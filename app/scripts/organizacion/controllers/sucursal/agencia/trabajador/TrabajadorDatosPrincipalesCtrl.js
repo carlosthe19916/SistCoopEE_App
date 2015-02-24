@@ -3,6 +3,13 @@ define(['../../../module'], function (module) {
 
     var trabajadorDatosPrincipalesCtrl = function($scope, $state, Trabajador, PersonaNatural, Notifications){
 
+        $scope.refresh = function(){
+            if(angular.isDefined($scope.view.trabajadorDB)){
+                $scope.view.trabajador = angular.copy($scope.view.trabajadorDB);
+            }
+        };
+        $scope.refresh();
+
         $scope.check = function($event){
             if(!angular.isUndefined($event))
                 $event.preventDefault();

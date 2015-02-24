@@ -12,6 +12,7 @@ define([
     './sucursal/EditarSucursalCtrl',
     './sucursal/SucursalDatosPrincipalesCtrl',
     './sucursal/SucursalResumenCtrl',
+    './sucursal/SucursalDesactivarCtrl',
 
     './sucursal/agencia/AgenciaDatosPrincipales',
     './sucursal/agencia/AgenciaResumenCtrl',

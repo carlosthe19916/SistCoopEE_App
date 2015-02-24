@@ -75,6 +75,12 @@ define(['./app'], function(app) {
                 controller: 'AgenciaDatosPrincipalesCtrl',
                 module: 'ORGANIZACION',
                 roles: ['ADMIN']
+            }).state('app.admin.organizacion.estructura.editarSucursal.desactivar', {
+                url: '/desactivar',
+                templateUrl: appHelper.viewPath("organizacion/sucursal/form-desactivar-sucursal"),
+                controller: 'SucursalDesactivarCtrl',
+                module: 'ORGANIZACION',
+                roles: ['ADMIN']
             })
 
             .state('app.admin.organizacion.estructura.buscarAgencia', {

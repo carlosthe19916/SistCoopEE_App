@@ -8,10 +8,15 @@ define(['../../../module'], function (module) {
             bovedaDB: undefined
         };
 
+        $scope.view.loaded = {
+            cajas: undefined
+        };
+
         $scope.loadParams = function(){
             $scope.view.boveda = $scope.params.object;
             $scope.view.bovedaDB = angular.copy($scope.params.object);
-            $scope.view.bovedaDB.cajas = $scope.view.bovedaDB.$getCajas().$object;
+
+            $scope.view.loaded.cajas = $scope.view.boveda.$getCajas().$object;
         };
         $scope.loadParams();
 

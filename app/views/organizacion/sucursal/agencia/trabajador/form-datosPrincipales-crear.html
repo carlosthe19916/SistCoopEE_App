@@ -47,8 +47,8 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-4" ng-class="{ 'validate-has-error' : form.numeroDocumento.$invalid && (form.numeroDocumento.$dirty || form.numeroDocumento.$touched || form.$submitted)}">
-        <div class="form-group">
+    <div class="col-sm-4">
+        <div class="form-group" ng-class="{ 'validate-has-error' : form.numeroDocumento.$invalid && (form.numeroDocumento.$dirty || form.numeroDocumento.$touched || form.$submitted)}">
             <label>N&uacute;mero documento</label>
             <div class="input-group">
                 <input type="text" name="numeroDocumento" ng-model="view.trabajador.numeroDocumento" ui-keypress="{13:'check($event)'}" ng-pattern="/^[0-9]+$/" ng-minlength="combo.selected.tipoDocumento.cantidadCaracteres" ng-maxlength="combo.selected.tipoDocumento.cantidadCaracteres" class="form-control" required/>

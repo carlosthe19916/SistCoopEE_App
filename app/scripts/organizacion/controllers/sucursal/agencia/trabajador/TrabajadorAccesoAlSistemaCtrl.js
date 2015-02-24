@@ -16,7 +16,13 @@ define(['../../../module'], function (module) {
                 first: 0,
                 max: 5
             };
-            $scope.combo.usuario = Usuario.$search(queryParams).$object;
+            if($scope.combo.usuario){
+                $scope.combo.usuario = Usuario.$search(queryParams).$object;
+            }
+            else {
+                queryParams.search = $scope.view.trabajador.usuario;
+                $scope.combo.usuario = Usuario.$search(queryParams).$object;
+            }
         };
 
         $scope.desvincular = function(){

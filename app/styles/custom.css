@@ -26,6 +26,12 @@ form .form-group.validate-has-error .form-control + div {
     font-size: 12px;
     color: #cc3f44;
 }
+form .form-group.validate-has-error .input-group + div {
+    display: block;
+    padding-top: 5px;
+    font-size: 12px;
+    color: #cc3f44;
+}
 form .form-group.validate-has-error .ui-select-container + div {
     display: block;
     padding-top: 5px;
